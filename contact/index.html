@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | PT KUSUMA SARANA DEDIKASI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg-solid: #222;
+        --text-dim: #c8c8c8;
+        --text-bright: #fff;
+        --panel: rgba(20,20,20,0.92);
+        --gap-bridge: 12px;
+      }
+      *{ box-sizing: border-box; }
+      body{
+        margin:0;
+        font-family: 'Share Tech Mono', monospace;
+        background:#0f0f0f;
+        color:#eee;
+        min-height:200vh;
+      }
+
+      /* NAVBAR (sticky + blur saat scroll) */
+      .navbar{
+        position: sticky; top:0; z-index:1000; width:100%;
+        padding:12px 20px 10px;
+        background: var(--bg-solid);
+        color: var(--text-bright);
+        transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
+        -webkit-backdrop-filter:none; backdrop-filter:none;
+        border-radius:0;
+      }
+      .navbar.scrolled{
+        background: rgba(20,20,20,0.35);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      }
+
+      .topbar{ display:flex; align-items:center; justify-content:space-between; }
+
+      /* LOGO: gunakan <img> */
+      .logo{ display:flex; align-items:center; }
+      .logo img{
+        max-height:55px; height:auto; width:auto; display:block;
+      }
+
+      /* Hamburger (mobile) */
+      .hamburger{
+        display:none; font-size:28px; background:none; border:none; color:var(--text-dim);
+        cursor:pointer; padding:4px 6px; line-height:1; transition:color .2s ease;
+      }
+      .hamburger:hover{ color:var(--text-bright); }
+
+      /* MENU utama (desktop) */
+      .menu{
+        display:flex; justify-content:center; gap:40px; margin-top:12px; flex-wrap:wrap;
+      }
+      .menu a, .menu button.menu-link{
+        text-decoration:none; background:none; border:none;
+        color:var(--text-dim); font-weight:500; padding:6px 0;
+        transition:color .2s ease; letter-spacing:1px; text-transform:uppercase; font-size:20px; 
+        font-family: 'Share Tech Mono', monospace;
+        cursor:pointer;
+      }
+      .menu a:hover, .menu button.menu-link:hover{ color:var(--text-bright); }
+
+      /* DROPDOWN Products (desktop) */
+      .dropdown{ position:relative; }
+      .dropdown::after{
+        content:""; position:absolute; left:-8px; right:-8px; top:100%;
+        height: var(--gap-bridge);
+      }
+      .menu .caret{
+        margin-left:6px; font-size:12px; opacity:.8; transition:transform .2s ease, color .2s ease;
+        display:inline-block;
+      }
+      .submenu{
+        position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
+        top: calc(100% + var(--gap-bridge));
+        min-width:260px; display:flex; flex-direction:column;
+        background: var(--panel); border:1px solid rgba(255,255,255,0.06);
+        border-radius:10px; padding:10px; box-shadow:0 12px 28px rgba(0,0,0,.35);
+        visibility:hidden; opacity:0; pointer-events:none;
+        transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s;
+      }
+      .submenu a{
+        text-transform:none; letter-spacing:.3px; font-size:13px; color:#d4d4d4;
+        padding:8px 10px; border-radius:6px; transition:color .2s ease, background .2s ease; white-space:nowrap;
+      }
+      .submenu a:hover{ color:#fff; background:rgba(255,255,255,0.06); }
+      .dropdown:hover .menu-link{ color:var(--text-bright); }
+      .dropdown:hover .caret{ transform:translateY(1px) rotate(180deg); }
+      .dropdown:hover .submenu{
+        visibility:visible; opacity:1; pointer-events:auto;
+        transform:translateX(-50%) translateY(0);
+        transition: opacity .16s ease, transform .16s ease, visibility 0s;
+      }
+
+      /* Demo hero */
+      .hero{
+        height:60vh;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+          url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+        border-bottom:1px solid rgba(255,255,255,0.06);
+      }
+      .container{ padding:24px; max-width:1100px; margin:0 auto; }
+
+      /* MOBILE OVERRIDES */
+      @media (max-width: 768px){
+        .hamburger{ display:block; }
+
+        /* Menu menjadi kolom penuh, tidak geser samping */
+        .menu{
+          display:none;
+          flex-direction:column;
+          align-items:stretch;     /* full width */
+          gap:16px;
+          margin-top:12px;
+          width:100%;
+        }
+        .menu.active{ display:flex; }
+
+        /* Setiap item selebar container, teks tetap center */
+        .menu a, .menu button.menu-link{
+          display:block;
+          width:100%;
+          text-align:center;
+          padding:10px 12px;
+        }
+
+        /* Dropdown & submenu memenuhi lebar, turun ke bawah, dorong item lain */
+        .dropdown{ width:100%; }
+        .submenu{
+          position:static; left:auto; top:auto; transform:none;
+          min-width:0; width:100%;
+          margin-top:6px;
+          border-radius:8px; padding:6px 8px; box-shadow:none;
+          visibility:visible; opacity:1; pointer-events:auto;
+          display:none;            /* default: tertutup */
+        }
+        .dropdown.open .submenu{ display:flex; }
+
+        /* caret rotasi saat terbuka */
+        .dropdown .caret{ transform:none; }
+        .dropdown.open .caret{ transform:rotate(180deg); }
+
+        /* hover bridge tidak diperlukan di mobile */
+        .dropdown::after{ display:none; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="topbar">
+        <div class="logo">
+          <a href="/">
+            <img src="/assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp" alt="LOGO PERUSAHAAN PT KUSUMA SARANA DEDIKASI">
+          </a>
+        </div>
+        <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      </div>
+
+      <div id="menu" class="menu" role="menubar">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+
+        <div class="dropdown" id="productsDropdown">
+          <button class="menu-link" aria-haspopup="true" aria-expanded="false">
+            Products <span class="caret">▾</span>
+          </button>
+          <div class="submenu" role="menu">
+            <a href="#">Sealing Elements</a>
+            <a href="#">CNC Machined Seals</a>
+            <a href="#">Hydraulic & Pneumatic Seals</a>
+            <a href="#">O-Rings</a>
+            <a href="#">Custom Gaskets</a>
+          </div>
+        </div>
+
+        <a href="#">Customers</a>
+        <a href="#">Gallery</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <section class="hero"></section>
+    <div class="container">
+      <h1>Welcome to MyCompany</h1>
+      <p>Di mobile, buka “Products” → dropdown turun ke bawah dan item lain terdorong ke bawah (vertikal rapi).</p>
+    </div>
+
+    <script>
+      function toggleMenu(){
+        document.getElementById('menu').classList.toggle('active');
+      }
+      const navbar = document.getElementById('navbar');
+      const threshold = 10;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > threshold){ navbar.classList.add('scrolled'); }
+        else { navbar.classList.remove('scrolled'); }
+      });
+
+      const productsDropdown = document.getElementById('productsDropdown');
+      const productsBtn = productsDropdown.querySelector('.menu-link');
+      productsBtn.addEventListener('click', (e) => {
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        if (isMobile){
+          e.preventDefault();
+          productsDropdown.classList.toggle('open');
+          const expanded = productsBtn.getAttribute('aria-expanded') === 'true';
+          productsBtn.setAttribute('aria-expanded', String(!expanded));
+        }
+      });
+    </script>
+  </body>
+</html>
