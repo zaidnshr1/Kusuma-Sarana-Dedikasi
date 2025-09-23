@@ -8,6 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/build/three.min.js"></script>
     <style>
+      /* =================================== */
+      /*          GLOBAL STYLES              */
+      /* =================================== */
+
+      /* Variabel warna dan layout global */
       :root{
         --bg-solid: #222;
         --text-dim: #c8c8c8;
@@ -24,7 +29,11 @@
         min-height:200vh;
       }
 
-      /* NAVBAR (sticky + blur saat scroll) */
+      /* =================================== */
+      /*             NAVBAR                  */
+      /* =================================== */
+
+      /* --- Kontainer Navbar Utama (Sticky & Efek Blur) --- */
       .navbar{
         position: sticky; top:0; z-index:1000; width:100%;
         padding:12px 20px 10px;
@@ -43,20 +52,20 @@
 
       .topbar{ display:flex; align-items:center; justify-content:space-between; }
 
-      /* LOGO: gunakan <img> */
+      /* --- Logo Perusahaan --- */
       .logo{ display:flex; align-items:center; }
       .logo img{
         max-height:55px; height:auto; width:auto; display:block;
       }
 
-      /* Hamburger (mobile) */
+      /* --- Tombol Hamburger (Hanya Tampil di Mobile) --- */
       .hamburger{
         display:none; font-size:28px; background:none; border:none; color:var(--text-dim);
         cursor:pointer; padding:4px 6px; line-height:1; transition:color .2s ease;
       }
       .hamburger:hover{ color:var(--text-bright); }
 
-      /* MENU utama (desktop) */
+      /* --- Menu Navigasi Utama --- */
       .menu{
         display:flex; justify-content:center; gap:40px; margin-top:12px; flex-wrap:wrap;
       }
@@ -69,7 +78,7 @@
       }
       .menu a:hover, .menu button.menu-link:hover{ color:var(--text-bright); }
 
-      /* DROPDOWN Products (desktop) */
+      /* --- Dropdown "Products" di Desktop --- */
       .dropdown{ position:relative; }
       .dropdown::after{
         content:""; position:absolute; left:-8px; right:-8px; top:100%;
@@ -101,7 +110,11 @@
         transition: opacity .16s ease, transform .16s ease, visibility 0s;
       }
       
-      /* HERO SECTION */
+      /* =================================== */
+      /*           HERO SECTION              */
+      /* =================================== */
+
+      /* --- Kontainer Utama Hero & Slider --- */
       .hero {
         position: relative;
         height: 100vh;
@@ -130,6 +143,7 @@
         justify-content: center;
       }
 
+      /* --- Konten Teks di Dalam Hero --- */
       .hero-content {
         max-width: 55%;
         color: var(--text-bright);
@@ -175,7 +189,7 @@
         border-color: #FFFFFF;
       }
 
-      /* Elemen Navigasi Slider */
+      /* --- Navigasi Slider (Panah Kiri/Kanan) --- */
       .slider-nav {
         position: absolute;
         top: 50%;
@@ -208,6 +222,7 @@
         border-color: rgba(255,255,255,0.5);
       }
 
+      /* --- Indikator Halaman Slider (Titik-titik) --- */
       .slider-indicators {
         position: absolute;
         bottom: 40px;
@@ -232,7 +247,11 @@
         background-color: #FFFFFF;
       }
 
-      /* PRODUCTS SECTION */
+      /* =================================== */
+      /*          PRODUCTS SECTION           */
+      /* =================================== */
+
+      /* --- Kontainer Utama & Layout Grid --- */
       #products-section {
         background: #000;
         padding: 80px 4%;
@@ -248,6 +267,7 @@
         margin: 0 auto;
       }
 
+      /* --- Kolom Kiri (Judul & Grid Produk) --- */
       .products-grid-column h2 {
         font-family: 'Montserrat', sans-serif;
         font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -299,6 +319,7 @@
         color: #666;
       }
       
+      /* --- Kolom Kanan (Kanvas Model 3D) --- */
       .products-3d-column {
         position: relative;
         width: 100%;
@@ -313,11 +334,15 @@
         height: 100%;
         outline: none;
       }
-      /* MOBILE OVERRIDES */
+
+      /* =================================== */
+      /*        RESPONSIVE (MOBILE)          */
+      /* =================================== */
       @media (max-width: 768px){
+
+        /* --- Tampilan Navbar di Mobile --- */
         .hamburger{ display:block; }
 
-        /* Menu menjadi kolom penuh, tidak geser samping */
         .menu{
           display:none;
           flex-direction:column;
@@ -328,15 +353,12 @@
         }
         .menu.active{ display:flex; }
 
-        /* Setiap item selebar container, teks tetap center */
         .menu a, .menu button.menu-link{
           display:block;
           width:100%;
           text-align:center;
           padding:10px 12px;
         }
-
-        /* Dropdown & submenu memenuhi lebar, turun ke bawah, dorong item lain */
         .dropdown{ width:100%; }
         .submenu{
           position:static; left:auto; top:auto; transform:none;
@@ -348,17 +370,13 @@
         }
         .dropdown.open .submenu{ display:flex; }
 
-        /* caret rotasi saat terbuka */
         .dropdown .caret{ transform:none; }
         .dropdown.open .caret{ transform:rotate(180deg); }
 
-        /* hover bridge tidak diperlukan di mobile */
         .dropdown::after{ display:none; }
 
-        /* Hero Section Mobile */
-        .hero {
-          /* No changes needed here anymore */
-        }
+        /* --- Tampilan Hero Section di Mobile --- */
+        .hero { /* Tidak ada perubahan spesifik, mengandalkan style .slide */ }
 
         .slide { padding: 0 5%; justify-content: center; text-align: center; }
 
@@ -381,7 +399,7 @@
         .slider-nav { display: none; } /* Sembunyikan panah di mobile */
         .slider-indicators { bottom: 20px; }
 
-        /* Products Section Mobile */
+        /* --- Tampilan Products Section di Mobile --- */
         #products-section {
           padding: 60px 5%;
         }
@@ -521,18 +539,27 @@
     </section>
 
     <script>
+      // =================================== //
+      //      NAVBAR & MENU LOGIC          //
+      // =================================== //
+
+      // 1. Fungsi untuk toggle menu hamburger di mobile
       function toggleMenu(){
         document.getElementById('menu').classList.toggle('active');
       }
+
+      // 2. Efek blur pada navbar saat halaman di-scroll
       const navbar = document.getElementById('navbar');
       const threshold = 10;
       window.addEventListener('scroll', () => {
         if (window.scrollY > threshold){ navbar.classList.add('scrolled'); }
         else { navbar.classList.remove('scrolled'); }
       });
-
+      
+      // 3. Logika untuk membuka/menutup dropdown "Products" di mobile
       const productsDropdown = document.getElementById('productsDropdown');
       const productsBtn = productsDropdown.querySelector('.menu-link');
+
       productsBtn.addEventListener('click', (e) => {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         if (isMobile){
@@ -543,19 +570,25 @@
         }
       });
 
-      // --- SLIDER LOGIC ---
+      // =================================== //
+      //          HERO SLIDER LOGIC        //
+      // =================================== //
+
+      // 1. Seleksi Elemen DOM
       const slidesContainer = document.querySelector('.slides-container');
       const slides = document.querySelectorAll('.slide');
       const nextBtn = document.querySelector('.slider-arrow.right');
       const prevBtn = document.querySelector('.slider-arrow.left');
       const dots = document.querySelectorAll('.indicator-dot');
 
+      // 2. Variabel Status
       let currentIndex = 0;
       let slideInterval;
       const slideCount = slides.length;
 
+      // 3. Fungsi Utama
       const goToSlide = (index) => {
-        // Boundary checks
+        // Cek batasan agar index tidak keluar dari rentang slide
         if (index < 0) index = slideCount - 1;
         if (index >= slideCount) index = 0;
 
@@ -575,43 +608,53 @@
         goToSlide(currentIndex - 1);
       };
 
+      // 4. Logika Slide Otomatis
       const startAutoSlide = () => {
         slideInterval = setInterval(nextSlide, 5000); // 5 seconds
       };
 
       const resetAutoSlide = () => {
+        // Hentikan interval yang ada dan mulai lagi dari awal
         clearInterval(slideInterval);
         startAutoSlide();
       };
 
-      // Event Listeners
+      // 5. Event Listeners untuk Navigasi
       nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
       prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
       dots.forEach((dot, index) => {
         dot.addEventListener('click', () => { goToSlide(index); resetAutoSlide(); });
       });
 
-      // Initial setup
+      // 6. Inisialisasi Slider
       goToSlide(0);
       startAutoSlide();
 
-      // --- THREE.JS 3D MODEL LOGIC ---
+      // =================================== //
+      //      THREE.JS 3D MODEL LOGIC      //
+      // =================================== //
+
       const canvas = document.getElementById('3d-canvas');
+      // Pastikan elemen canvas ada dan library Three.js sudah dimuat
       if (canvas && typeof THREE !== 'undefined') {
-        // 1. Scene Setup
+
+        // 1. Setup Scene, Camera, dan Renderer
         const scene = new THREE.Scene();
         const container = document.querySelector('.products-3d-column');
 
-        // 2. Camera
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = 4.3;
+        const camera = new THREE.PerspectiveCamera(
+          75, // Field of view
+          container.clientWidth / container.clientHeight, // Aspect ratio
+          0.1, // Near clipping plane
+          1000 // Far clipping plane
+        );
+        camera.position.z = 4; // Posisikan kamera sedikit mundur
 
-        // 3. Renderer
         const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
-
-        // 4. Object (TorusKnot as placeholder)
+        
+        // 2. Membuat Objek 3D (Placeholder)
         const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 150, 20);
         const material = new THREE.MeshBasicMaterial({ 
           color: 0xff8800, // Glowing orange
@@ -620,7 +663,7 @@
         const model = new THREE.Mesh(geometry, material);
         scene.add(model);
 
-        // 5. Mouse Interaction
+        // 3. Interaksi Gerakan Mouse
         let mouse = { x: 0, y: 0 };
         let targetRotation = { x: 0, y: 0 };
 
@@ -630,22 +673,24 @@
         }
         window.addEventListener('mousemove', onMouseMove);
 
-        // 6. Animation Loop
+        // 4. Animation Loop (Render Terus-menerus)
         function animate() {
           requestAnimationFrame(animate);
 
+          // Kalkulasi rotasi target berdasarkan posisi mouse
           targetRotation.y = mouse.x * 1.2;
           targetRotation.x = mouse.y * 1.2;
 
+          // Terapkan rotasi secara perlahan (smoothing/easing)
           model.rotation.y += (targetRotation.y - model.rotation.y) * 0.05;
           model.rotation.x += (targetRotation.x - model.rotation.x) * 0.05;
-          model.rotation.z += 0.001;
+          model.rotation.z += 0.001; // Rotasi konstan agar tetap hidup
 
           renderer.render(scene, camera);
         }
         animate();
 
-        // 7. Handle Window Resize
+        // 5. Menangani Perubahan Ukuran Jendela Browser
         window.addEventListener('resize', () => {
           camera.aspect = container.clientWidth / container.clientHeight;
           camera.updateProjectionMatrix();
