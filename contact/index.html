@@ -1,311 +1,431 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | PT KUSUMA SARANA DEDIKASI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">    
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <style>
-      :root{
-        --bg-solid: #000;
-        --text-dim: #c8c8c8;
-        --text-bright: #fff;
-        --panel: rgba(20,20,20,0.92);
-        --gap-bridge: 12px;
-      }
-      *{ box-sizing: border-box; }
-      body{
-        margin:0;
-        font-family: 'Share Tech Mono', monospace;
-        background:#0f0f0f;
-        color:#eee;
-        min-height:200vh;
-      }
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact | PT KUSUMA SARANA DEDIKASI</title>
 
-      /* NAVBAR (sticky + blur saat scroll) */
-      .navbar{
-        position: sticky; top:0; z-index:1000; width:100%;
-        padding:12px 20px 10px;
-        background: var(--bg-solid);
-        color: var(--text-bright);
-        transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
-        -webkit-backdrop-filter:none; backdrop-filter:none;
-        border-radius:0;
-      }
-      .navbar.scrolled{
-        background: rgba(20,20,20,0.35);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 6px 18px rgba(0,0,0,.25);
-      }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
-      .topbar{ display:flex; align-items:center; justify-content:space-between; }
+  <style>
+    /* =====================================
+       DESIGN TOKENS
+    ====================================== */
+    :root{
+      --bg:#0b0b0d;
+      --panel:rgba(255,255,255,0.04);
+      --glass:rgba(255,255,255,0.03);
+      --muted:#bfc3c7;
+      --text:#eaeef2;
+      --accent:#ff8a00;
+      --success:#28a745;
+      --radius:12px;
+      --maxw:1100px;
+      --transition:180ms cubic-bezier(.2,.9,.3,1);
+    }
 
-      /* LOGO: gunakan <img> */
-      .logo{ display:flex; align-items:center; }
-      .logo img{
-        max-height:55px; height:auto; width:auto; display:block;
-      }
+    /* =====================================
+       BASE / RESET
+    ====================================== */
+    *{ box-sizing:border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    html,body{ height:100%; margin:0; background:var(--bg); color:var(--text); font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,'Share Tech Mono',monospace; }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--maxw); margin:0 auto; padding:28px; }
 
-      /* Hamburger (mobile) */
-      .hamburger{
-        display:none; font-size:28px; background:none; border:none; color:var(--text-dim);
-        cursor:pointer; padding:4px 6px; line-height:1; transition:color .2s ease;
-      }
-      .hamburger:hover{ color:var(--text-bright); }
+    /* =====================================
+       NAVBAR
+    ====================================== */
+    nav.navbar{
+      --nav-h:64px;
+      position:sticky; top:0; z-index:60;
+      backdrop-filter:blur(6px);
+      background:linear-gradient(180deg,rgba(11,11,13,0.6),rgba(11,11,13,0.4));
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .nav-inner{ min-height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:var(--maxw); margin:0 auto; padding:12px 20px; }
+    .logo{ display:flex; align-items:center; gap:12px; }
+    .logo img{ max-height:52px; width:auto; display:block; }
+    .brand-title{ font-weight:700; letter-spacing:.6px; color:var(--muted); font-size:13px; }
+    .nav-actions{ display:flex; align-items:center; gap:18px; }
 
-      /* MENU utama (desktop) */
+    /* menu (desktop) */
+    .menu{ display:flex; gap:24px; align-items:center; }
+    .menu a, .menu button{ color:var(--muted); border:0; background:none; font-size:13px; padding:8px; cursor:pointer; text-transform:uppercase; letter-spacing:1px; }
+    .menu a:hover, .menu button:hover{ color:var(--text); transform:translateY(-1px); }
+
+    /* caret */
+    .caret{ margin-left:6px; font-size:11px; opacity:.9; display:inline-block; transition:transform var(--transition); }
+
+    /* dropdown (desktop) */
+    .dropdown{ position:relative; }
+    .submenu{
+      position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
+      top:calc(100% + 10px); margin-top:4px;
+      min-width:240px; background:var(--glass); border-radius:10px; padding:8px;
+      border:1px solid rgba(255,255,255,0.04); box-shadow:0 10px 30px rgba(0,0,0,.45);
+      display:flex; flex-direction:column; gap:6px; opacity:0; pointer-events:none;
+      transform-origin:top center; transition:opacity 160ms ease, transform 160ms ease;
+    }
+    .dropdown:hover .submenu{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+    .submenu a{ padding:10px 12px; border-radius:8px; color:var(--muted); font-size:13px; }
+    .submenu a:hover{ background:rgba(255,255,255,0.02); color:var(--text); }
+    .dropdown:hover .submenu,
+    .dropdown:focus-within .submenu{ opacity:1; pointer-events:auto; }
+    .submenu::before{ content:""; position:absolute; top:-12px; left:0; right:0; height:12px; }
+
+    /* hamburger */
+    .hamburger{ display:none; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
+
+    /* =====================================
+       NAVBAR (MOBILE ≤880px)
+       - Menu anchored from top to avoid sticky/fixed jank
+       - Body scroll lock when menu open
+    ====================================== */
+    @media (max-width:880px){
       .menu{
-        display:flex; justify-content:center; gap:40px; margin-top:12px; flex-wrap:wrap;
+        display:none;
+        position:fixed;
+        top:var(--nav-h);
+        left:0; right:0;
+        z-index:80;
+        background:linear-gradient(180deg,rgba(11,11,13,0.95),rgba(11,11,13,0.98));
+        padding:18px;
+        flex-direction:column; gap:8px; border-top:1px solid rgba(255,255,255,0.03);
+        max-height:calc(100dvh - var(--nav-h)); overflow:auto;
       }
-      .menu a, .menu button.menu-link{
-        text-decoration:none; background:none; border:none;
-        color:var(--text-dim); font-weight:500; padding:6px 0;
-        transition:color .2s ease; letter-spacing:1px; text-transform:uppercase; font-size:20px; 
-        font-family: 'Share Tech Mono', monospace;
-        cursor:pointer;
-      }
-      .menu a:hover, .menu button.menu-link:hover{ color:var(--text-bright); }
+      .menu.open{ display:flex; }
+      .hamburger{ display:block; }
+      body.menu-open{ overflow:hidden; }
 
-      /* DROPDOWN Products (desktop) */
-      .dropdown{ position:relative; }
-      .dropdown::after{
-        content:""; position:absolute; left:-8px; right:-8px; top:100%;
-        height: var(--gap-bridge);
-      }
-      .menu .caret{
-        margin-left:6px; font-size:12px; opacity:.8; transition:transform .2s ease, color .2s ease;
-        display:inline-block;
-      }
-      .submenu{
-        position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
-        top: calc(100% + var(--gap-bridge));
-        min-width:260px; display:flex; flex-direction:column;
-        background: var(--panel); border:1px solid rgba(255,255,255,0.06);
-        border-radius:10px; padding:10px; box-shadow:0 12px 28px rgba(0,0,0,.35);
-        visibility:hidden; opacity:0; pointer-events:none;
-        transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s;
-      }
-      .submenu a{
-        text-transform:none; letter-spacing:.3px; font-size:13px; color:#d4d4d4;
-        padding:8px 10px; border-radius:6px; transition:color .2s ease, background .2s ease; white-space:nowrap;
-      }
-      .submenu a:hover{ color:#fff; background:rgba(255,255,255,0.06); }
-      .dropdown:hover .menu-link{ color:var(--text-bright); }
-      .dropdown:hover .caret{ transform:translateY(1px) rotate(180deg); }
-      .dropdown:hover .submenu{
-        visibility:visible; opacity:1; pointer-events:auto;
-        transform:translateX(-50%) translateY(0);
-        transition: opacity .16s ease, transform .16s ease, visibility 0s;
-      }
+      /* dropdown in mobile becomes stacked */
+      .dropdown .submenu{ position:static; transform:none; opacity:1; pointer-events:auto; display:none; padding-left:10px; box-shadow:none; border:0; background:transparent; }
+      .dropdown.open .submenu{ display:flex; }
+    }
 
-      /* Demo hero */
-      .hero{
-        height:60vh;
-        background:
-          linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
-          url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
-        border-bottom:1px solid rgba(255,255,255,0.06);
-      }
-      .container{ padding:24px; max-width:1100px; margin:0 auto; }
+    /* =====================================
+       HERO
+    ====================================== */
+    .hero{
+      padding:64px 0 36px;
+      background:
+        linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.2)),
+        url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .hero .title{ font-size:38px; margin:0 0 8px; color:var(--accent); font-weight:700; letter-spacing:.6px; }
+    .hero p.lead{ margin:0; color:var(--muted); max-width:840px; line-height:1.7; }
 
-      /* MOBILE OVERRIDES */
-      @media (max-width: 768px){
-        .hamburger{ display:block; }
+    /* =====================================
+       CONTACT AREA
+    ====================================== */
+    .contact-wrap{ display:grid; grid-template-columns:1fr 420px; gap:28px; margin-top:28px; }
+    @media (max-width:980px){ .contact-wrap{ grid-template-columns:1fr; } }
 
-        /* Menu menjadi kolom penuh, tidak geser samping */
-        .menu{
-          display:none;
-          flex-direction:column;
-          align-items:stretch;     /* full width */
-          gap:16px;
-          margin-top:12px;
-          width:100%;
-        }
-        .menu.active{ display:flex; }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      padding:20px; border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.5);
+    }
 
-        /* Setiap item selebar container, teks tetap center */
-        .menu a, .menu button.menu-link{
-          display:block;
-          width:100%;
-          text-align:center;
-          padding:10px 12px;
-        }
+    /* form */
+    form label{ display:block; font-size:13px; color:var(--muted); margin-bottom:8px; }
+    .field{ display:flex; gap:10px; flex-direction:column; margin-bottom:12px; }
+    input[type="text"], input[type="email"], textarea, select{
+      background:rgba(255,255,255,0.02); color:var(--text); border:1px solid rgba(255,255,255,0.04);
+      padding:12px 14px; border-radius:10px; outline:none; font-size:14px; transition:box-shadow var(--transition), border-color var(--transition);
+    }
+    input::placeholder, textarea::placeholder{ color:rgba(255,255,255,0.35); font-style:italic; }
+    input:focus, textarea:focus{ box-shadow:0 6px 18px rgba(0,0,0,.6), 0 0 0 4px rgba(255,138,0,0.06); border-color:rgba(255,138,0,0.9); }
+    textarea{ min-height:140px; resize:vertical; }
 
-        /* Dropdown & submenu memenuhi lebar, turun ke bawah, dorong item lain */
-        .dropdown{ width:100%; }
-        .submenu{
-          position:static; left:auto; top:auto; transform:none;
-          min-width:0; width:100%;
-          margin-top:6px;
-          border-radius:8px; padding:6px 8px; box-shadow:none;
-          visibility:visible; opacity:1; pointer-events:auto;
-          display:none;            /* default: tertutup */
-        }
-        .dropdown.open .submenu{ display:flex; }
+    .muted-small{ font-size:12px; color:var(--muted); }
+    .btn{
+      display:inline-flex; gap:10px; align-items:center; justify-content:center;
+      background:linear-gradient(90deg,var(--accent),#ff6a00); color:#0b0b0b; border:0; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer;
+      box-shadow:0 8px 20px rgba(255,138,0,0.12);
+    }
+    .btn[disabled]{ opacity:.6; cursor:not-allowed; transform:none; }
 
-        /* caret rotasi saat terbuka */
-        .dropdown .caret{ transform:none; }
-        .dropdown.open .caret{ transform:rotate(180deg); }
+    /* info / map */
+    .info-list{ display:flex; flex-direction:column; gap:12px; }
+    .info-item{ display:flex; gap:12px; align-items:flex-start; }
+    .info-item svg{ flex:0 0 34px; width:34px; height:34px; opacity:.9; }
+    .map-wrap{ height:280px; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.04); }
 
-        /* hover bridge tidak diperlukan di mobile */
-        .dropdown::after{ display:none; }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar" id="navbar">
-      <div class="topbar">
-        <div class="logo">
-          <a href="/">
-            <img src="/assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp" alt="LOGO PERUSAHAAN PT KUSUMA SARANA DEDIKASI">
-          </a>
+    /* helpers */
+    .muted{ color:var(--muted); }
+    .label-strong{ color:var(--text); font-weight:700; font-size:14px; }
+
+    /* =====================================
+       TOAST
+    ====================================== */
+    .toast{
+      position:fixed; right:20px; bottom:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.04); color:var(--text);
+      padding:12px 16px; border-radius:10px; box-shadow:0 14px 36px rgba(0,0,0,.5);
+      transform:translateY(18px); opacity:0; pointer-events:none; transition:all 240ms ease;
+    }
+    .toast.show{ transform:translateY(0); opacity:1; pointer-events:auto; }
+
+    /* focus visible */
+    :focus{ outline:none; }
+    :focus-visible{ box-shadow:0 0 0 4px rgba(255,138,0,0.08); border-radius:8px; }
+
+    /* =====================================
+       SMALL SCREEN TWEAKS (≤520px)
+    ====================================== */
+    @media (max-width:520px){
+      .hero .title{ font-size:28px; text-align:center; }
+      .hero p.lead{ text-align:center; }
+      .nav-inner{ padding:10px 14px; }
+      .container{ padding:14px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===================================
+       NAVBAR
+  ==================================== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <div class="logo" aria-hidden="false">
+        <a href="/" aria-label="Home">
+          <img src="/assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp" alt="PT Kusuma Sarana Dedikasi logo" onerror="this.style.display='none'">
+        </a>
+        <div>
+          <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+          <div style="font-size:11px; color:var(--muted);">Industrial sealing & tailored solutions</div>
         </div>
-        <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
       </div>
 
-      <div id="menu" class="menu" role="menubar">
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
+      <div class="nav-actions" role="navigation">
+        <button class="hamburger" aria-expanded="false" aria-controls="main-menu" title="Open menu" onclick="toggleMobileMenu(this)">☰</button>
 
-        <div class="dropdown" id="productsDropdown">
-          <button class="menu-link" aria-haspopup="true" aria-expanded="false">
-            Products <span class="caret">▾</span>
-          </button>
-          <div class="submenu" role="menu">
-            <a href="#">Sealing Elements</a>
-            <a href="#">CNC Machined Seals</a>
-            <a href="#">Hydraulic & Pneumatic Seals</a>
-            <a href="#">O-Rings</a>
-            <a href="#">Custom Gaskets</a>
+        <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+          <a role="menuitem" href="#">Home</a>
+          <a role="menuitem" href="#">About Us</a>
+
+          <div class="dropdown" id="productsDropdown">
+            <button class="menu-link" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown(event, 'productsDropdown')">
+              Products <span class="caret">▾</span>
+            </button>
+            <div class="submenu" role="menu" aria-label="Products submenu">
+              <a role="menuitem" href="#">Sealing Elements</a>
+              <a role="menuitem" href="#">CNC Machined Seals</a>
+              <a role="menuitem" href="#">Hydraulic & Pneumatic Seals</a>
+              <a role="menuitem" href="#">O-Rings</a>
+              <a role="menuitem" href="#">Custom Gaskets</a>
+            </div>
+          </div>
+
+          <a role="menuitem" href="#">Customers</a>
+          <a role="menuitem" href="#">Gallery</a>
+          <a role="menuitem" href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================================
+       HERO
+  ==================================== -->
+  <header class="hero" aria-hidden="false">
+    <div class="container">
+      <h1 class="title">Contact Us</h1>
+      <p class="lead">If you need information, quotes, or a deeper technical discussion about our products and services, send us a message via the contact form below or email us directly. <span class="muted">We typically respond within 1–2 business days.</span></p>
+    </div>
+  </header>
+
+  <!-- ===================================
+       CONTACT
+  ==================================== -->
+  <main class="container" id="contact" aria-labelledby="contact-heading">
+    <section class="contact-wrap" aria-describedby="contact-desc">
+      <!-- form -->
+      <aside class="card" aria-label="Contact form">
+        <h2 style="margin:0 0 6px; color:var(--accent);">Send Us a Message</h2>
+        <p class="muted-small" id="contact-desc">Lengkapi form berikut — semua field wajib diisi. This demo uses client-side validation only.</p>
+
+        <form id="contactForm" novalidate onsubmit="handleSubmit(event)">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Your full name" required aria-required="true" />
+          </div>
+
+          <div class="field" style="display:flex; gap:12px;">
+            <div style="flex:1;">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required aria-required="true" />
+            </div>
+
+            <div style="width:120px;">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="text" placeholder="+62..." inputmode="tel" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" placeholder="Inquiry about product / service" required />
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" placeholder="Tell us briefly what you need..." required></textarea>
+          </div>
+
+          <div style="display:flex; gap:12px; align-items:center; margin-top:6px;">
+            <button class="btn" id="sendBtn" type="submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span id="btnLabel">Send Message</span>
+            </button>
+
+            <div class="muted-small">Or email: <a href="mailto:m.zaidanshori04@gmail.com" style="color:var(--muted)">m.zaidanshori04@gmail.com</a></div>
+          </div>
+        </form>
+      </aside>
+
+      <!-- info + map -->
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div class="card info-list" aria-label="Contact information">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div class="label-strong">Contact Information</div>
+              <div class="muted-small">Office hours: Mon–Fri, 08:30–17:00</div>
+            </div>
+            <div style="font-size:12px; color:var(--muted)">Bekasi / Jakarta</div>
+          </div>
+
+          <div style="height:8px"></div>
+
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <div class="label-strong">Address</div>
+              <div class="muted">Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi Barat 17136</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92V21a1 1 0 01-1.11 1 19.86 19.86 0 01-8.63-3.11 19.5 19.5 0 01-6-6A19.86 19.86 0 013 3.11 1 1 0 014 2h3.09a1 1 0 01.95.68l.7 2.2a1 1 0 01-.27 1L9.16 8.92a12 12 0 005.92 5.92l2.04-1.5a1 1 0 011-.27l2.2.7a1 1 0 01.68.95z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <div class="label-strong">Phone</div>
+              <div class="muted">+62 (21) 555-0123</div>
+            </div>
           </div>
         </div>
 
-        <a href="#">Customers</a>
-        <a href="#">Gallery</a>
-        <a href="#">Contact</a>
+        <div class="card map-wrap" aria-label="Office location map">
+          <iframe title="Office location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126763.08742796046!2d106.6894297!3d-6.2297289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e4c067b5ed%3A0x301576d14feb8c0!2sJakarta!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+            width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-hidden="false"></iframe>
+        </div>
       </div>
-    </nav>
-
-    <!-- CONTACT HEADER (full-width black) -->
-    <section id="contact-hero" style="background:#000;padding:70px 20px;">
-    <div style="max-width:1100px;margin:0 auto;text-align:center;">
-        <h2 style="font-size:2.5rem;font-weight:700;margin:0 0 12px;color:#ff8a00;">
-        Contact Us
-        </h2>
-        <p style="font-size:1rem;line-height:1.7;max-width:820px;margin:0 auto;color:#d6d6d6;">
-        If you need information, quotes, or require a more detailed discussion
-        about the products and services we offer, please contact us via the
-        contact form or through email.
-        </p>
-    </div>
     </section>
+  </main>
 
-    <!-- CONTACT BODY (background image + overlay) -->
-    <section id="contact-body"
-    style="
-        position:relative;
-        padding:70px 20px;
-        background:url('assets/contact-bg.webp') center/cover no-repeat;
-    ">
-    <!-- overlay gelap agar teks & card terbaca -->
-    <div aria-hidden="true" style="position:absolute;inset:0;background:rgba(0,0,0,.45);"></div>
+  <!-- ===================================
+       TOAST
+  ==================================== -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><strong>Message sent</strong><div class="muted-small">We received your message. We'll reply soon.</div></div>
+  </div>
 
-    <div style="position:relative;max-width:1100px;margin:0 auto;">
-        <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;">
+  <script>
+    /* =====================================
+       MENU / DROPDOWN
+    ====================================== */
 
-        <!-- FORM (kiri) -->
-        <div style="
-            flex:1;min-width:300px;
-            background:#ffffff;border-radius:10px;padding:22px;
-            box-shadow:0 12px 26px rgba(0,0,0,.25);
-        ">
-            <h3 style="margin:0 0 12px;color:#222;">Send Us a Message</h3>
-            <form style="display:flex;flex-direction:column;gap:14px;">
-            <label style="font-size:.9rem;color:#444;">
-                Name
-                <input type="text" placeholder="Your Name" required
-                style="display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid #ddd;border-radius:8px;outline:none;">
-            </label>
+    function toggleMobileMenu(btn){
+      const menu = document.getElementById('main-menu');
+      const opened = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      document.body.classList.toggle('menu-open', opened); // lock scroll when open
+    }
 
-            <label style="font-size:.9rem;color:#444;">
-                Email
-                <input type="email" placeholder="Your Email" required
-                style="display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid #ddd;border-radius:8px;outline:none;">
-            </label>
-
-            <label style="font-size:.9rem;color:#444;">
-                Subject
-                <input type="text" placeholder="Subject"
-                style="display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid #ddd;border-radius:8px;outline:none;">
-            </label>
-
-            <label style="font-size:.9rem;color:#444;">
-                Message
-                <textarea rows="6" placeholder="Your Message" required
-                style="display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid #ddd;border-radius:8px;outline:none;resize:vertical;"></textarea>
-            </label>
-
-            <button type="submit"
-                style="background:#007bff;color:#fff;border:none;padding:14px 16px;border-radius:8px;cursor:pointer;font-weight:600;">
-                Send Message
-            </button>
-            </form>
-        </div>
-
-        <!-- INFO + MAP (kanan) -->
-        <div style="flex:1;min-width:300px;display:flex;flex-direction:column;gap:20px;">
-            <div style="
-            background:#ffffff;border-radius:10px;padding:20px;
-            box-shadow:0 12px 26px rgba(0,0,0,.25);
-            ">
-            <h3 style="margin:0 0 10px;color:#222;">Contact Information</h3>
-            <p style="margin:6px 0;color:#444;"><strong>Address:</strong> Jl. Contoh Raya No.123, Jakarta</p>
-            <p style="margin:6px 0;color:#444;"><strong>Phone:</strong> +62 812-3456-7890</p>
-            <p style="margin:6px 0;color:#444;"><strong>Email:</strong> info@company.com</p>
-            </div>
-
-            <div style="
-            background:#ffffff;border-radius:10px;overflow:hidden;
-            box-shadow:0 12px 26px rgba(0,0,0,.25); height:280px;
-            ">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126763.08742796046!2d106.6894297!3d-6.2297289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e4c067b5ed%3A0x301576d14feb8c0!2sJakarta!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
-                width="100%" height="100%" style="border:0;" allowfullscreen=""
-                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-            </div>
-        </div>
-
-        </div>
-    </div>
-    </section>
-
-    <script>
-      function toggleMenu(){
-        document.getElementById('menu').classList.toggle('active');
+    function toggleDropdown(e, id){
+      const el = document.getElementById(id);
+      const isMobile = window.matchMedia("(max-width:880px)").matches;
+      if(isMobile){
+        el.classList.toggle('open');
+        const btn = el.querySelector('.menu-link');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', (!expanded).toString());
       }
-      const navbar = document.getElementById('navbar');
-      const threshold = 10;
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > threshold){ navbar.classList.add('scrolled'); }
-        else { navbar.classList.remove('scrolled'); }
-      });
+    }
 
-      const productsDropdown = document.getElementById('productsDropdown');
-      const productsBtn = productsDropdown.querySelector('.menu-link');
-      productsBtn.addEventListener('click', (e) => {
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-        if (isMobile){
-          e.preventDefault();
-          productsDropdown.classList.toggle('open');
-          const expanded = productsBtn.getAttribute('aria-expanded') === 'true';
-          productsBtn.setAttribute('aria-expanded', String(!expanded));
+    let hideTimer;
+    const dropdown = document.querySelector('#productsDropdown');
+    dropdown.addEventListener('mouseenter', ()=>{
+      clearTimeout(hideTimer);
+      dropdown.classList.add('open');
+    });
+    dropdown.addEventListener('mouseleave', ()=>{
+      hideTimer = setTimeout(()=> dropdown.classList.remove('open'), 150);
+    });
+
+    /* =====================================
+       NAVBAR ELEVATION (VISUAL)
+    ====================================== */
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      navbar.style.boxShadow = (window.scrollY > 8) ? '0 8px 30px rgba(0,0,0,.6)' : 'none';
+    });
+
+    /* =====================================
+       FORM (CLIENT-SIDE DEMO)
+    ====================================== */
+    const form = document.getElementById('contactForm');
+    const sendBtn = document.getElementById('sendBtn');
+    const btnLabel = document.getElementById('btnLabel');
+    const toast = document.getElementById('toast');
+
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 4200);
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      if(!form.reportValidity()) return; // native validation
+      sendBtn.disabled = true;
+      btnLabel.textContent = 'Sending...';
+      setTimeout(()=>{
+        sendBtn.disabled = false;
+        btnLabel.textContent = 'Send Message';
+        form.reset();
+        showToast();
+      }, 900);
+    }
+
+    /* =====================================
+       KEYBOARD HANDLING
+    ====================================== */
+    document.addEventListener('keydown', (ev) => {
+      if(ev.key === 'Escape'){
+        const menu = document.getElementById('main-menu');
+        if(menu.classList.contains('open')) {
+          menu.classList.remove('open');
+          document.querySelector('.hamburger').setAttribute('aria-expanded','false');
+          document.body.classList.remove('menu-open');
         }
-      });
-    </script>
+        const dropdown = document.getElementById('productsDropdown');
+        if(dropdown.classList.contains('open')) dropdown.classList.remove('open');
+      }
+    });
 
-
-  </body>
+    // Add focus ring only after Tab
+    (function(){
+      const handleFirstTab = (e) => {
+        if(e.key === 'Tab'){
+          document.body.classList.add('user-is-tabbing');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      };
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+  </script>
+</body>
 </html>
