@@ -7,20 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">    
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js/controls/OrbitControls.js"></script>
     <style>
       /* =================================== */
       /*          GLOBAL STYLES              */
       /* =================================== */
 
       /* Variabel warna dan layout global */
-      :root{
-        --bg-solid: #222;
-        --text-dim: #c8c8c8;
-        --text-bright: #fff;
-        --panel: rgba(20,20,20,0.92);
-        --gap-bridge: 12px;
+      :root { 
+        --bg: #0b0b0d;
+        --glass: rgba(255, 255, 255, 0.03);
+        --muted: #bfc3c7;
+        --text: #eaeef2;
+        --accent: #ff8a00;
+        --success: #28a745;
+        --radius: 12px;
+        --maxw: 1100px;
+        --transition: 180ms cubic-bezier(0.2, 0.9, 0.3, 1);
+        --nav-h: 64px;
       }
-      *{ box-sizing: border-box; }
+      *{ box-sizing: border-box; -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale; }
       body{
         margin:0;
         font-family: 'Share Tech Mono', monospace;
@@ -35,78 +43,124 @@
 
       /* NAVBAR (sticky + blur saat scroll) */
       .navbar{
-        position: sticky; top:0; z-index:1000; width:100%;
-        padding:12px 20px 10px;
-        background: var(--bg-solid);
-        color: var(--text-bright);
-        transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
-        -webkit-backdrop-filter:none; backdrop-filter:none;
-        border-radius:0;
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        backdrop-filter: blur(6px);
+        background: linear-gradient(
+          180deg,
+          rgba(11, 11, 13, 0.6),
+          rgba(11, 11, 13, 0.4)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       }
-      .navbar.scrolled{
-        background: rgba(20,20,20,0.35);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      .nav-inner {
+        min-height: var(--nav-h);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 12px 20px;
       }
-
-      .topbar{ display:flex; align-items:center; justify-content:space-between; }
 
       /* LOGO: gunakan <img> */
-      .logo{ display:flex; align-items:center; }
+      .logo{ display:flex; align-items:center; gap: 12px; }
       .logo img{
-        max-height:55px; height:auto; width:auto; display:block;
+        max-height:52px; width:auto; display:block;
+      }
+      .brand-title {
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
       }
 
       /* Hamburger (mobile) */
       .hamburger{
-        display:none; font-size:28px; background:none; border:none; color:var(--text-dim);
-        cursor:pointer; padding:4px 6px; line-height:1; transition:color .2s ease;
+        display: none;
+        background: none;
+        border: 0;
+        color: var(--muted);
+        font-size: 22px;
+        padding: 8px;
+        cursor: pointer;
       }
-      .hamburger:hover{ color:var(--text-bright); }
 
       /* MENU utama (desktop) */
       .menu{
-        display:flex; justify-content:center; gap:40px; margin-top:12px; flex-wrap:wrap;
+        display: flex;
+        gap: 24px;
+        align-items: center;
       }
       .menu a, .menu button.menu-link{
-        text-decoration:none; background:none; border:none;
-        color:var(--text-dim); font-weight:500; padding:6px 0;
-        transition:color .2s ease; letter-spacing:1px; text-transform:uppercase; font-size:14px;
-        cursor:pointer;
+        color: var(--muted);
+        border: 0;
+        background: none;
+        font-size: 13px;
+        padding: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
       }
-      .menu a:hover, .menu button.menu-link:hover{ color:var(--text-bright); }
+      .menu a:hover,
+      .menu button:hover {
+        color: var(--text);
+        transform: translateY(-1px);
+      }
 
       /* DROPDOWN Products (desktop) */
       .dropdown{ position:relative; }
-      .dropdown::after{
-        content:""; position:absolute; left:-8px; right:-8px; top:100%;
-        height: var(--gap-bridge);
-      }
       .menu .caret{
-        margin-left:6px; font-size:12px; opacity:.8; transition:transform .2s ease, color .2s ease;
-        display:inline-block;
+        margin-left: 6px;
+        font-size: 11px;
+        opacity: 0.9;
+        display: inline-block;
+        transition: transform var(--transition);
       }
       .submenu{
-        position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
-        top: calc(100% + var(--gap-bridge));
-        min-width:260px; display:flex; flex-direction:column;
-        background: var(--panel); border:1px solid rgba(255,255,255,0.06);
-        border-radius:10px; padding:10px; box-shadow:0 12px 28px rgba(0,0,0,.35);
-        visibility:hidden; opacity:0; pointer-events:none;
-        transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) translateY(6px);
+        top: calc(100% + 10px);
+        margin-top: 4px;
+        min-width: 240px;
+        background: var(--glass);
+        border-radius: 10px;
+        padding: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        opacity: 0;
+        pointer-events: none;
+        transform-origin: top center;
+        transition: opacity 160ms ease, transform 160ms ease;
       }
       .submenu a{
-        text-transform:none; letter-spacing:.3px; font-size:13px; color:#d4d4d4; font-family: 'Share Tech Mono', monospace;
-        padding:8px 10px; border-radius:6px; transition:color .2s ease, background .2s ease; white-space:nowrap;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        text-transform: none;
+        letter-spacing: normal;
       }
-      .submenu a:hover{ color:#fff; background:rgba(255,255,255,0.06); }
-      .dropdown:hover .menu-link{ color:var(--text-bright); }
-      .dropdown:hover .caret{ transform:translateY(1px) rotate(180deg); }
+      .submenu a:hover {
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+      }
       .dropdown:hover .submenu{
-        visibility:visible; opacity:1; pointer-events:auto;
-        transform:translateX(-50%) translateY(0);
-        transition: opacity .16s ease, transform .16s ease, visibility 0s;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
       }
       /* =================================== */
       /*           HERO SECTION              */
@@ -115,7 +169,7 @@
       /* --- Kontainer Utama Hero & Slider --- */
       .hero {
         position: relative;
-        height: 100vh;
+        height: 90vh;
         width: 100%;
         background-color: #111111;
         /* Optional: Placeholder untuk grafik abstrak di latar belakang */
@@ -137,10 +191,6 @@
         padding: 0 8%;
       }
 
-      .slide.placeholder-slide {
-        justify-content: center;
-      }
-
       /* --- Konten Teks di Dalam Hero --- */
       .hero-content {
         max-width: 55%;
@@ -151,7 +201,7 @@
       .hero-content h1 {
         font-family: 'Share Tech Mono', monospace;
         font-size: clamp(2.2rem, 5vw, 4rem); /* Ukuran font responsif */
-        font-weight: 600;
+        font-weight: normal;
         text-transform: uppercase;
         color: #FFFFFF;
         margin: 0 0 16px 0;
@@ -162,7 +212,7 @@
         font-family: 'Share Tech Mono', monospace;
         font-size: clamp(0.9rem, 1.5vw, 1rem);
         text-transform: uppercase;
-        color: #AAAAAA;
+        color: var(--muted);
         margin: 0 0 32px 0;
         letter-spacing: 0.5px;
         max-width: 90%;
@@ -203,7 +253,7 @@
 
       .slider-arrow {
         background: none;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid #444;
         color: #AAAAAA;
         width: 50px;
         height: 50px;
@@ -217,7 +267,7 @@
       .slider-arrow:hover {
         background-color: rgba(255, 255, 255, 0.05);
         color: #FFFFFF;
-        border-color: rgba(255,255,255,0.5);
+        border-color: #888;
       }
 
       /* --- Indikator Halaman Slider (Titik-titik) --- */
@@ -269,7 +319,7 @@
       .products-grid-column h2,
       .about-text-column h2 {
         font-family: 'Share Tech Mono', monospace;
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
         text-transform: uppercase;
         color: var(--text-bright);
         margin: 0 0 40px 0;
@@ -293,7 +343,7 @@
         transition: border-color 0.3s ease, background-color 0.3s ease;
         font-family: 'Share Tech Mono', monospace;
         font-size: 13px;
-        font-weight: 500;
+        font-weight: normal;
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
@@ -322,7 +372,7 @@
       .products-3d-column {
         position: relative;
         width: 100%;
-        min-height: 500px; /* Ensure it has height */
+        min-height: 650px; /* Ubah nilai ini untuk mengatur tinggi kanvas */
       }
 
       #3d-canvas {
@@ -355,7 +405,7 @@
 
       .services-grid-column h2 {
         font-family: 'Share Tech Mono', monospace;
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
         text-transform: uppercase;
         color: var(--text-bright);
         margin: 0 0 40px 0;
@@ -477,7 +527,7 @@
 
       #customers-section h2 {
         font-family: 'Share Tech Mono', monospace;
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
         text-transform: uppercase;
         color: var(--text-bright);
         margin: 0 0 50px 0;
@@ -485,16 +535,13 @@
       }
 
       .logo-grid {
-        /* 3. Sesuaikan Grid dan Posisi */
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 40px;
-        align-items: center; /* Penting untuk menengahkan logo secara vertikal */
+        align-items: center;
         max-width: 1200px;
         margin: 0 auto 50px auto;
       }
-
-      /* 1. Hapus .logo-card dan stylingnya */
 
       /* 2. Atur Ulang Ukuran dan Gaya Logo */
       .logo-grid img {
@@ -503,12 +550,12 @@
         width: auto;
         object-fit: contain;
         filter: invert(1);
-        margin: 0 auto; /* Menengahkan logo di dalam sel gridnya */
-        transition: transform 0.3s ease; /* Transisi untuk efek hover */
+        margin: 0 auto;
+        transition: transform 0.3s ease;
       }
 
       .logo-grid img:hover {
-        transform: scale(1.05); /* Efek hover baru: sedikit membesar */
+        transform: scale(1.05);
       }
 
       /* 4. Perbarui Gaya Tombol */
@@ -517,6 +564,107 @@
         padding: 8px 18px;
         font-size: 13px;
         background-color: transparent;
+      }
+
+      /* =================================== */
+      /*              FOOTER                 */
+      /* =================================== */
+      footer.site-footer {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.015)
+        );
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 40px;
+      }
+      .footer-inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 34px 28px 18px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr;
+        gap: 28px;
+      }
+      .footer-col h4 {
+        margin: 0 0 12px;
+        font-size: 14px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .footer-brand {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .footer-brand img {
+        height: 44px;
+        width: auto;
+        display: block;
+      }
+      .footer-brand .name {
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.5px;
+      }
+
+      .footer-text {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .footer-links a {
+        color: var(--muted);
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: color var(--transition), transform var(--transition);
+      }
+      .footer-links a:hover {
+        color: var(--text);
+        transform: translateX(2px);
+      }
+
+      .footer-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .footer-contact .item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .footer-contact svg {
+        width: 18px;
+        height: 18px;
+        opacity: 0.9;
+        flex: 0 0 18px;
+      }
+
+      .footer-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 22px;
+        padding-top: 14px;
+        color: var(--muted);
+        font-size: 12px;
       }
 
       /* =================================== */
@@ -589,164 +737,219 @@
       /* =================================== */
       /*        RESPONSIVE (MOBILE)          */
       /* =================================== */
-      @media (max-width: 768px){
 
-        /* --- Tampilan Navbar di Mobile --- */
+      /* --- Styles for Tablet and Mobile (Navbar changes first) --- */
+      @media (max-width: 880px) {
+        /* Show hamburger, hide desktop menu */
         .hamburger{ display:block; }
+        .nav-actions .menu { display: none; }
 
-        .menu{
-          display:none;
-          flex-direction:column;
-          align-items:stretch;     /* full width */
-          gap:16px;
-          margin-top:12px;
-          width:100%;
-        }
-        .menu.active{ display:flex; }
-
-        .menu a, .menu button.menu-link{
-          display:block;
-          width:100%;
-          text-align:center;
-          padding:10px 12px;
-        }
-        .dropdown{ width:100%; }
-        .submenu{
-          position:static; left:auto; top:auto; transform:none;
-          min-width:0; width:100%;
-          margin-top:6px;
-          border-radius:8px; padding:6px 8px; box-shadow:none;
-          visibility:visible; opacity:1; pointer-events:auto;
-          display:none;            /* default: tertutup */
-        }
-        .dropdown.open .submenu{ display:flex; }
-
-        .dropdown .caret{ transform:none; }
-        .dropdown.open .caret{ transform:rotate(180deg); }
-
-        .dropdown::after{ display:none; }
-
-        /* --- Tampilan Hero Section di Mobile --- */
-        .hero { /* Tidak ada perubahan spesifik, mengandalkan style .slide */ }
-
-        .slide { padding: 0 5%; justify-content: center; text-align: center; }
-
-        .hero-content {
-          max-width: 100%; /* Lebar penuh */
+        /* Styling for the opened mobile menu */
+        .menu.open {
           display: flex;
           flex-direction: column;
-          align-items: center; /* Item di dalam konten (seperti tombol) jadi di tengah */
+          align-items: flex-start;
+          gap: 12px;
+          position: fixed;
+          top: var(--nav-h);
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(11, 11, 13, 0.98);
+          backdrop-filter: blur(10px);
+          padding: 24px;
+          overflow-y: auto;
+          z-index: 50;
         }
 
+        .menu a, .menu button.menu-link {
+          font-size: 16px;
+          width: 100%;
+          text-align: left;
+          padding: 12px 8px;
+        }
+
+        body.menu-open {
+          overflow: hidden;
+        }
+
+        /* Dropdown styling for mobile */
+        .submenu{
+          position: static;
+          transform: none;
+          opacity: 1;
+          pointer-events: auto;
+          display: none;
+          padding: 10px 0 0 15px;
+          box-shadow: none;
+          border: 0;
+          background: transparent;
+          min-width: unset;
+          margin-top: 8px;
+        }
+        .dropdown.open .submenu { display: flex; }
+        .dropdown.open .caret{ transform:rotate(180deg); }
+      }
+
+      /* --- Styles for Mobile (General Layout) --- */
+      @media (max-width: 768px) {
+        /* Hero Section */
+        .slide { 
+          padding: 0 5%; 
+          justify-content: center; 
+          text-align: center; 
+        }
+        .hero-content {
+          max-width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
         .hero-content h1 {
-          font-size: clamp(2rem, 8vw, 2.5rem); /* Ukuran font disesuaikan untuk mobile */
+          font-size: clamp(2rem, 8vw, 2.5rem);
         }
-
         .hero-content .subtitle {
           max-width: 100%;
           font-size: clamp(0.8rem, 4vw, 0.9rem);
         }
-
-        .slider-nav { display: none; } /* Sembunyikan panah di mobile */
+        .slider-nav { display: none; }
         .slider-indicators { bottom: 20px; }
 
-        /* --- Tampilan Products Section di Mobile --- */
+        /* Products Section */
         #products-section {
           padding: 60px 5%;
         }
         .products-container {
-          grid-template-columns: 1fr; /* Stack columns */
+          grid-template-columns: 1fr;
           gap: 50px;
         }
         .products-grid-column h2 {
           text-align: center;
         }
+        .products-grid {
+          grid-template-columns: 1fr; /* Stack product cards */
+        }
         .products-3d-column {
-          min-height: 350px; /* Adjust height for mobile */
+          min-height: 400px;
         }
 
-        /* --- Tampilan Services Section di Mobile --- */
+        /* Services Section */
         #services-section {
           padding: 60px 5%;
         }
         .services-container {
-          grid-template-columns: 1fr; /* Stack columns */
+          grid-template-columns: 1fr;
           gap: 50px;
         }
         .services-grid-column h2 {
           text-align: center;
         }
 
-        /* --- Tampilan About Section di Mobile --- */
+        /* About Section */
         #about-section {
           padding: 60px 5%;
         }
         .about-container {
-          grid-template-columns: 1fr; /* Stack columns */
+          grid-template-columns: 1fr;
           gap: 50px;
         }
         .about-text-column {
-          order: 1; /* Text comes first */
+          order: 1;
         }
-        .youtube-embed-wrapper { order: 2; } /* Video comes second */
-
+        .youtube-embed-wrapper { order: 2; }
         .about-box {
           padding: 24px;
         }
-
-        /* --- Tampilan Customers Section di Mobile --- */
+        
+        /* Customers Section */
         .logo-grid {
-          grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
-          gap: 16px;
-        }
-        .logo-grid img {
-          max-height: 45px; /* Perkecil sedikit di mobile */
+          grid-template-columns: 1fr 1fr;
           gap: 30px;
         }
+        .logo-grid img {
+          max-height: 45px;
+        }
 
-        /* --- Tampilan Footer di Mobile --- */
-        .footer-container {
-          grid-template-columns: 1fr; /* Stack columns */
-          gap: 40px;
+        /* Footer */
+        .footer-grid {
+          grid-template-columns: 1fr;
           text-align: center;
         }
-        .footer-about .logo {
-          justify-content: center;
+        .footer-brand, .footer-links, .footer-contact {
+          align-items: center;
         }
+        .footer-contact .item {
+          text-align: left;
+        }
+        .footer-meta {
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        /* Further adjustments for very small screens if needed */
       }
     </style>
   </head>
   <body>
-    <nav class="navbar" id="navbar">
-      <div class="topbar">
-        <div class="logo">
-          <a href="/">
-            <img src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp" alt="LOGO PERUSAHAAN PT KUSUMA SARANA DEDIKASI">
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="nav-inner">
+        <div class="logo" aria-hidden="false">
+          <a href="/" aria-label="Home">
+            <img
+              src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
+              alt="PT Kusuma Sarana Dedikasi logo"
+              onerror="this.style.display='none'"
+            />
           </a>
-        </div>
-        <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
-      </div>
-
-      <div id="menu" class="menu" role="menubar" style="font-family: 'Share Tech Mono', monospace;">
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-
-        <div class="dropdown" id="productsDropdown">
-          <button class="menu-link" aria-haspopup="true" aria-expanded="false">
-            Products <span class="caret">▾</span>
-          </button>
-          <div class="submenu" role="menu">
-            <a href="#">Sealing Elements</a>
-            <a href="#">CNC Machined Seals</a>
-            <a href="#">Hydraulic & Pneumatic Seals</a>
-            <a href="#">O-Rings</a>
-            <a href="#">Custom Gaskets</a>
+          <div>
+            <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+            <div style="font-size: 11px; color: var(--muted)">
+              Quality Distribution Solutions
+            </div>
           </div>
         </div>
 
-        <a href="#">Customers</a>
-        <a href="#">Gallery</a>
-        <a href="#">Contact</a>
+        <div class="nav-actions" role="navigation">
+          <button
+            class="hamburger"
+            aria-expanded="false"
+            aria-controls="main-menu"
+            title="Open menu"
+            onclick="toggleMobileMenu(this)"
+          >
+            ☰
+          </button>
+
+          <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+            <a role="menuitem" href="/">Home</a>
+            <a role="menuitem" href="/about-us/">About Us</a>
+
+            <div class="dropdown" id="productsDropdown">
+              <button
+                class="menu-link"
+                aria-haspopup="true"
+                aria-expanded="false"
+                onclick="toggleDropdown(event, 'productsDropdown')"
+              >
+                Products <span class="caret">▾</span>
+              </button>
+              <div class="submenu" role="menu" aria-label="Products submenu">
+                <a role="menuitem" href="#">Sealing Elements</a>
+                <a role="menuitem" href="#">CNC Machined Seals</a>
+                <a role="menuitem" href="#">Hydraulic & Pneumatic Seals</a>
+                <a role="menuitem" href="#">O-Rings</a>
+                <a role="menuitem" href="#">Custom Gaskets</a>
+              </div>
+            </div>
+
+            <a role="menuitem" href="/customers/">Customers</a>
+            <a role="menuitem" href="/gallery/">Gallery</a>
+            <a role="menuitem" href="/contact/">Contact</a>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -755,30 +958,52 @@
         <!-- Slide 1 (Konten Asli) -->
         <div class="slide">
           <div class="hero-content">
-            <h1>
-              Your Go-To Solution<br>For Mining
-            </h1>
+            <h1>YOUR GO-TO SOLUTION</h1>
             <p class="subtitle">
-              Sealing Excellence & Hydraulic Cylinder Repair & Manufacturing.
+              Providing quality products and becoming the best solution for the needs of our industrial, construction, and corporate customers.
             </p>
             <a href="#" class="cta-button">Explore Products</a>
           </div>
         </div>
         <!-- Slide 2 (Placeholder) -->
-        <div class="slide placeholder-slide">
-          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 2</h2>
+        <div class="slide">
+          <div class="hero-content">
+            <h1>A LEADING & TRUSTED PARTNER</h1>
+            <p class="subtitle">
+              Our vision is to become a leading and trusted trading and general supplier company in Indonesia that provides maximum value for our customers.
+            </p>
+            <a href="/about-us/" class="cta-button">About Us</a>
+          </div>
         </div>
         <!-- Slide 3 (Placeholder) -->
-        <div class="slide placeholder-slide">
-          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 3</h2>
+        <div class="slide">
+          <div class="hero-content">
+            <h1>YOUR ONE-STOP BUSINESS SOLUTION</h1>
+            <p class="subtitle">
+              We are able to adapt to various scales and types of your business needs, from office supplies, safety equipment, to industrial tools.
+            </p>
+            <a href="#services-section" class="cta-button">Our Services</a>
+          </div>
         </div>
         <!-- Slide 4 (Placeholder) -->
-        <div class="slide placeholder-slide">
-          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 4</h2>
+        <div class="slide">
+          <div class="hero-content">
+            <h1>QUALITY PRODUCTS, RESPONSIVE SERVICE</h1>
+            <p class="subtitle">
+              We are committed to providing high-quality products with guaranteed warranties, supported by a fast, responsive, and professional team.
+            </p>
+            <a href="/customers/" class="cta-button">View Customers</a>
+          </div>
         </div>
         <!-- Slide 5 (Placeholder) -->
-        <div class="slide placeholder-slide">
-          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 5</h2>
+        <div class="slide">
+          <div class="hero-content">
+            <h1>GET IN TOUCH WITH US</h1>
+            <p class="subtitle">
+              Our team is ready to serve and find the best solution for your needs. Contact us for a consultation.
+            </p>
+            <a href="/contact/" class="cta-button">Contact Us</a>
+          </div>
         </div>
       </div>
     
@@ -906,89 +1131,112 @@
       <a href="#" class="cta-button">View Customers</a>
     </section>
 
-    <!-- FOOTER SECTION -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-column footer-about">
-          <div class="logo">
-            <a href="/">
-              <img src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp" alt="LOGO PERUSAHAAN PT KUSUMA SARANA DEDIKASI">
-            </a>
+    <footer class="site-footer" aria-label="Website footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <!-- Brand & summary -->
+          <div class="footer-col">
+            <div class="footer-brand">
+              <img
+                src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
+                alt="Logo PT KSD"
+                onerror="this.style.display='none'"
+              />
+              <div>
+                <div class="name">PT Kusuma Sarana Dedikasi</div>
+                <div style="font-size: 12px; color: var(--muted)">
+                  Quality Distribution Solutions
+                </div>
+              </div>
+            </div>
+            <p class="footer-text">
+              We serve as a trusted distribution partner supporting the needs of
+              office, industrial, construction, and laboratory sectors. With
+              international standards, we deliver added value through superior
+              quality and consistent service.
+            </p>
           </div>
-          <p>Your go-to solution for sealing excellence & hydraulic cylinder repair and manufacturing.</p>
+
+          <!-- Quick links -->
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <nav class="footer-links" aria-label="Footer navigation">
+              <a href="/">Home</a>
+              <a href="/about-us/">About Us</a>
+              <a href="/contact/">Contact</a>
+              <a href="/customers/">Customers</a>
+              <a href="/gallery/">Gallery</a>
+            </nav>
+          </div>
+
+          <!-- Products -->
+          <div class="footer-col">
+            <h4>Products</h4>
+            <div class="footer-links">
+              <a href="#">Sealing Elements</a>
+              <a href="#">CNC Machined Seals</a>
+              <a href="#">Hydraulic &amp; Pneumatic Seals</a>
+              <a href="#">O-Rings</a>
+              <a href="#">Custom Gaskets</a>
+            </div>
+          </div>
+
+          <!-- Contact & newsletter -->
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="footer-contact">
+              <div class="item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div>
+                  Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi
+                  Barat 17136
+                </div>
+              </div>
+              <div class="item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M4 4h16v16H4z"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                  />
+                  <path
+                    d="M4 7l8 6 8-6"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <div>
+                  <a href="mailto:m.zaidanshori04@gmail.com"
+                    >m.zaidanshori04@gmail.com</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="footer-column">
-          <h4>Company</h4>
-          <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Gallery</a></li>
-          </ul>
+
+        <div class="footer-meta">
+          <div>
+            © <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights
+            reserved.
+          </div>
         </div>
-        <div class="footer-column">
-          <h4>Products</h4>
-          <ul class="footer-links">
-            <li><a href="#">Sealing Elements</a></li>
-            <li><a href="#">CNC Machined Seals</a></li>
-            <li><a href="#">Hydraulic Cylinders</a></li>
-            <li><a href="#">All Products</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>Contact Us</h4>
-          <ul class="footer-links">
-            <li>Email: sales@ksd.co.id</li>
-            <li>Phone: (021) 1234-5678</li>
-            <li>Address: Cikarang, West Java</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 PT Kusuma Sarana Dedikasi. All Rights Reserved.</p>
       </div>
     </footer>
-
+    
     <script>
       // =================================== //
-      //      NAVBAR & MENU LOGIC          //
+      //          HERO SLIDER LOGIC          //
       // =================================== //
-
-      // 1. Fungsi untuk toggle menu hamburger di mobile
-      function toggleMenu(){
-        document.getElementById('menu').classList.toggle('active');
-      }
-
-      // 2. Efek blur pada navbar saat halaman di-scroll
-      const navbar = document.getElementById('navbar');
-
-      if (navbar) {
-        const threshold = 10;
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > threshold){ navbar.classList.add('scrolled'); }
-          else { navbar.classList.remove('scrolled'); }
-        });
-      }
-
-      // 3. Logika untuk dropdown di mobile
-      const productsDropdown = document.getElementById('productsDropdown');
-      if (productsDropdown) {
-        const productsBtn = productsDropdown.querySelector('.menu-link');
-        productsBtn.addEventListener('click', (e) => {
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-        if (isMobile){
-          e.preventDefault();
-          productsDropdown.classList.toggle('open');
-          const expanded = productsBtn.getAttribute('aria-expanded') === 'true';
-          productsBtn.setAttribute('aria-expanded', String(!expanded));
-        }
-        });
-      }
-
-      // =================================== //
-      //          HERO SLIDER LOGIC        //
-      // =================================== //
-
-      // 1. Seleksi Elemen DOM
       const slidesContainer = document.querySelector('.slides-container');
       const slides = document.querySelectorAll('.slide');
       const nextBtn = document.querySelector('.slider-arrow.right');
@@ -1000,9 +1248,7 @@
       let slideInterval;
       const slideCount = slides.length;
 
-      // 3. Fungsi Utama
       const goToSlide = (index) => {
-        // Cek batasan agar index tidak keluar dari rentang slide
         if (index < 0) index = slideCount - 1;
         if (index >= slideCount) index = 0;
 
@@ -1022,25 +1268,21 @@
         goToSlide(currentIndex - 1);
       };
 
-      // 4. Logika Slide Otomatis
       const startAutoSlide = () => {
-        slideInterval = setInterval(nextSlide, 5000); // 5 seconds
+        slideInterval = setInterval(nextSlide, 5000);
       };
 
       const resetAutoSlide = () => {
-        // Hentikan interval yang ada dan mulai lagi dari awal
         clearInterval(slideInterval);
         startAutoSlide();
       };
 
-      // 5. Event Listeners untuk Navigasi
       nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
       prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
       dots.forEach((dot, index) => {
         dot.addEventListener('click', () => { goToSlide(index); resetAutoSlide(); });
       });
 
-      // 6. Inisialisasi Slider
       goToSlide(0);
       startAutoSlide();
 
@@ -1052,59 +1294,172 @@
       // Pastikan elemen canvas ada dan library Three.js sudah dimuat
       if (canvas && typeof THREE !== 'undefined') {
 
-        // 1. Setup Scene, Camera, dan Renderer
+        // --- 1. Scene Setup ---
         const scene = new THREE.Scene();
         const container = document.querySelector('.products-3d-column');
-
+ 
         const camera = new THREE.PerspectiveCamera(
-          75, // Field of view
-          container.clientWidth / container.clientHeight, // Aspect ratio
-          0.1, // Near clipping plane
-          1000 // Far clipping plane
+          65,
+          container.clientWidth / container.clientHeight,
+          0.1,
+          1000
         );
-        camera.position.z = 4; // Posisikan kamera sedikit mundur
+        camera.position.z = 5.5;
 
         const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         
-        // 2. Membuat Objek 3D (Placeholder)
-        const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 150, 20);
-        const material = new THREE.MeshBasicMaterial({ 
-          color: 0xff8800, // Glowing orange
-          wireframe: true 
-        });
-        const model = new THREE.Mesh(geometry, material);
-        scene.add(model);
+        // --- 2. Lighting & Scene Objects ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
 
-        // 3. Interaksi Gerakan Mouse
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 7.5);
+        scene.add(directionalLight);
+
+        const galaxyGroup = new THREE.Group();
+        scene.add(galaxyGroup);
+        galaxyGroup.position.set(0, 0, 0);
+        galaxyGroup.scale.set(1.0, 1.0, 1.0);
+
+        const coreGeometry = new THREE.IcosahedronGeometry(0.7, 2);
+        const coreMaterial = new THREE.MeshBasicMaterial({
+          color: 0x9933ff,
+          wireframe: true
+        });
+        const core = new THREE.Mesh(coreGeometry, coreMaterial);
+        galaxyGroup.add(core);
+
+        // --- 3. Materials ---
+        const solidMaterial = new THREE.MeshStandardMaterial({
+          color: 0xff8800,
+          emissive: 0xff8800,
+          emissiveIntensity: 0.4,
+          metalness: 0.5,
+          roughness: 0.4,
+          transparent: true,
+          opacity: 0.3
+        });
+
+        const wireframeMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffae42, // Warna oranye lebih terang untuk kontras
+          wireframe: true
+        });
+
+        const modelPivots = [];
+
+        function createOrbitingObject(object3D, orbitRadius, rotation, targetSize = 1.5) { 
+          // Normalisasi skala
+          const box = new THREE.Box3().setFromObject(object3D);
+          const size = box.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scaleFactor = targetSize / maxDim;
+          object3D.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+          const wireframeClone = object3D.clone();
+
+          object3D.traverse(child => { if (child.isMesh) child.material = solidMaterial; });
+          wireframeClone.traverse(child => { if (child.isMesh) child.material = wireframeMaterial; });
+
+          const modelGroup = new THREE.Group();
+          modelGroup.add(object3D);
+          modelGroup.add(wireframeClone);
+          
+          modelGroup.position.x = orbitRadius;
+
+          const pivotGroup = new THREE.Group();
+          pivotGroup.add(modelGroup);
+
+          pivotGroup.rotation.x = rotation.x;
+          pivotGroup.rotation.y = rotation.y;
+
+          pivotGroup.rotation.z = Math.random() * Math.PI * 2;
+
+          galaxyGroup.add(pivotGroup);
+          modelPivots.push({ 
+            pivot: pivotGroup, 
+            model: modelGroup, 
+            speed: Math.random() * 0.004 + 0.001 
+          });
+        }
+        
+        // --- 4. Model Loading ---
+        const loader = new THREE.GLTFLoader();
+        function loadAndDisplayModel(path, orbitRadius, rotation) {
+          loader.load(path, (gltf) => {
+            createOrbitingObject(gltf.scene, orbitRadius, rotation);
+          }, undefined, (error) => {
+            console.error(`An error happened while loading ${path}:`, error);
+          });
+        }
+
+        const asteroidGeometries = [
+          new THREE.OctahedronGeometry(0.7, 0),      // Diamond shape
+          new THREE.BoxGeometry(0.7, 0.7, 0.7),
+          new THREE.DodecahedronGeometry(0.6, 0)
+        ];
+
+        for (let i = 0; i < 3; i++) {
+          const geometry = asteroidGeometries[Math.floor(Math.random() * asteroidGeometries.length)];
+          const asteroid = new THREE.Mesh(geometry);
+          
+          const radius = Math.random() * 2 + 2.0;
+          const rotation = {
+            x: Math.random() * Math.PI,
+            y: Math.random() * Math.PI,
+          };
+
+          createOrbitingObject(asteroid, radius, rotation, 0.8);
+        }
+
+        const modelsToLoad = [
+          { path: 'assets/models/helmet.glb', radius: 2.0, rotation: { x: 0.2, y: 0 } },
+          { path: 'assets/models/wrench.glb', radius: 3.0, rotation: { x: -0.5, y: 2 } },
+          { path: 'assets/models/pipe.glb', radius: 4.0, rotation: { x: 0.8, y: 4 } }
+        ];
+
+        // Loop dan panggil fungsi pemuat untuk setiap model
+        modelsToLoad.forEach(modelInfo => {
+          loadAndDisplayModel(modelInfo.path, modelInfo.radius, modelInfo.rotation);
+        });
+        
+        // --- 5. Animation & Interaction ---
         let mouse = { x: 0, y: 0 };
         let targetRotation = { x: 0, y: 0 };
 
         function onMouseMove(event) {
-          mouse.x = (event.clientX / window.innerWidth) - 0.5;
-          mouse.y = (event.clientY / window.innerHeight) - 0.5;
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+          mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
         }
         window.addEventListener('mousemove', onMouseMove);
 
-        // 4. Animation Loop (Render Terus-menerus)
         function animate() {
           requestAnimationFrame(animate);
+          
+          // Rotasi seluruh sistem berdasarkan mouse
+          targetRotation.y = mouse.x * 0.5;
+          targetRotation.x = mouse.y * 0.5;
+          galaxyGroup.rotation.y += (targetRotation.y - galaxyGroup.rotation.y) * 0.05;
+          galaxyGroup.rotation.x += (targetRotation.x - galaxyGroup.rotation.x) * 0.05;
 
-          // Kalkulasi rotasi target berdasarkan posisi mouse
-          targetRotation.y = mouse.x * 1.2;
-          targetRotation.x = mouse.y * 1.2;
+          modelPivots.forEach(item => {
+            // Rotasi orbit
+            item.pivot.rotation.z += item.speed;
 
-          // Terapkan rotasi secara perlahan (smoothing/easing)
-          model.rotation.y += (targetRotation.y - model.rotation.y) * 0.05;
-          model.rotation.x += (targetRotation.x - model.rotation.x) * 0.05;
-          model.rotation.z += 0.001; // Rotasi konstan agar tetap hidup
+            // Rotasi model pada porosnya sendiri
+            item.model.rotation.y += 0.005;
+          });
+
+          // Animasikan inti pusat
+          core.rotation.y += 0.001;
+          core.rotation.x += 0.001;
 
           renderer.render(scene, camera);
         }
         animate();
 
-        // 5. Menangani Perubahan Ukuran Jendela Browser
         window.addEventListener('resize', () => {
           camera.aspect = container.clientWidth / container.clientHeight;
           camera.updateProjectionMatrix();
@@ -1115,14 +1470,13 @@
       // =================================== //
       //    DYNAMIC CUSTOMERS LOGO LOGIC   //
       // =================================== //
-
-      // 1. Database of client logos
+      
       const clientDatabase = [
         { name: 'PLN', logoUrl: 'assets/logos/pln.png' },
         { name: 'Sinarmas', logoUrl: 'assets/logos/sinarmas.png' },
         { name: 'United Tractors', logoUrl: 'assets/logos/united-tracktors.png' },
-        /*{ name: 'Weatherford', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Weatherford_Logo.svg/1280px-Weatherford_Logo.svg.png' },
-        { name: 'Pertamina', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/9/9d/Pertamina_Logo.svg/1200px-Pertamina_Logo.svg.png' },
+        { name: 'Weatherford', logoUrl: 'assets/logos/weatherford.png' },
+        /*{ name: 'Pertamina', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/9/9d/Pertamina_Logo.svg/1200px-Pertamina_Logo.svg.png' },
         { name: 'Freeport Indonesia', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/3/36/Freeport-McMoRan_logo.svg/1200px-Freeport-McMoRan_logo.svg.png' },
         { name: 'Adaro Energy', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/b/b7/Adaro_Energy_logo.svg/1200px-Adaro_Energy_logo.svg.png' },
         { name: 'Kaltim Prima Coal', logoUrl: 'https://www.kpc.co.id/wp-content/uploads/2022/03/logo-kpc.png' },
@@ -1132,46 +1486,36 @@
 
       const logoContainer = document.getElementById('logo-grid-container');
 
-      // 2. Function to shuffle an array (Fisher-Yates Shuffle)
       function shuffleArray(array) {
         let currentIndex = array.length, randomIndex;
-        // While there remain elements to shuffle.
         while (currentIndex != 0) {
-          // Pick a remaining element.
           randomIndex = Math.floor(Math.random() * currentIndex);
           currentIndex--;
-          // And swap it with the current element.
           [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
         }
         return array;
       }
 
-      // 3. Function to get random clients and display them
       function updateDisplayedLogos() {
-        if (!logoContainer) return; // Exit if container not found
+        if (!logoContainer) return;
 
-        // Create a copy to not modify the original database
         const shuffledClients = shuffleArray([...clientDatabase]);
-        
-        // Get the first 4 clients
         const selectedClients = shuffledClients.slice(0, 4);
 
-        // Clear the current logos
         logoContainer.innerHTML = '';
 
-        // 4. Create and append new logo cards
         selectedClients.forEach((client, index) => {
-          // 1. Hapus pembuatan 'card', langsung buat 'img'
           const img = document.createElement('img');
           img.src = client.logoUrl;
           img.alt = `Logo ${client.name}`;
           logoContainer.appendChild(img);
         });
       }
-
-      // 5. Initial call and interval setup
-      updateDisplayedLogos(); // Run once on page load
-      setInterval(updateDisplayedLogos, 5000); // Run every 5 seconds
+      
+      if (logoContainer) {
+        updateDisplayedLogos();
+        setInterval(updateDisplayedLogos, 5000);
+      }
     </script>
   </body>
 </html>
