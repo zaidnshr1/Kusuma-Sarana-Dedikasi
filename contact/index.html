@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Contact | PT KUSUMA SARANA DEDIKASI</title>
 
+      <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/fav/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/Logo-KSD-Favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/Logo-KSD-Favicon180.png">
+
     <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap"
@@ -70,6 +75,7 @@
           rgba(11, 11, 13, 0.4)
         );
         border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        /* font-family: "Share Tech Mono" */
       }
       .nav-inner {
         min-height: var(--nav-h);
@@ -256,13 +262,9 @@
       ====================================== */
       .hero {
         padding: 64px 0 36px;
-        background: linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.2)
-          ),
-          url("https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1600&auto=format&fit=crop")
-            center/cover no-repeat;
+        background: 
+          linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.2)),
+          url("/assets/Office-Mock-PT-Kusuma-Sarana-Dedikasi.webp") center center / cover no-repeat fixed;
         border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       }
       .hero .title {
@@ -471,6 +473,7 @@
         );
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         margin-top: 40px;
+        /* font-family: "Share Tech Mono" */
       }
       .footer-inner {
         max-width: var(--maxw);
@@ -651,8 +654,8 @@
         <div class="logo" aria-hidden="false">
           <a href="/" aria-label="Home">
             <img
-              src="/assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
-              alt="PT Kusuma Sarana Dedikasi logo"
+              src="/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp"
+              alt="Logo Perusahaan PT Kusuma Sarana Dedikasi"
               onerror="this.style.display='none'"
             />
           </a>
@@ -736,14 +739,21 @@
             Please complete the form below — all fields are required.
           </p>
 
-          <form id="contactForm" novalidate onsubmit="handleSubmit(event)">
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="176dea5b-7dc8-41c3-a4ea-dc8771235719" />
+            <input type="hidden" name="from_name" value="WEB KSD - CONTACT FORM" />
+            <input type="hidden" name="subject" value="New Contact Message — PT KSD" />
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;" />
+            <input type="hidden" name="replyto" value="email" />
+            <input type="hidden" name="headers:X-Company" value="PT Kusuma Sarana Dedikasi" />
+            <input type="hidden" name="to" value="zaidchilicond@gmail.com" />
             <div class="field">
               <label for="name">Full name</label>
               <input
-                id="name"
-                name="name"
+                id="subject"
+                name="user_subject"
                 type="text"
-                placeholder="Your full name"
+                placeholder="Example: John Doe"
                 required
                 aria-required="true"
               />
@@ -822,9 +832,9 @@
               <div class="muted-small">
                 Or email:
                 <a
-                  href="mailto:m.zaidanshori04@gmail.com"
+                  href="mailto:zaidchilicond@gmail.com"
                   style="color: var(--muted)"
-                  >m.zaidanshori04@gmail.com</a
+                  >zaidchilicond@gmail.com</a
                 >
               </div>
             </div>
@@ -956,8 +966,8 @@
           <div class="footer-col">
             <div class="footer-brand">
               <img
-                src="/assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
-                alt="Logo PT KSD"
+                src="/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp"
+                alt="Logo Perusahaan PT Kusuma Sarana Dedikasi"
                 onerror="this.style.display='none'"
               />
               <div>
@@ -1051,8 +1061,8 @@
                   />
                 </svg>
                 <div>
-                  <a href="mailto:m.zaidanshori04@gmail.com"
-                    >m.zaidanshori04@gmail.com</a
+                  <a href="mailto:zaidchilicond@gmail.com"
+                    >zaidchilicond@gmail.com</a
                   >
                 </div>
               </div>
@@ -1137,6 +1147,7 @@
         FORM (CLIENT-SIDE DEMO)
       ====================================== */
       const form = document.getElementById("contactForm");
+      form.addEventListener('submit', handleSubmit);
       const sendBtn = document.getElementById("sendBtn");
       const btnLabel = document.getElementById("btnLabel");
       const toast = document.getElementById("toast");
@@ -1146,17 +1157,44 @@
         setTimeout(() => toast.classList.remove("show"), 4200);
       }
 
-      function handleSubmit(e) {
+      /* =====================================
+        FORM SUBMISSION HANDLER
+      ====================================== */
+      async function handleSubmit(e) {
         e.preventDefault();
-        if (!form.reportValidity()) return; // native validation
+        if (!form.reportValidity()) return;
+
         sendBtn.disabled = true;
         btnLabel.textContent = "Sending...";
-        setTimeout(() => {
-          sendBtn.disabled = false;
+
+        try {
+          const formData = new FormData(form);
+
+          // Kirim ke Web3Forms
+          const res = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+          });
+
+          const data = await res.json();
+
+          if (res.ok && (data?.success || data?.message === "Submission successful")) {
+            // Sukses
+            btnLabel.textContent = "Sent";
+            showToast();       // tetap pakai toast kamu
+            form.reset();
+          } else {
+            // Gagal terkontrol (mis: access_key salah)
+            btnLabel.textContent = "Send Message";
+            alert(data?.message || "Failed to send. Please try again.");
+          }
+        } catch (err) {
+          // Jaringan/error tak terduga
           btnLabel.textContent = "Send Message";
-          form.reset();
-          showToast();
-        }, 900);
+          alert("Network error. Please try again.");
+        } finally {
+          sendBtn.disabled = false;
+        }
       }
 
       /* =====================================
