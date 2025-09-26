@@ -30,10 +30,10 @@
       }
 
       /* =================================== */
-      /*             NAVBAR                  */
+      /*        NAVBAR (NEW STYLE)           */
       /* =================================== */
 
-      /* --- Kontainer Navbar Utama (Sticky & Efek Blur) --- */
+      /* NAVBAR (sticky + blur saat scroll) */
       .navbar{
         position: sticky; top:0; z-index:1000; width:100%;
         padding:12px 20px 10px;
@@ -52,33 +52,32 @@
 
       .topbar{ display:flex; align-items:center; justify-content:space-between; }
 
-      /* --- Logo Perusahaan --- */
+      /* LOGO: gunakan <img> */
       .logo{ display:flex; align-items:center; }
       .logo img{
         max-height:55px; height:auto; width:auto; display:block;
       }
 
-      /* --- Tombol Hamburger (Hanya Tampil di Mobile) --- */
+      /* Hamburger (mobile) */
       .hamburger{
         display:none; font-size:28px; background:none; border:none; color:var(--text-dim);
         cursor:pointer; padding:4px 6px; line-height:1; transition:color .2s ease;
       }
       .hamburger:hover{ color:var(--text-bright); }
 
-      /* --- Menu Navigasi Utama --- */
+      /* MENU utama (desktop) */
       .menu{
         display:flex; justify-content:center; gap:40px; margin-top:12px; flex-wrap:wrap;
       }
       .menu a, .menu button.menu-link{
         text-decoration:none; background:none; border:none;
         color:var(--text-dim); font-weight:500; padding:6px 0;
-        transition:color .2s ease; letter-spacing:1px; text-transform:uppercase; font-size:20px; 
-        font-family: 'Share Tech Mono', monospace;
+        transition:color .2s ease; letter-spacing:1px; text-transform:uppercase; font-size:14px;
         cursor:pointer;
       }
       .menu a:hover, .menu button.menu-link:hover{ color:var(--text-bright); }
 
-      /* --- Dropdown "Products" di Desktop --- */
+      /* DROPDOWN Products (desktop) */
       .dropdown{ position:relative; }
       .dropdown::after{
         content:""; position:absolute; left:-8px; right:-8px; top:100%;
@@ -98,7 +97,7 @@
         transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s;
       }
       .submenu a{
-        text-transform:none; letter-spacing:.3px; font-size:13px; color:#d4d4d4;
+        text-transform:none; letter-spacing:.3px; font-size:13px; color:#d4d4d4; font-family: 'Share Tech Mono', monospace;
         padding:8px 10px; border-radius:6px; transition:color .2s ease, background .2s ease; white-space:nowrap;
       }
       .submenu a:hover{ color:#fff; background:rgba(255,255,255,0.06); }
@@ -109,7 +108,6 @@
         transform:translateX(-50%) translateY(0);
         transition: opacity .16s ease, transform .16s ease, visibility 0s;
       }
-      
       /* =================================== */
       /*           HERO SECTION              */
       /* =================================== */
@@ -151,7 +149,7 @@
       }
 
       .hero-content h1 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Share Tech Mono', monospace;
         font-size: clamp(2.2rem, 5vw, 4rem); /* Ukuran font responsif */
         font-weight: 600;
         text-transform: uppercase;
@@ -161,7 +159,7 @@
       }
 
       .hero-content .subtitle {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Share Tech Mono', monospace;
         font-size: clamp(0.9rem, 1.5vw, 1rem);
         text-transform: uppercase;
         color: #AAAAAA;
@@ -268,8 +266,9 @@
       }
 
       /* --- Kolom Kiri (Judul & Grid Produk) --- */
-      .products-grid-column h2 {
-        font-family: 'Montserrat', sans-serif;
+      .products-grid-column h2,
+      .about-text-column h2 {
+        font-family: 'Share Tech Mono', monospace;
         font-size: clamp(1.8rem, 4vw, 2.5rem);
         text-transform: uppercase;
         color: var(--text-bright);
@@ -292,7 +291,7 @@
         text-decoration: none;
         color: var(--text-dim);
         transition: border-color 0.3s ease, background-color 0.3s ease;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Share Tech Mono', monospace;
         font-size: 13px;
         font-weight: 500;
         text-transform: uppercase;
@@ -333,6 +332,258 @@
         width: 100%;
         height: 100%;
         outline: none;
+      }
+
+      /* =================================== */
+      /*          SERVICES SECTION           */
+      /* =================================== */
+
+      #services-section {
+        background: #000;
+        padding: 80px 4%;
+        /* No border-top to blend seamlessly with the products section */
+      }
+
+      .services-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .services-grid-column h2 {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        text-transform: uppercase;
+        color: var(--text-bright);
+        margin: 0 0 40px 0;
+        letter-spacing: 1px;
+      }
+
+      /* Reusing .products-grid and .product-card styles for consistency */
+
+      .services-image-column {
+        position: relative;
+        width: 100%;
+        min-height: 500px; /* Match height with 3D column for alignment */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .services-image-column img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures image covers the area without distortion */
+        border-radius: 12px;
+        /* Optional: effect to make it look more 'techy' */
+        filter: saturate(0) brightness(1.2) contrast(1.5);
+        opacity: 0.7;
+        border: 1px solid #444;
+      }
+
+      .services-image-column img:hover {
+        filter: saturate(0.5) brightness(1.4) contrast(1.5) hue-rotate(340deg);
+        opacity: 0.9;
+        transition: all 0.4s ease;
+      }
+
+      /* =================================== */
+      /*           ABOUT SECTION             */
+      /* =================================== */
+      #about-section {
+        background: #000;
+        padding: 80px 4%; /* Padding on the section itself */
+      }
+
+      /* New "box" container */
+      .about-box {
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .about-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        /* max-width and margin are now on .about-box */
+      }
+
+      .about-text-column p {
+        /* Pastikan paragraf tidak terlalu dekat dengan judul baru */
+        margin-top: 0;
+
+        /* 3. Updated font to match the main theme */
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+        color: var(--text-dim);
+        line-height: 1.8;
+        margin: 0 0 24px 0;
+      }
+
+      /* 2. Improved button style */
+      .about-text-column .cta-button,
+      #customers-section .cta-button {
+        margin-top: 16px; /* This will be overridden for the customers button */
+        background-color: #222;
+        color: var(--text-bright); /* Explicitly set text color */
+        text-decoration: none; /* Remove underline */
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 12px 24px;
+        font-size: 13px;
+        display: inline-block; /* Ensure it behaves like a button */
+      }
+      .about-text-column .cta-button:hover,
+      #customers-section .cta-button:hover {
+        background-color: #2a2a2a;
+        border-color: #666;
+      }
+
+      /* 4. Responsive YouTube Embed styles */
+      .youtube-embed-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid #444;
+        width: 100%;
+      }
+
+      .youtube-embed-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* =================================== */
+      /*         CUSTOMERS SECTION           */
+      /* =================================== */
+      #customers-section {
+        background: #000;
+        padding: 80px 4%;
+        text-align: center;
+      }
+
+      #customers-section h2 {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        text-transform: uppercase;
+        color: var(--text-bright);
+        margin: 0 0 50px 0;
+        letter-spacing: 1px;
+      }
+
+      .logo-grid {
+        /* 3. Sesuaikan Grid dan Posisi */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+        align-items: center; /* Penting untuk menengahkan logo secara vertikal */
+        max-width: 1200px;
+        margin: 0 auto 50px auto;
+      }
+
+      /* 1. Hapus .logo-card dan stylingnya */
+
+      /* 2. Atur Ulang Ukuran dan Gaya Logo */
+      .logo-grid img {
+        max-height: 180px; /* Ukuran diperbesar */
+        max-width: 180px; /* Mencegah logo lebar memakan tempat */
+        width: auto;
+        object-fit: contain;
+        filter: invert(1);
+        margin: 0 auto; /* Menengahkan logo di dalam sel gridnya */
+        transition: transform 0.3s ease; /* Transisi untuk efek hover */
+      }
+
+      .logo-grid img:hover {
+        transform: scale(1.05); /* Efek hover baru: sedikit membesar */
+      }
+
+      /* 4. Perbarui Gaya Tombol */
+      #customers-section .cta-button {
+        margin-top: 0; /* Reset margin-top specifically for this button */
+        padding: 8px 18px;
+        font-size: 13px;
+        background-color: transparent;
+      }
+
+      /* =================================== */
+      /*              FOOTER                 */
+      /* =================================== */
+      .footer {
+        background-color: #000;
+        color: var(--text-dim);
+        padding: 60px 4% 20px;
+        border-top: 1px solid #222;
+        font-size: 14px;
+      }
+
+      .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 40px;
+      }
+
+      .footer-about .logo img {
+        max-height: 45px;
+        margin-bottom: 16px;
+      }
+
+      .footer-about p {
+        line-height: 1.7;
+        margin: 0;
+        font-size: 13px;
+      }
+
+      .footer-column h4 {
+        color: var(--text-bright);
+        font-size: 16px;
+        margin: 0 0 20px 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 12px;
+      }
+
+      .footer-links a {
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--text-bright);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #222;
+        margin-top: 40px;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
       }
 
       /* =================================== */
@@ -413,6 +664,55 @@
         .products-3d-column {
           min-height: 350px; /* Adjust height for mobile */
         }
+
+        /* --- Tampilan Services Section di Mobile --- */
+        #services-section {
+          padding: 60px 5%;
+        }
+        .services-container {
+          grid-template-columns: 1fr; /* Stack columns */
+          gap: 50px;
+        }
+        .services-grid-column h2 {
+          text-align: center;
+        }
+
+        /* --- Tampilan About Section di Mobile --- */
+        #about-section {
+          padding: 60px 5%;
+        }
+        .about-container {
+          grid-template-columns: 1fr; /* Stack columns */
+          gap: 50px;
+        }
+        .about-text-column {
+          order: 1; /* Text comes first */
+        }
+        .youtube-embed-wrapper { order: 2; } /* Video comes second */
+
+        .about-box {
+          padding: 24px;
+        }
+
+        /* --- Tampilan Customers Section di Mobile --- */
+        .logo-grid {
+          grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+          gap: 16px;
+        }
+        .logo-grid img {
+          max-height: 45px; /* Perkecil sedikit di mobile */
+          gap: 30px;
+        }
+
+        /* --- Tampilan Footer di Mobile --- */
+        .footer-container {
+          grid-template-columns: 1fr; /* Stack columns */
+          gap: 40px;
+          text-align: center;
+        }
+        .footer-about .logo {
+          justify-content: center;
+        }
       }
     </style>
   </head>
@@ -427,7 +727,7 @@
         <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
       </div>
 
-      <div id="menu" class="menu" role="menubar">
+      <div id="menu" class="menu" role="menubar" style="font-family: 'Share Tech Mono', monospace;">
         <a href="#">Home</a>
         <a href="#">About Us</a>
 
@@ -466,19 +766,19 @@
         </div>
         <!-- Slide 2 (Placeholder) -->
         <div class="slide placeholder-slide">
-          <h1 style="color: white; font-size: 4rem; font-family: 'Montserrat', sans-serif;">SLIDE 2</h1>
+          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 2</h2>
         </div>
         <!-- Slide 3 (Placeholder) -->
         <div class="slide placeholder-slide">
-          <h1 style="color: white; font-size: 4rem; font-family: 'Montserrat', sans-serif;">SLIDE 3</h1>
+          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 3</h2>
         </div>
         <!-- Slide 4 (Placeholder) -->
         <div class="slide placeholder-slide">
-          <h1 style="color: white; font-size: 4rem; font-family: 'Montserrat', sans-serif;">SLIDE 4</h1>
+          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 4</h2>
         </div>
         <!-- Slide 5 (Placeholder) -->
         <div class="slide placeholder-slide">
-          <h1 style="color: white; font-size: 4rem; font-family: 'Montserrat', sans-serif;">SLIDE 5</h1>
+          <h2 style="color: white; font-size: 4rem; font-family: 'Share Tech Mono', monospace; font-weight: 600;">SLIDE 5</h2>
         </div>
       </div>
     
@@ -538,6 +838,116 @@
       </div>
     </section>
 
+    <!-- OUR SERVICES SECTION -->
+    <section id="services-section">
+      <div class="services-container">
+        <div class="services-grid-column">
+          <h2>Our Services</h2>
+          <div class="products-grid">
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HYDRAULIC SYSTEM DESIGN
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HARDCHROME PLATING
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              TURBOCHARGER REPAIR
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              CONTRACT SERVICE PROGRAM
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HYDRAULIC MOTOR & PUMP REPAIR
+            </a>
+            <!-- The 6th cell is intentionally left empty to create the desired layout -->
+          </div>
+        </div>
+        <div class="services-image-column">
+          <!-- Placeholder image with an industrial/tech theme -->
+          <img src="https://images.unsplash.com/photo-1581092921462-6870002a97e3?q=80&w=2070&auto=format&fit=crop" alt="Technicians working on machinery">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT US / COMPANY PROFILE SECTION -->
+    <section id="about-section">
+      <!-- 1. New "box" container wrapping the content -->
+      <div class="about-box">
+        <div class="about-container">
+          <div class="about-text-column">
+            <h2>About Us</h2>
+            <p>
+              TOTAL PRIME ENGINEERING began in 2008 as a Sealing Elements company. Today, we are highly recognized in the market as a very reliable and trustworthy partner, offering quality products at very reasonable prices. We are also known as the largest stockist for sealing businesses in Indonesia. Since 2013, we have expanded into the Repair and Production of Hydraulic Cylinders.
+            </p>
+            <p>
+              Currently, we have a production facility spanning 5350 square meters in Cikarang, West Java, and another production facility in Balikpapan covering 1250 square meters. These two facilities enable us to efficiently undertake all processes, from design to repair and production, under one roof.
+            </p>
+            <a href="#" class="cta-button">FIND OUT MORE</a>
+          </div>
+          <!-- 4. Replaced <video> with responsive YouTube <iframe> -->
+          <div class="youtube-embed-wrapper">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUSTED BY / CUSTOMERS SECTION -->
+    <section id="customers-section">
+      <h2>Trusted By</h2>
+      <div class="logo-grid" id="logo-grid-container">
+        <!-- Logos will be dynamically inserted here by JavaScript -->
+      </div>
+      <a href="#" class="cta-button">View Customers</a>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column footer-about">
+          <div class="logo">
+            <a href="/">
+              <img src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp" alt="LOGO PERUSAHAAN PT KUSUMA SARANA DEDIKASI">
+            </a>
+          </div>
+          <p>Your go-to solution for sealing excellence & hydraulic cylinder repair and manufacturing.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Products</h4>
+          <ul class="footer-links">
+            <li><a href="#">Sealing Elements</a></li>
+            <li><a href="#">CNC Machined Seals</a></li>
+            <li><a href="#">Hydraulic Cylinders</a></li>
+            <li><a href="#">All Products</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact Us</h4>
+          <ul class="footer-links">
+            <li>Email: sales@ksd.co.id</li>
+            <li>Phone: (021) 1234-5678</li>
+            <li>Address: Cikarang, West Java</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 PT Kusuma Sarana Dedikasi. All Rights Reserved.</p>
+      </div>
+    </footer>
+
     <script>
       // =================================== //
       //      NAVBAR & MENU LOGIC          //
@@ -550,17 +960,20 @@
 
       // 2. Efek blur pada navbar saat halaman di-scroll
       const navbar = document.getElementById('navbar');
-      const threshold = 10;
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > threshold){ navbar.classList.add('scrolled'); }
-        else { navbar.classList.remove('scrolled'); }
-      });
-      
-      // 3. Logika untuk membuka/menutup dropdown "Products" di mobile
-      const productsDropdown = document.getElementById('productsDropdown');
-      const productsBtn = productsDropdown.querySelector('.menu-link');
 
-      productsBtn.addEventListener('click', (e) => {
+      if (navbar) {
+        const threshold = 10;
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > threshold){ navbar.classList.add('scrolled'); }
+          else { navbar.classList.remove('scrolled'); }
+        });
+      }
+
+      // 3. Logika untuk dropdown di mobile
+      const productsDropdown = document.getElementById('productsDropdown');
+      if (productsDropdown) {
+        const productsBtn = productsDropdown.querySelector('.menu-link');
+        productsBtn.addEventListener('click', (e) => {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         if (isMobile){
           e.preventDefault();
@@ -568,7 +981,8 @@
           const expanded = productsBtn.getAttribute('aria-expanded') === 'true';
           productsBtn.setAttribute('aria-expanded', String(!expanded));
         }
-      });
+        });
+      }
 
       // =================================== //
       //          HERO SLIDER LOGIC        //
@@ -697,6 +1111,67 @@
           renderer.setSize(container.clientWidth, container.clientHeight);
         });
       }
+
+      // =================================== //
+      //    DYNAMIC CUSTOMERS LOGO LOGIC   //
+      // =================================== //
+
+      // 1. Database of client logos
+      const clientDatabase = [
+        { name: 'PLN', logoUrl: 'assets/logos/pln.png' },
+        { name: 'Sinarmas', logoUrl: 'assets/logos/sinarmas.png' },
+        { name: 'United Tractors', logoUrl: 'assets/logos/united-tracktors.png' },
+        /*{ name: 'Weatherford', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Weatherford_Logo.svg/1280px-Weatherford_Logo.svg.png' },
+        { name: 'Pertamina', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/9/9d/Pertamina_Logo.svg/1200px-Pertamina_Logo.svg.png' },
+        { name: 'Freeport Indonesia', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/3/36/Freeport-McMoRan_logo.svg/1200px-Freeport-McMoRan_logo.svg.png' },
+        { name: 'Adaro Energy', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/b/b7/Adaro_Energy_logo.svg/1200px-Adaro_Energy_logo.svg.png' },
+        { name: 'Kaltim Prima Coal', logoUrl: 'https://www.kpc.co.id/wp-content/uploads/2022/03/logo-kpc.png' },
+        { name: 'Pamapersada Nusantara', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Pama_persada_nusantara_logo.svg/2560px-Pama_persada_nusantara_logo.svg.png' },
+        { name: 'Bukit Asam', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/b/b2/Logo_Bukit_Asam.svg/1200px-Logo_Bukit_Asam.svg.png' }*/
+      ];
+
+      const logoContainer = document.getElementById('logo-grid-container');
+
+      // 2. Function to shuffle an array (Fisher-Yates Shuffle)
+      function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        // While there remain elements to shuffle.
+        while (currentIndex != 0) {
+          // Pick a remaining element.
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+      }
+
+      // 3. Function to get random clients and display them
+      function updateDisplayedLogos() {
+        if (!logoContainer) return; // Exit if container not found
+
+        // Create a copy to not modify the original database
+        const shuffledClients = shuffleArray([...clientDatabase]);
+        
+        // Get the first 4 clients
+        const selectedClients = shuffledClients.slice(0, 4);
+
+        // Clear the current logos
+        logoContainer.innerHTML = '';
+
+        // 4. Create and append new logo cards
+        selectedClients.forEach((client, index) => {
+          // 1. Hapus pembuatan 'card', langsung buat 'img'
+          const img = document.createElement('img');
+          img.src = client.logoUrl;
+          img.alt = `Logo ${client.name}`;
+          logoContainer.appendChild(img);
+        });
+      }
+
+      // 5. Initial call and interval setup
+      updateDisplayedLogos(); // Run once on page load
+      setInterval(updateDisplayedLogos, 5000); // Run every 5 seconds
     </script>
   </body>
 </html>
