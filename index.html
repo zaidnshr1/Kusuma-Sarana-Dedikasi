@@ -6,216 +6,1510 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">    
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js/controls/OrbitControls.js"></script>
     <style>
-      :root{
-        --bg-solid: #222;
-        --text-dim: #c8c8c8;
-        --text-bright: #fff;
-        --panel: rgba(20,20,20,0.92);
-        --gap-bridge: 12px;
+      /* =================================== */
+      /*           GLOBAL STYLES             */
+      /* =================================== */
+      :root { 
+        --bg: #0b0b0d;
+        --glass: rgba(255, 255, 255, 0.03);
+        --muted: #bfc3c7;
+        --text: #eaeef2;
+        --accent: #ff8a00;
+        --success: #28a745;
+        --radius: 12px;
+        --maxw: 1100px;
+        --transition: 180ms cubic-bezier(0.2, 0.9, 0.3, 1);
+        --nav-h: 64px;
       }
-      *{ box-sizing: border-box; }
+      *{ box-sizing: border-box; -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale; }
       body{
         margin:0;
         font-family: 'Share Tech Mono', monospace;
         background:#0f0f0f;
         color:#eee;
+        overflow-x: hidden;
         min-height:200vh;
       }
 
-      /* NAVBAR (sticky + blur saat scroll) */
-      .navbar{
-        position: sticky; top:0; z-index:1000; width:100%;
-        padding:12px 20px 10px;
-        background: var(--bg-solid);
-        color: var(--text-bright);
-        transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
-        -webkit-backdrop-filter:none; backdrop-filter:none;
-        border-radius:0;
+      /* =================================== */
+      /*              NAVBAR                 */
+      /* =================================== */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        backdrop-filter: blur(6px);
+        background: linear-gradient(
+          180deg,
+          rgba(11, 11, 13, 0.6),
+          rgba(11, 11, 13, 0.4)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       }
-      .navbar.scrolled{
-        background: rgba(20,20,20,0.35);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      .nav-inner {
+        min-height: var(--nav-h);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 12px 20px;
       }
 
-      .topbar{ display:flex; align-items:center; justify-content:space-between; }
-
-      /* LOGO: gunakan <img> */
-      .logo{ display:flex; align-items:center; }
+      .logo{ display:flex; align-items:center; gap: 12px; }
       .logo img{
-        max-height:55px; height:auto; width:auto; display:block;
+        max-height:52px; width:auto; display:block;
+      }
+      .brand-title {
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
       }
 
-      /* Hamburger (mobile) */
       .hamburger{
-        display:none; font-size:28px; background:none; border:none; color:var(--text-dim);
-        cursor:pointer; padding:4px 6px; line-height:1; transition:color .2s ease;
+        display: none;
+        background: none;
+        border: 0;
+        color: var(--muted);
+        font-size: 22px;
+        padding: 8px;
+        cursor: pointer;
       }
-      .hamburger:hover{ color:var(--text-bright); }
 
-      /* MENU utama (desktop) */
       .menu{
-        display:flex; justify-content:center; gap:40px; margin-top:12px; flex-wrap:wrap;
+        display: flex;
+        gap: 24px;
+        align-items: center;
       }
       .menu a, .menu button.menu-link{
-        text-decoration:none; background:none; border:none;
-        color:var(--text-dim); font-weight:500; padding:6px 0;
-        transition:color .2s ease; letter-spacing:1px; text-transform:uppercase; font-size:20px; 
-        font-family: 'Share Tech Mono', monospace;
-        cursor:pointer;
+        color: var(--muted);
+        border: 0;
+        background: none;
+        font-size: 13px;
+        padding: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: inherit; /* Memaksa tombol untuk mewarisi font */
+        text-decoration: none;
       }
-      .menu a:hover, .menu button.menu-link:hover{ color:var(--text-bright); }
+      .menu a:hover,
+      .menu button:hover {
+        color: var(--text);
+        transform: translateY(-1px);
+      }
 
-      /* DROPDOWN Products (desktop) */
       .dropdown{ position:relative; }
-      .dropdown::after{
-        content:""; position:absolute; left:-8px; right:-8px; top:100%;
-        height: var(--gap-bridge);
-      }
       .menu .caret{
-        margin-left:6px; font-size:12px; opacity:.8; transition:transform .2s ease, color .2s ease;
-        display:inline-block;
+        margin-left: 6px;
+        font-size: 11px;
+        opacity: 0.9;
+        display: inline-block;
+        transition: transform var(--transition);
       }
       .submenu{
-        position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
-        top: calc(100% + var(--gap-bridge));
-        min-width:260px; display:flex; flex-direction:column;
-        background: var(--panel); border:1px solid rgba(255,255,255,0.06);
-        border-radius:10px; padding:10px; box-shadow:0 12px 28px rgba(0,0,0,.35);
-        visibility:hidden; opacity:0; pointer-events:none;
-        transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) translateY(6px);
+        top: calc(100% + 10px);
+        margin-top: 4px;
+        min-width: 240px;
+        background: var(--glass);
+        border-radius: 10px;
+        padding: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        opacity: 0;
+        pointer-events: none;
+        transform-origin: top center;
+        transition: opacity 160ms ease, transform 160ms ease;
       }
       .submenu a{
-        text-transform:none; letter-spacing:.3px; font-size:13px; color:#d4d4d4;
-        padding:8px 10px; border-radius:6px; transition:color .2s ease, background .2s ease; white-space:nowrap;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        text-transform: none;
+        letter-spacing: normal;
       }
-      .submenu a:hover{ color:#fff; background:rgba(255,255,255,0.06); }
-      .dropdown:hover .menu-link{ color:var(--text-bright); }
-      .dropdown:hover .caret{ transform:translateY(1px) rotate(180deg); }
+      .submenu a:hover {
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+      }
       .dropdown:hover .submenu{
-        visibility:visible; opacity:1; pointer-events:auto;
-        transform:translateX(-50%) translateY(0);
-        transition: opacity .16s ease, transform .16s ease, visibility 0s;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+      /* =================================== */
+      /*           HERO SECTION              */
+      /* =================================== */
+
+      .hero {
+        position: relative;
+        height: 90vh;
+        width: 100%;
+        background-color: #111111;
+      }
+      .slides-container {
+        display: flex;
+        height: 100%;
+        width: 100%; /* JS will handle the total width logic */
+        transition: transform 0.6s ease-in-out;
       }
 
-      /* Demo hero */
-      .hero{
-        height:60vh;
-        background:
-          linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
-          url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
-        border-bottom:1px solid rgba(255,255,255,0.06);
+      .slide {
+        flex: 1 0 100%; /* Each slide takes full width */
+        display: flex;
+        align-items: center;
+        padding: 0 8%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
       }
-      .container{ padding:24px; max-width:1100px; margin:0 auto; }
 
-      /* MOBILE OVERRIDES */
-      @media (max-width: 768px){
+      .slide-1 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-1.jpg'); }
+      .slide-2 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-2.jpg'); }
+      .slide-3 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-3.jpg'); }
+      .slide-4 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-4.jpg'); }
+      .slide-5 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-5.jpg'); }
+
+      .hero-content {
+        max-width: 55%;
+        color: var(--text-bright);
+        z-index: 2;
+      }
+      .hero-content h1 {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(2.2rem, 5vw, 4rem); /* Ukuran font responsif */
+        font-weight: normal;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        margin: 0 0 16px 0;
+        line-height: 1.2;
+      }
+      .hero-content .subtitle {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 32px 0;
+        letter-spacing: 0.5px;
+        max-width: 90%;
+      }
+      .hero-content .cta-button {
+        display: inline-block;
+        background: transparent;
+        border: 1px solid #888888;
+        color: #FFFFFF;
+        padding: 14px 28px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 14px;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      .hero-content .cta-button:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: #FFFFFF;
+      }
+
+      .slider-nav {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4%;
+        pointer-events: none; /* Agar tidak menghalangi interaksi di bawahnya */
+      }
+      .slider-arrow {
+        background: none;
+        border: 1px solid #444;
+        color: #AAAAAA;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        pointer-events: all; /* Aktifkan kembali pointer untuk tombol */
+        transition: all 0.3s ease;
+      }
+      .slider-arrow:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #FFFFFF;
+        border-color: #888;
+      }
+
+      .slider-indicators {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        list-style: none;
+        gap: 12px;
+        z-index: 3;
+      }
+      .indicator-dot {
+        width: 10px;
+        height: 10px;
+        background-color: #444444;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .indicator-dot.active {
+        background-color: #FFFFFF;
+      }
+
+      /* =================================== */
+      /*          PRODUCTS SECTION           */
+      /* =================================== */
+
+      #products-section {
+        background: #000;
+        padding: 80px 4%;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .products-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .products-grid-column h2,
+      .about-text-column h2 {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        text-transform: uppercase;
+        color: var(--text-bright);
+        margin: 0 0 40px 0;
+        letter-spacing: 1px;
+      }
+      .products-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .product-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 24px 16px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--text-dim);
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 13px;
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .product-card:hover {
+        border-color: #fff;
+        background-color: rgba(255, 255, 255, 0.04);
+        color: var(--text-bright);
+      }
+      .product-card .icon-placeholder {
+        height: 40px;
+        width: 40px;
+        border: 1px solid #555;
+        border-radius: 50%;
+        margin: 0 auto 16px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 20px;
+        color: #666;
+      }
+      
+      .products-3d-column {
+        position: relative;
+        width: 100%;
+        min-height: 650px; /* Ubah nilai ini untuk mengatur tinggi kanvas */
+      }
+      #3d-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+      }
+
+      /* =================================== */
+      /*          SERVICES SECTION           */
+      /* =================================== */
+
+      #services-section {
+        background: #000;
+        padding: 80px 4%;
+      }
+      .services-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .services-grid-column h2 {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        text-transform: uppercase;
+        color: var(--text-bright);
+        margin: 0 0 40px 0;
+        letter-spacing: 1px;
+      }
+
+      .services-image-column {
+        position: relative;
+        width: 100%;
+        min-height: 500px; /* Match height with 3D column for alignment */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .services-image-column img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures image covers the area without distortion */
+        border-radius: 12px;
+        filter: saturate(0) brightness(1.2) contrast(1.5);
+        opacity: 0.7;
+        border: 1px solid #444;
+      }
+      .services-image-column img:hover {
+        filter: saturate(0.5) brightness(1.4) contrast(1.5) hue-rotate(340deg);
+        opacity: 0.9;
+        transition: all 0.4s ease;
+      }
+
+      /* =================================== */
+      /*           ABOUT SECTION             */
+      /* =================================== */
+      #about-section {
+        background: #000;
+        padding: 80px 4%; /* Padding on the section itself */
+      }
+      .about-box {
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .about-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .about-text-column p {
+        margin-top: 0;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+        color: var(--text-dim);
+        line-height: 1.8;
+        margin: 0 0 24px 0;
+      }
+      .about-text-column .cta-button,
+      #customers-section .cta-button {
+        margin-top: 16px; /* This will be overridden for the customers button */
+        background-color: #222;
+        color: var(--text-bright); /* Explicitly set text color */
+        text-decoration: none; /* Remove underline */
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 12px 24px;
+        font-size: 13px;
+        display: inline-block; /* Ensure it behaves like a button */
+      }
+      .about-text-column .cta-button:hover,
+      #customers-section .cta-button:hover {
+        background-color: #2a2a2a;
+        border-color: #666;
+      }
+
+      .youtube-embed-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid #444;
+        width: 100%;
+      }
+      .youtube-embed-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* =================================== */
+      /*         CUSTOMERS SECTION           */
+      /* =================================== */
+      #customers-section {
+        background: #000;
+        padding: 80px 4%;
+        text-align: center;
+      }
+      #customers-section h2 {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        text-transform: uppercase;
+        color: var(--text-bright);
+        margin: 0 0 50px 0;
+        letter-spacing: 1px;
+      }
+      .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto 50px auto;
+      }
+
+      .logo-grid img {
+        max-height: 180px; /* Ukuran diperbesar */
+        max-width: 180px; /* Mencegah logo lebar memakan tempat */
+        width: auto;
+        object-fit: contain;
+        filter: invert(1);
+        margin: 0 auto;
+        transition: transform 0.3s ease;
+      }
+      .logo-grid img:hover {
+        transform: scale(1.05);
+      }
+
+      #customers-section .cta-button {
+        margin-top: 0; /* Reset margin-top specifically for this button */
+        padding: 8px 18px;
+        font-size: 13px;
+        background-color: transparent;
+      }
+
+      /* =================================== */
+      /*              FOOTER                 */
+      /* =================================== */
+      footer.site-footer {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.015)
+        );
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 40px;
+      }
+      .footer-inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 34px 28px 18px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr;
+        gap: 28px;
+      }
+      .footer-col h4 {
+        margin: 0 0 12px;
+        font-size: 14px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .footer-brand {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .footer-brand img {
+        height: 44px;
+        width: auto;
+        display: block;
+      }
+      .footer-brand .name {
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.5px;
+      }
+
+      .footer-text {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .footer-links a {
+        color: var(--muted);
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: color var(--transition), transform var(--transition);
+      }
+      .footer-links a:hover {
+        color: var(--text);
+        transform: translateX(2px);
+      }
+
+      .footer-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .footer-contact .item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .footer-contact svg {
+        width: 18px;
+        height: 18px;
+        opacity: 0.9;
+        flex: 0 0 18px;
+      }
+
+      .footer-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 22px;
+        padding-top: 14px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      /* =================================== */
+      /*        RESPONSIVE (MOBILE)          */
+      /* =================================== */
+
+      @media (max-width: 880px) {
         .hamburger{ display:block; }
+        .nav-actions .menu { display: none; }
 
-        /* Menu menjadi kolom penuh, tidak geser samping */
-        .menu{
-          display:none;
-          flex-direction:column;
-          align-items:stretch;     /* full width */
-          gap:16px;
-          margin-top:12px;
-          width:100%;
+        .menu.open {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          position: fixed;
+          top: var(--nav-h);
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(11, 11, 13, 0.98);
+          backdrop-filter: blur(10px);
+          padding: 24px;
+          overflow-y: auto;
+          z-index: 50;
         }
-        .menu.active{ display:flex; }
-
-        /* Setiap item selebar container, teks tetap center */
-        .menu a, .menu button.menu-link{
-          display:block;
-          width:100%;
-          text-align:center;
-          padding:10px 12px;
+        .menu a, .menu button.menu-link {
+          font-size: 16px;
+          width: 100%;
+          text-align: left;
+          padding: 12px 8px;
+        }
+        body.menu-open {
+          overflow: hidden;
         }
 
-        /* Dropdown & submenu memenuhi lebar, turun ke bawah, dorong item lain */
-        .dropdown{ width:100%; }
         .submenu{
-          position:static; left:auto; top:auto; transform:none;
-          min-width:0; width:100%;
-          margin-top:6px;
-          border-radius:8px; padding:6px 8px; box-shadow:none;
-          visibility:visible; opacity:1; pointer-events:auto;
-          display:none;            /* default: tertutup */
+          position: static;
+          transform: none;
+          opacity: 1;
+          pointer-events: auto;
+          display: none;
+          padding: 10px 0 10px 20px; /* Penyesuaian padding */
+          box-shadow: none;
+          border: 0;
+          background: transparent;
+          min-width: unset;
+          margin-top: 8px;
+          flex-direction: column; /* BARU: Susun item ke bawah */
+          gap: 8px; /* BARU: Beri jarak antar item submenu */
         }
-        .dropdown.open .submenu{ display:flex; }
-
-        /* caret rotasi saat terbuka */
-        .dropdown .caret{ transform:none; }
+        .dropdown.open .submenu { display: flex; }
         .dropdown.open .caret{ transform:rotate(180deg); }
+      }
 
-        /* hover bridge tidak diperlukan di mobile */
-        .dropdown::after{ display:none; }
+      @media (max-width: 768px) {
+        .slide { 
+          padding: 0 5%; 
+          justify-content: center; 
+          text-align: center; 
+        }
+        .hero-content {
+          max-width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .hero-content h1 {
+          font-size: clamp(2rem, 8vw, 2.5rem);
+        }
+        .hero-content .subtitle {
+          max-width: 100%;
+          font-size: clamp(0.8rem, 4vw, 0.9rem);
+        }
+        .slider-nav { display: none; }
+        .slider-indicators { bottom: 20px; }
+
+        #products-section {
+          padding: 60px 5%;
+        }
+        .products-container {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+        .products-grid-column h2 {
+          text-align: center;
+          font-size: 2rem;
+        }
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+        .products-3d-column {
+          min-height: 400px;
+        }
+
+        #services-section {
+          padding: 60px 5%;
+        }
+        .services-container {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+        .services-grid-column h2 { text-align: center; }
+
+        #about-section {
+          padding: 60px 5%;
+        }
+        .about-container { grid-template-columns: 1fr; gap: 50px; }
+        .about-text-column { order: 1; }
+        .youtube-embed-wrapper { order: 2; }
+        .about-box { padding: 24px; }
+        
+        .logo-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 30px;
+        }
+        .logo-grid img {
+          max-height: 45px;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .footer-brand, .footer-links, .footer-contact {
+          align-items: center;
+        }
+        .footer-contact .item { text-align: left; }
+        .footer-meta {
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+        }
       }
     </style>
   </head>
   <body>
-    <nav class="navbar" id="navbar">
-      <div class="topbar">
-        <div class="logo">
-          <a href="/">
-            <img src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp" alt="LOGO PERUSAHAAN PT KUSUMA SARANA DEDIKASI">
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="nav-inner">
+        <div class="logo" aria-hidden="false">
+          <a href="/" aria-label="Home">
+            <img
+              src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
+              alt="PT Kusuma Sarana Dedikasi logo"
+              onerror="this.style.display='none'"
+            />
           </a>
-        </div>
-        <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
-      </div>
-
-      <div id="menu" class="menu" role="menubar">
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-
-        <div class="dropdown" id="productsDropdown">
-          <button class="menu-link" aria-haspopup="true" aria-expanded="false">
-            Products <span class="caret">▾</span>
-          </button>
-          <div class="submenu" role="menu">
-            <a href="#">Sealing Elements</a>
-            <a href="#">CNC Machined Seals</a>
-            <a href="#">Hydraulic & Pneumatic Seals</a>
-            <a href="#">O-Rings</a>
-            <a href="#">Custom Gaskets</a>
+          <div>
+            <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+            <div style="font-size: 11px; color: var(--muted)">
+              Quality Distribution Solutions
+            </div>
           </div>
         </div>
 
-        <a href="#">Customers</a>
-        <a href="#">Gallery</a>
-        <a href="#">Contact</a>
+        <div class="nav-actions" role="navigation">
+          <button
+            class="hamburger"
+            aria-expanded="false"
+            aria-controls="main-menu"
+            title="Open menu"
+            onclick="toggleMobileMenu(this)"
+          >
+            ☰
+          </button>
+
+          <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+            <a role="menuitem" href="/">Home</a>
+            <a role="menuitem" href="/about-us/">About Us</a>
+
+            <div class="dropdown" id="productsDropdown">
+              <button
+                class="menu-link"
+                aria-haspopup="true"
+                aria-expanded="false"
+                onclick="toggleDropdown(event, 'productsDropdown')"
+              >
+                Products <span class="caret">▾</span>
+              </button>
+              <div class="submenu" role="menu" aria-label="Products submenu">
+                <a role="menuitem" href="#">Sealing Elements</a>
+                <a role="menuitem" href="#">CNC Machined Seals</a>
+                <a role="menuitem" href="#">Hydraulic & Pneumatic Seals</a>
+                <a role="menuitem" href="#">O-Rings</a>
+                <a role="menuitem" href="#">Custom Gaskets</a>
+              </div>
+            </div>
+
+            <a role="menuitem" href="/customers/">Customers</a>
+            <a role="menuitem" href="/gallery/">Gallery</a>
+            <a role="menuitem" href="/contact/">Contact</a>
+          </div>
+        </div>
       </div>
     </nav>
 
-    <section class="hero"></section>
-    <div class="container">
-      <h1>Welcome to MyCompany</h1>
-      <p>Di mobile, buka “Products” → dropdown turun ke bawah dan item lain terdorong ke bawah (vertikal rapi).</p>
-    </div>
+    <section class="hero">
+      <div class="slides-container">
+        <!-- Slide 1 (Konten Asli) -->
+        <div class="slide slide-1">
+          <div class="hero-content">
+            <h1>YOUR GO-TO SOLUTION</h1>
+            <p class="subtitle">
+              Providing quality products and becoming the best solution for the needs of our industrial, construction, and corporate customers.
+            </p>
+            <a href="#" class="cta-button">Explore Products</a>
+          </div>
+        </div>
+        <!-- Slide 2 (Placeholder) -->
+        <div class="slide slide-2">
+          <div class="hero-content">
+            <h1>A LEADING & TRUSTED PARTNER</h1>
+            <p class="subtitle">
+              Our vision is to become a leading and trusted trading and general supplier company in Indonesia that provides maximum value for our customers.
+            </p>
+            <a href="/about-us/" class="cta-button">About Us</a>
+          </div>
+        </div>
+        <!-- Slide 3 (Placeholder) -->
+        <div class="slide slide-3">
+          <div class="hero-content">
+            <h1>YOUR ONE-STOP BUSINESS SOLUTION</h1>
+            <p class="subtitle">
+              We are able to adapt to various scales and types of your business needs, from office supplies, safety equipment, to industrial tools.
+            </p>
+            <a href="#services-section" class="cta-button">Our Services</a>
+          </div>
+        </div>
+        <!-- Slide 4 (Placeholder) -->
+        <div class="slide slide-4">
+          <div class="hero-content">
+            <h1>QUALITY PRODUCTS, RESPONSIVE SERVICE</h1>
+            <p class="subtitle">
+              We are committed to providing high-quality products with guaranteed warranties, supported by a fast, responsive, and professional team.
+            </p>
+            <a href="/customers/" class="cta-button">View Customers</a>
+          </div>
+        </div>
+        <!-- Slide 5 (Placeholder) -->
+        <div class="slide slide-5">
+          <div class="hero-content">
+            <h1>GET IN TOUCH WITH US</h1>
+            <p class="subtitle">
+              Our team is ready to serve and find the best solution for your needs. Contact us for a consultation.
+            </p>
+            <a href="/contact/" class="cta-button">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    
+      <div class="slider-nav">
+        <button class="slider-arrow left" aria-label="Previous slide">&lt;</button>
+        <button class="slider-arrow right" aria-label="Next slide">&gt;</button>
+      </div>
+    
+      <div class="slider-indicators">
+        <span class="indicator-dot"></span><span class="indicator-dot"></span><span class="indicator-dot"></span><span class="indicator-dot"></span><span class="indicator-dot"></span>
+      </div>
+    </section>
+    
+    <!-- OUR PRODUCTS SECTION -->
+    <section id="products-section">
+      <div class="products-container">
+        <div class="products-grid-column">
+          <h2>Our Products</h2>
+          <div class="products-grid">
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              SEALING ELEMENTS
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              CNC MACHINED SEALS
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              MECHANICAL SEALS
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HYDRAULIC HOSES
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HYDRAULIC CYLINDERS
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              TURBO CHARGERS
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HEAVY EQUIPMENT PARTS
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              UNDERCARRIAGE
+            </a>
+          </div>
+        </div>
+        <div class="products-3d-column">
+          <canvas id="3d-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR SERVICES SECTION -->
+    <section id="services-section">
+      <div class="services-container">
+        <div class="services-grid-column">
+          <h2>Our Services</h2>
+          <div class="products-grid">
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HYDRAULIC SYSTEM DESIGN
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HARDCHROME PLATING
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              TURBOCHARGER REPAIR
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              CONTRACT SERVICE PROGRAM
+            </a>
+            <a href="#" class="product-card">
+              <div class="icon-placeholder">#</div>
+              HYDRAULIC MOTOR & PUMP REPAIR
+            </a>
+            <!-- The 6th cell is intentionally left empty to create the desired layout -->
+          </div>
+        </div>
+        <div class="services-image-column">
+          <!-- Placeholder image with an industrial/tech theme -->
+          <img src="https://images.unsplash.com/photo-1581092921462-6870002a97e3?q=80&w=2070&auto=format&fit=crop" alt="Technicians working on machinery">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT US / COMPANY PROFILE SECTION -->
+    <section id="about-section">
+      <!-- 1. New "box" container wrapping the content -->
+      <div class="about-box">
+        <div class="about-container">
+          <div class="about-text-column">
+            <h2>About Us</h2>
+            <p>
+              TOTAL PRIME ENGINEERING began in 2008 as a Sealing Elements company. Today, we are highly recognized in the market as a very reliable and trustworthy partner, offering quality products at very reasonable prices. We are also known as the largest stockist for sealing businesses in Indonesia. Since 2013, we have expanded into the Repair and Production of Hydraulic Cylinders.
+            </p>
+            <p>
+              Currently, we have a production facility spanning 5350 square meters in Cikarang, West Java, and another production facility in Balikpapan covering 1250 square meters. These two facilities enable us to efficiently undertake all processes, from design to repair and production, under one roof.
+            </p>
+            <a href="#" class="cta-button">FIND OUT MORE</a>
+          </div>
+          <!-- 4. Replaced <video> with responsive YouTube <iframe> -->
+          <div class="youtube-embed-wrapper">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUSTED BY / CUSTOMERS SECTION -->
+    <section id="customers-section">
+      <h2>Trusted By</h2>
+      <div class="logo-grid" id="logo-grid-container">
+        <!-- Logos will be dynamically inserted here by JavaScript -->
+      </div>
+      <a href="#" class="cta-button">View Customers</a>
+    </section>
+
+    <footer class="site-footer" aria-label="Website footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <!-- Brand & summary -->
+          <div class="footer-col">
+            <div class="footer-brand">
+              <img
+                src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
+                alt="Logo PT KSD"
+                onerror="this.style.display='none'"
+              />
+              <div>
+                <div class="name">PT Kusuma Sarana Dedikasi</div>
+                <div style="font-size: 12px; color: var(--muted)">
+                  Quality Distribution Solutions
+                </div>
+              </div>
+            </div>
+            <p class="footer-text">
+              We serve as a trusted distribution partner supporting the needs of
+              office, industrial, construction, and laboratory sectors. With
+              international standards, we deliver added value through superior
+              quality and consistent service.
+            </p>
+          </div>
+
+          <!-- Quick links -->
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <nav class="footer-links" aria-label="Footer navigation">
+              <a href="/">Home</a>
+              <a href="/about-us/">About Us</a>
+              <a href="/contact/">Contact</a>
+              <a href="/customers/">Customers</a>
+              <a href="/gallery/">Gallery</a>
+            </nav>
+          </div>
+
+          <!-- Products -->
+          <div class="footer-col">
+            <h4>Products</h4>
+            <div class="footer-links">
+              <a href="#">Sealing Elements</a>
+              <a href="#">CNC Machined Seals</a>
+              <a href="#">Hydraulic &amp; Pneumatic Seals</a>
+              <a href="#">O-Rings</a>
+              <a href="#">Custom Gaskets</a>
+            </div>
+          </div>
+
+          <!-- Contact & newsletter -->
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="footer-contact">
+              <div class="item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div>
+                  Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi
+                  Barat 17136
+                </div>
+              </div>
+              <div class="item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M4 4h16v16H4z"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                  />
+                  <path
+                    d="M4 7l8 6 8-6"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <div>
+                  <a href="mailto:m.zaidanshori04@gmail.com"
+                    >m.zaidanshori04@gmail.com</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-meta">
+          <div>
+            © <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights
+            reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" style="display: none; position: fixed; right: 18px; bottom: 18px; z-index: 70; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.06); background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02)); color: var(--text); padding: 10px 12px; font-size: 13px; cursor: pointer; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width: 16px; height: 16px;">
+        <path
+          d="M12 19V5M5 12l7-7 7 7"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      Top
+    </button>
 
     <script>
-      function toggleMenu(){
-        document.getElementById('menu').classList.toggle('active');
+      /* =================================== */
+      /*         MOBILE NAVBAR LOGIC         */
+      /* =================================== */
+      function toggleMobileMenu(button) {
+        const menu = document.getElementById('main-menu');
+        const opened = menu.classList.toggle('open');
+        button.setAttribute('aria-expanded', opened);
+        document.body.classList.toggle('menu-open', opened);
+        if (opened) {
+          button.innerHTML = '✕'; // Close icon
+          button.title = 'Close menu';
+        } else {
+          button.innerHTML = '☰'; // Hamburger icon
+          button.title = 'Open menu';
+        }
       }
-      const navbar = document.getElementById('navbar');
-      const threshold = 10;
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > threshold){ navbar.classList.add('scrolled'); }
-        else { navbar.classList.remove('scrolled'); }
+      function toggleDropdown(event, dropdownId) {
+        const isMobile = window.matchMedia("(max-width: 880px)").matches;
+        if (isMobile) {
+          const dropdown = document.getElementById(dropdownId);
+          const button = dropdown.querySelector('button');
+          const opened = dropdown.classList.toggle('open');
+          button.setAttribute('aria-expanded', opened);
+        }
+      }
+
+      /* =================================== */
+      /*          HERO SLIDER LOGIC          */
+      /* =================================== */
+      const slidesContainer = document.querySelector('.slides-container');
+      const slides = document.querySelectorAll('.slide');
+      const nextBtn = document.querySelector('.slider-arrow.right');
+      const prevBtn = document.querySelector('.slider-arrow.left');
+      const dots = document.querySelectorAll('.indicator-dot');
+
+      let currentIndex = 0;
+      let slideInterval;
+      const slideCount = slides.length;
+
+      const goToSlide = (index) => {
+        if (index < 0) index = slideCount - 1;
+        if (index >= slideCount) index = 0;
+
+        slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+        currentIndex = index;
+
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
+      };
+
+      const nextSlide = () => {
+        goToSlide(currentIndex + 1);
+      };
+
+      const prevSlide = () => {
+        goToSlide(currentIndex - 1);
+      };
+
+      const startAutoSlide = () => {
+        slideInterval = setInterval(nextSlide, 5000);
+      };
+
+      const resetAutoSlide = () => {
+        clearInterval(slideInterval);
+        startAutoSlide();
+      };
+
+      nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+      prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => { goToSlide(index); resetAutoSlide(); });
       });
 
-      const productsDropdown = document.getElementById('productsDropdown');
-      const productsBtn = productsDropdown.querySelector('.menu-link');
-      productsBtn.addEventListener('click', (e) => {
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-        if (isMobile){
-          e.preventDefault();
-          productsDropdown.classList.toggle('open');
-          const expanded = productsBtn.getAttribute('aria-expanded') === 'true';
-          productsBtn.setAttribute('aria-expanded', String(!expanded));
+      goToSlide(0);
+      startAutoSlide();
+
+      /* =================================== */
+      /*       THREE.JS 3D MODEL LOGIC       */
+      /* =================================== */
+      const canvas = document.getElementById('3d-canvas');
+      if (canvas && typeof THREE !== 'undefined') {
+
+        const isMobile = window.innerWidth < 768;
+
+        const scene = new THREE.Scene();
+        const container = document.querySelector('.products-3d-column');
+ 
+        const camera = new THREE.PerspectiveCamera(
+          65,
+          container.clientWidth / container.clientHeight,
+          0.1,
+          1000
+        );
+        camera.position.z = 5.5;
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 7.5);
+        scene.add(directionalLight);
+
+        const galaxyGroup = new THREE.Group();
+        scene.add(galaxyGroup);
+        galaxyGroup.position.set(0, 0, 0);
+        galaxyGroup.scale.set(1.0, 1.0, 1.0);
+
+        const coreGeometry = new THREE.IcosahedronGeometry(0.7, 2);
+        const coreMaterial = new THREE.MeshBasicMaterial({
+          color: 0x9933ff,
+          wireframe: true
+        });
+        const core = new THREE.Mesh(coreGeometry, coreMaterial);
+        galaxyGroup.add(core);
+
+        const solidMaterial = new THREE.MeshStandardMaterial({
+          color: 0xff8800,
+          emissive: 0xff8800,
+          emissiveIntensity: 0.4,
+          metalness: 0.5,
+          roughness: 0.4,
+          transparent: true,
+          opacity: 0.3
+        });
+        const wireframeMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffae42, // Warna oranye lebih terang untuk kontras
+          wireframe: true
+        });
+
+        const modelPivots = [];
+
+        function createOrbitingObject(object3D, orbitRadius, rotation, targetSize = 1.5) { 
+          const box = new THREE.Box3().setFromObject(object3D);
+          const size = box.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scaleFactor = targetSize / maxDim;
+          object3D.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+          const wireframeClone = object3D.clone();
+
+          object3D.traverse(child => { if (child.isMesh) child.material = solidMaterial; });
+          wireframeClone.traverse(child => { if (child.isMesh) child.material = wireframeMaterial; });
+
+          const modelGroup = new THREE.Group();
+          modelGroup.add(object3D);
+          modelGroup.add(wireframeClone);
+          
+          modelGroup.position.x = orbitRadius;
+
+          const pivotGroup = new THREE.Group();
+          pivotGroup.add(modelGroup);
+
+          pivotGroup.rotation.x = rotation.x;
+          pivotGroup.rotation.y = rotation.y;
+
+          pivotGroup.rotation.z = Math.random() * Math.PI * 2;
+
+          galaxyGroup.add(pivotGroup);
+          modelPivots.push({ 
+            pivot: pivotGroup, 
+            model: modelGroup, 
+            speed: Math.random() * 0.004 + 0.001 
+          });
+        }
+        
+        const loader = new THREE.GLTFLoader();
+        function loadAndDisplayModel(path, orbitRadius, rotation) {
+          loader.load(path, (gltf) => {
+            createOrbitingObject(gltf.scene, orbitRadius, rotation);
+          }, undefined, (error) => {
+            console.error(`An error happened while loading ${path}:`, error);
+          });
+        }
+
+        const asteroidGeometries = [
+          new THREE.OctahedronGeometry(0.7, 0),      // Diamond shape
+          new THREE.BoxGeometry(0.7, 0.7, 0.7),
+          new THREE.DodecahedronGeometry(0.6, 0)
+        ];
+
+        const asteroidCount = 3;
+        for (let i = 0; i < asteroidCount; i++) {
+          const geometry = asteroidGeometries[Math.floor(Math.random() * asteroidGeometries.length)];
+          const asteroid = new THREE.Mesh(geometry);
+          
+          const radius = Math.random() * 2 + 2.0; // Gunakan radius yang sama untuk semua
+          const rotation = {
+            x: Math.random() * Math.PI,
+            y: Math.random() * Math.PI,
+          };
+
+          createOrbitingObject(asteroid, radius, rotation, 0.8); 
+        }
+
+        const modelsToLoad = [
+          { path: 'assets/models/helmet.glb', radius: 2.0, rotation: { x: 0.2, y: 0 } },
+          { path: 'assets/models/wrench.glb', radius: 3.0, rotation: { x: -0.5, y: 2 } },
+          { path: 'assets/models/pipe.glb', radius: 4.0, rotation: { x: 0.8, y: 4 } }
+        ];
+
+        modelsToLoad.forEach(modelInfo => {
+          loadAndDisplayModel(modelInfo.path, modelInfo.radius, modelInfo.rotation);
+        });
+        
+        let mouse = { x: 0, y: 0 };
+        let targetRotation = { x: 0, y: 0 };
+
+        function onMouseMove(event) {
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+          mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        }
+        window.addEventListener('mousemove', onMouseMove);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          controls.update();
+
+          modelPivots.forEach(item => {
+            item.pivot.rotation.z += item.speed;
+            item.model.rotation.y += 0.005;
+          });
+
+          core.rotation.y += 0.001;
+          core.rotation.x += 0.001;
+
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+          camera.aspect = container.clientWidth / container.clientHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+      }
+
+      /* =================================== */
+      /*    DYNAMIC CUSTOMERS LOGO LOGIC     */
+      /* =================================== */
+      const clientDatabase = [
+        { name: 'PLN', logoUrl: 'assets/logos/pln.png' },
+        { name: 'Sinarmas', logoUrl: 'assets/logos/sinarmas.png' },
+        { name: 'United Tractors', logoUrl: 'assets/logos/united-tracktors.png' },
+        { name: 'Weatherford', logoUrl: 'assets/logos/weatherford.png' },
+        /*{ name: 'Pertamina', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/9/9d/Pertamina_Logo.svg/1200px-Pertamina_Logo.svg.png' },
+        { name: 'Freeport Indonesia', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/3/36/Freeport-McMoRan_logo.svg/1200px-Freeport-McMoRan_logo.svg.png' },
+        { name: 'Adaro Energy', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/b/b7/Adaro_Energy_logo.svg/1200px-Adaro_Energy_logo.svg.png' },
+        { name: 'Kaltim Prima Coal', logoUrl: 'https://www.kpc.co.id/wp-content/uploads/2022/03/logo-kpc.png' },
+        { name: 'Pamapersada Nusantara', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Pama_persada_nusantara_logo.svg/2560px-Pama_persada_nusantara_logo.svg.png' },
+        { name: 'Bukit Asam', logoUrl: 'https://upload.wikimedia.org/wikipedia/id/thumb/b/b2/Logo_Bukit_Asam.svg/1200px-Logo_Bukit_Asam.svg.png' }*/
+      ];
+
+      const logoContainer = document.getElementById('logo-grid-container');
+      function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+      }
+      function updateDisplayedLogos() {
+        if (!logoContainer) return;
+
+        const shuffledClients = shuffleArray([...clientDatabase]);
+        const selectedClients = shuffledClients.slice(0, 4);
+
+        logoContainer.innerHTML = '';
+
+        selectedClients.forEach((client, index) => {
+          const img = document.createElement('img');
+          img.src = client.logoUrl;
+          img.alt = `Logo ${client.name}`;
+          logoContainer.appendChild(img);
+        });
+      }
+      
+      if (logoContainer) {
+        updateDisplayedLogos();
+        setInterval(updateDisplayedLogos, 5000);
+      }
+
+      /* =================================== */
+      /*       SMART SCROLL-SNAP LOGIC       */
+      /* =================================== */
+      document.addEventListener('DOMContentLoaded', () => {
+        const SCROLL_END_DELAY = 1500; // Jeda dalam milidetik sebelum snap dianggap selesai (1.5 detik)
+        const SNAP_DURATION = 1200;    // Durasi animasi scroll dalam milidetik (dibuat lebih lama agar smooth)
+
+        let scrollTimeout;      // Untuk menampung ID dari setTimeout
+        let isSnapping = false; // Flag untuk mencegah loop saat scroll otomatis berjalan
+
+        const customSmoothScroll = (targetY, duration) => {
+          const startY = window.scrollY;
+          const distance = targetY - startY;
+          let startTime = null;
+
+          const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+          const animation = (currentTime) => {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1); // Pastikan progress tidak melebihi 1
+            const easedProgress = easeInOutCubic(progress);
+
+            window.scrollTo(0, startY + distance * easedProgress);
+
+            if (timeElapsed < duration) {
+              requestAnimationFrame(animation);
+            }
+          };
+          requestAnimationFrame(animation);
+        };
+
+        const onScrollEnd = () => {
+          if (window.innerWidth < 768) {
+            return;
+          }
+
+          if (isSnapping) {
+            return;
+          }
+
+          const topThreshold = window.innerHeight * 0.5; // Jangan snap jika masih di setengah atas hero section
+          const bottomThreshold = document.body.scrollHeight - window.innerHeight - 50; // Jangan snap jika sudah dekat footer
+
+          if (window.scrollY < topThreshold || window.scrollY > bottomThreshold) {
+            return;
+          }
+
+          const sections = document.querySelectorAll('section[id]');
+          if (sections.length === 0) return;
+
+          let closestSection = null;
+          let minDistance = Infinity;
+
+          sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const distance = Math.abs(rect.top);
+
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestSection = section;
+            }
+          });
+
+          if (closestSection) {
+            isSnapping = true;
+            const targetY = closestSection.getBoundingClientRect().top + window.scrollY;
+            customSmoothScroll(targetY, SNAP_DURATION);
+
+            setTimeout(() => {
+              isSnapping = false;
+            }, SNAP_DURATION + 100); // Cooldown sedikit lebih lama dari durasi animasi
+          }
+        };
+
+        window.addEventListener('scroll', () => {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(onScrollEnd, SCROLL_END_DELAY);
+        }, { passive: true });
+      });
+
+      /* =================================== */
+      /*         MISC & ENHANCEMENTS         */
+      /* =================================== */
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        navbar.style.boxShadow =
+          window.scrollY > 8 ? "0 8px 30px rgba(0,0,0,.6)" : "none";
+      });
+
+      document.addEventListener("keydown", (ev) => {
+        if (ev.key === "Escape") {
+          const menu = document.getElementById("main-menu");
+          if (menu.classList.contains("open")) { toggleMobileMenu(document.querySelector(".hamburger")); }
         }
       });
+
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+      const backTopBtn = document.getElementById("backToTop");
+      if (backTopBtn) {
+        window.addEventListener("scroll", () => {
+          const shouldShow = window.scrollY > 280;
+          backTopBtn.style.display = shouldShow ? 'inline-flex' : 'none';
+        });
+        backTopBtn.addEventListener("click", () =>
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        );
+      }
+
     </script>
   </body>
 </html>
