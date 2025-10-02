@@ -11,10 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js/controls/OrbitControls.js"></script>
     <style>
       /* =================================== */
-      /*          GLOBAL STYLES              */
+      /*           GLOBAL STYLES             */
       /* =================================== */
-
-      /* Variabel warna dan layout global */
       :root { 
         --bg: #0b0b0d;
         --glass: rgba(255, 255, 255, 0.03);
@@ -34,15 +32,14 @@
         font-family: 'Share Tech Mono', monospace;
         background:#0f0f0f;
         color:#eee;
+        overflow-x: hidden;
         min-height:200vh;
       }
 
       /* =================================== */
-      /*        NAVBAR (NEW STYLE)           */
+      /*              NAVBAR                 */
       /* =================================== */
-
-      /* NAVBAR (sticky + blur saat scroll) */
-      .navbar{
+      .navbar {
         position: sticky;
         top: 0;
         z-index: 60;
@@ -65,7 +62,6 @@
         padding: 12px 20px;
       }
 
-      /* LOGO: gunakan <img> */
       .logo{ display:flex; align-items:center; gap: 12px; }
       .logo img{
         max-height:52px; width:auto; display:block;
@@ -82,7 +78,6 @@
         gap: 18px;
       }
 
-      /* Hamburger (mobile) */
       .hamburger{
         display: none;
         background: none;
@@ -93,7 +88,6 @@
         cursor: pointer;
       }
 
-      /* MENU utama (desktop) */
       .menu{
         display: flex;
         gap: 24px;
@@ -108,6 +102,7 @@
         cursor: pointer;
         text-transform: uppercase;
         letter-spacing: 1px;
+        font-family: inherit; /* Memaksa tombol untuk mewarisi font */
         text-decoration: none;
       }
       .menu a:hover,
@@ -116,7 +111,6 @@
         transform: translateY(-1px);
       }
 
-      /* DROPDOWN Products (desktop) */
       .dropdown{ position:relative; }
       .menu .caret{
         margin-left: 6px;
@@ -166,17 +160,12 @@
       /*           HERO SECTION              */
       /* =================================== */
 
-      /* --- Kontainer Utama Hero & Slider --- */
       .hero {
         position: relative;
         height: 90vh;
         width: 100%;
         background-color: #111111;
-        /* Optional: Placeholder untuk grafik abstrak di latar belakang */
-        /* background-image: url('path/to/your/abstract-graphic.png'); */
-        overflow: hidden; /* Mencegah konten keluar dari section */
       }
-
       .slides-container {
         display: flex;
         height: 100%;
@@ -189,15 +178,22 @@
         display: flex;
         align-items: center;
         padding: 0 8%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
       }
 
-      /* --- Konten Teks di Dalam Hero --- */
+      .slide-1 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-1.jpg'); }
+      .slide-2 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-2.jpg'); }
+      .slide-3 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-3.jpg'); }
+      .slide-4 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-4.jpg'); }
+      .slide-5 { background-image: linear-gradient(to right, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%), url('assets/images/hero-bg-5.jpg'); }
+
       .hero-content {
         max-width: 55%;
         color: var(--text-bright);
         z-index: 2;
       }
-
       .hero-content h1 {
         font-family: 'Share Tech Mono', monospace;
         font-size: clamp(2.2rem, 5vw, 4rem); /* Ukuran font responsif */
@@ -207,7 +203,6 @@
         margin: 0 0 16px 0;
         line-height: 1.2;
       }
-
       .hero-content .subtitle {
         font-family: 'Share Tech Mono', monospace;
         font-size: clamp(0.9rem, 1.5vw, 1rem);
@@ -217,7 +212,6 @@
         letter-spacing: 0.5px;
         max-width: 90%;
       }
-
       .hero-content .cta-button {
         display: inline-block;
         background: transparent;
@@ -231,13 +225,11 @@
         letter-spacing: 1px;
         transition: background-color 0.3s ease, border-color 0.3s ease;
       }
-
       .hero-content .cta-button:hover {
         background-color: rgba(255, 255, 255, 0.05);
         border-color: #FFFFFF;
       }
 
-      /* --- Navigasi Slider (Panah Kiri/Kanan) --- */
       .slider-nav {
         position: absolute;
         top: 50%;
@@ -250,7 +242,6 @@
         padding: 0 4%;
         pointer-events: none; /* Agar tidak menghalangi interaksi di bawahnya */
       }
-
       .slider-arrow {
         background: none;
         border: 1px solid #444;
@@ -263,14 +254,12 @@
         pointer-events: all; /* Aktifkan kembali pointer untuk tombol */
         transition: all 0.3s ease;
       }
-
       .slider-arrow:hover {
         background-color: rgba(255, 255, 255, 0.05);
         color: #FFFFFF;
         border-color: #888;
       }
 
-      /* --- Indikator Halaman Slider (Titik-titik) --- */
       .slider-indicators {
         position: absolute;
         bottom: 40px;
@@ -281,7 +270,6 @@
         gap: 12px;
         z-index: 3;
       }
-
       .indicator-dot {
         width: 10px;
         height: 10px;
@@ -290,7 +278,6 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
       }
-
       .indicator-dot.active {
         background-color: #FFFFFF;
       }
@@ -299,13 +286,11 @@
       /*          PRODUCTS SECTION           */
       /* =================================== */
 
-      /* --- Kontainer Utama & Layout Grid --- */
       #products-section {
         background: #000;
         padding: 80px 4%;
         border-top: 1px solid rgba(255,255,255,0.08);
       }
-
       .products-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -315,7 +300,6 @@
         margin: 0 auto;
       }
 
-      /* --- Kolom Kiri (Judul & Grid Produk) --- */
       .products-grid-column h2,
       .about-text-column h2 {
         font-family: 'Share Tech Mono', monospace;
@@ -325,13 +309,11 @@
         margin: 0 0 40px 0;
         letter-spacing: 1px;
       }
-
       .products-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
       }
-
       .product-card {
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid #333;
@@ -347,13 +329,11 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
-
       .product-card:hover {
         border-color: #fff;
         background-color: rgba(255, 255, 255, 0.04);
         color: var(--text-bright);
       }
-
       .product-card .icon-placeholder {
         height: 40px;
         width: 40px;
@@ -368,13 +348,11 @@
         color: #666;
       }
       
-      /* --- Kolom Kanan (Kanvas Model 3D) --- */
       .products-3d-column {
         position: relative;
         width: 100%;
         min-height: 650px; /* Ubah nilai ini untuk mengatur tinggi kanvas */
       }
-
       #3d-canvas {
         position: absolute;
         top: 0;
@@ -391,9 +369,7 @@
       #services-section {
         background: #000;
         padding: 80px 4%;
-        /* No border-top to blend seamlessly with the products section */
       }
-
       .services-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -402,7 +378,6 @@
         max-width: 1400px;
         margin: 0 auto;
       }
-
       .services-grid-column h2 {
         font-family: 'Share Tech Mono', monospace;
         font-size: clamp(1.8rem, 4vw, 2.2rem);
@@ -412,8 +387,6 @@
         letter-spacing: 1px;
       }
 
-      /* Reusing .products-grid and .product-card styles for consistency */
-
       .services-image-column {
         position: relative;
         width: 100%;
@@ -422,18 +395,15 @@
         align-items: center;
         justify-content: center;
       }
-
       .services-image-column img {
         width: 100%;
         height: 100%;
         object-fit: cover; /* Ensures image covers the area without distortion */
         border-radius: 12px;
-        /* Optional: effect to make it look more 'techy' */
         filter: saturate(0) brightness(1.2) contrast(1.5);
         opacity: 0.7;
         border: 1px solid #444;
       }
-
       .services-image-column img:hover {
         filter: saturate(0.5) brightness(1.4) contrast(1.5) hue-rotate(340deg);
         opacity: 0.9;
@@ -447,8 +417,6 @@
         background: #000;
         padding: 80px 4%; /* Padding on the section itself */
       }
-
-      /* New "box" container */
       .about-box {
         background-color: rgba(255, 255, 255, 0.03);
         border: 1px solid #333;
@@ -457,28 +425,20 @@
         max-width: 1400px;
         margin: 0 auto;
       }
-
       .about-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 60px;
         align-items: center;
-        /* max-width and margin are now on .about-box */
       }
-
       .about-text-column p {
-        /* Pastikan paragraf tidak terlalu dekat dengan judul baru */
         margin-top: 0;
-
-        /* 3. Updated font to match the main theme */
         font-family: 'Share Tech Mono', monospace;
         font-size: clamp(0.95rem, 1.5vw, 1.05rem);
         color: var(--text-dim);
         line-height: 1.8;
         margin: 0 0 24px 0;
       }
-
-      /* 2. Improved button style */
       .about-text-column .cta-button,
       #customers-section .cta-button {
         margin-top: 16px; /* This will be overridden for the customers button */
@@ -497,7 +457,6 @@
         border-color: #666;
       }
 
-      /* 4. Responsive YouTube Embed styles */
       .youtube-embed-wrapper {
         position: relative;
         padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -507,7 +466,6 @@
         border: 1px solid #444;
         width: 100%;
       }
-
       .youtube-embed-wrapper iframe {
         position: absolute;
         top: 0;
@@ -524,7 +482,6 @@
         padding: 80px 4%;
         text-align: center;
       }
-
       #customers-section h2 {
         font-family: 'Share Tech Mono', monospace;
         font-size: clamp(1.8rem, 4vw, 2.2rem);
@@ -533,7 +490,6 @@
         margin: 0 0 50px 0;
         letter-spacing: 1px;
       }
-
       .logo-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -543,7 +499,6 @@
         margin: 0 auto 50px auto;
       }
 
-      /* 2. Atur Ulang Ukuran dan Gaya Logo */
       .logo-grid img {
         max-height: 180px; /* Ukuran diperbesar */
         max-width: 180px; /* Mencegah logo lebar memakan tempat */
@@ -553,12 +508,10 @@
         margin: 0 auto;
         transition: transform 0.3s ease;
       }
-
       .logo-grid img:hover {
         transform: scale(1.05);
       }
 
-      /* 4. Perbarui Gaya Tombol */
       #customers-section .cta-button {
         margin-top: 0; /* Reset margin-top specifically for this button */
         padding: 8px 18px;
@@ -668,83 +621,13 @@
       }
 
       /* =================================== */
-      /*              FOOTER                 */
-      /* =================================== */
-      .footer {
-        background-color: #000;
-        color: var(--text-dim);
-        padding: 60px 4% 20px;
-        border-top: 1px solid #222;
-        font-size: 14px;
-      }
-
-      .footer-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1.5fr;
-        gap: 40px;
-      }
-
-      .footer-about .logo img {
-        max-height: 45px;
-        margin-bottom: 16px;
-      }
-
-      .footer-about p {
-        line-height: 1.7;
-        margin: 0;
-        font-size: 13px;
-      }
-
-      .footer-column h4 {
-        color: var(--text-bright);
-        font-size: 16px;
-        margin: 0 0 20px 0;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .footer-links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .footer-links li {
-        margin-bottom: 12px;
-      }
-
-      .footer-links a {
-        color: var(--text-dim);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .footer-links a:hover {
-        color: var(--text-bright);
-      }
-
-      .footer-bottom {
-        border-top: 1px solid #222;
-        margin-top: 40px;
-        padding-top: 20px;
-        text-align: center;
-        font-size: 12px;
-        color: #666;
-      }
-
-      /* =================================== */
       /*        RESPONSIVE (MOBILE)          */
       /* =================================== */
 
-      /* --- Styles for Tablet and Mobile (Navbar changes first) --- */
       @media (max-width: 880px) {
-        /* Show hamburger, hide desktop menu */
         .hamburger{ display:block; }
         .nav-actions .menu { display: none; }
 
-        /* Styling for the opened mobile menu */
         .menu.open {
           display: flex;
           flex-direction: column;
@@ -761,39 +644,36 @@
           overflow-y: auto;
           z-index: 50;
         }
-
         .menu a, .menu button.menu-link {
           font-size: 16px;
           width: 100%;
           text-align: left;
           padding: 12px 8px;
         }
-
         body.menu-open {
           overflow: hidden;
         }
 
-        /* Dropdown styling for mobile */
         .submenu{
           position: static;
           transform: none;
           opacity: 1;
           pointer-events: auto;
           display: none;
-          padding: 10px 0 0 15px;
+          padding: 10px 0 10px 20px; /* Penyesuaian padding */
           box-shadow: none;
           border: 0;
           background: transparent;
           min-width: unset;
           margin-top: 8px;
+          flex-direction: column; /* BARU: Susun item ke bawah */
+          gap: 8px; /* BARU: Beri jarak antar item submenu */
         }
         .dropdown.open .submenu { display: flex; }
         .dropdown.open .caret{ transform:rotate(180deg); }
       }
 
-      /* --- Styles for Mobile (General Layout) --- */
       @media (max-width: 768px) {
-        /* Hero Section */
         .slide { 
           padding: 0 5%; 
           justify-content: center; 
@@ -815,7 +695,6 @@
         .slider-nav { display: none; }
         .slider-indicators { bottom: 20px; }
 
-        /* Products Section */
         #products-section {
           padding: 60px 5%;
         }
@@ -825,15 +704,15 @@
         }
         .products-grid-column h2 {
           text-align: center;
+          font-size: 2rem;
         }
         .products-grid {
-          grid-template-columns: 1fr; /* Stack product cards */
+          grid-template-columns: 1fr;
         }
         .products-3d-column {
           min-height: 400px;
         }
 
-        /* Services Section */
         #services-section {
           padding: 60px 5%;
         }
@@ -841,27 +720,16 @@
           grid-template-columns: 1fr;
           gap: 50px;
         }
-        .services-grid-column h2 {
-          text-align: center;
-        }
+        .services-grid-column h2 { text-align: center; }
 
-        /* About Section */
         #about-section {
           padding: 60px 5%;
         }
-        .about-container {
-          grid-template-columns: 1fr;
-          gap: 50px;
-        }
-        .about-text-column {
-          order: 1;
-        }
+        .about-container { grid-template-columns: 1fr; gap: 50px; }
+        .about-text-column { order: 1; }
         .youtube-embed-wrapper { order: 2; }
-        .about-box {
-          padding: 24px;
-        }
+        .about-box { padding: 24px; }
         
-        /* Customers Section */
         .logo-grid {
           grid-template-columns: 1fr 1fr;
           gap: 30px;
@@ -870,7 +738,6 @@
           max-height: 45px;
         }
 
-        /* Footer */
         .footer-grid {
           grid-template-columns: 1fr;
           text-align: center;
@@ -878,18 +745,12 @@
         .footer-brand, .footer-links, .footer-contact {
           align-items: center;
         }
-        .footer-contact .item {
-          text-align: left;
-        }
+        .footer-contact .item { text-align: left; }
         .footer-meta {
           flex-direction: column;
           align-items: center;
           gap: 8px;
         }
-      }
-
-      @media (max-width: 720px) {
-        /* Further adjustments for very small screens if needed */
       }
     </style>
   </head>
@@ -956,7 +817,7 @@
     <section class="hero">
       <div class="slides-container">
         <!-- Slide 1 (Konten Asli) -->
-        <div class="slide">
+        <div class="slide slide-1">
           <div class="hero-content">
             <h1>YOUR GO-TO SOLUTION</h1>
             <p class="subtitle">
@@ -966,7 +827,7 @@
           </div>
         </div>
         <!-- Slide 2 (Placeholder) -->
-        <div class="slide">
+        <div class="slide slide-2">
           <div class="hero-content">
             <h1>A LEADING & TRUSTED PARTNER</h1>
             <p class="subtitle">
@@ -976,7 +837,7 @@
           </div>
         </div>
         <!-- Slide 3 (Placeholder) -->
-        <div class="slide">
+        <div class="slide slide-3">
           <div class="hero-content">
             <h1>YOUR ONE-STOP BUSINESS SOLUTION</h1>
             <p class="subtitle">
@@ -986,7 +847,7 @@
           </div>
         </div>
         <!-- Slide 4 (Placeholder) -->
-        <div class="slide">
+        <div class="slide slide-4">
           <div class="hero-content">
             <h1>QUALITY PRODUCTS, RESPONSIVE SERVICE</h1>
             <p class="subtitle">
@@ -996,7 +857,7 @@
           </div>
         </div>
         <!-- Slide 5 (Placeholder) -->
-        <div class="slide">
+        <div class="slide slide-5">
           <div class="hero-content">
             <h1>GET IN TOUCH WITH US</h1>
             <p class="subtitle">
@@ -1233,17 +1094,55 @@
       </div>
     </footer>
     
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" style="display: none; position: fixed; right: 18px; bottom: 18px; z-index: 70; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.06); background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02)); color: var(--text); padding: 10px 12px; font-size: 13px; cursor: pointer; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width: 16px; height: 16px;">
+        <path
+          d="M12 19V5M5 12l7-7 7 7"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      Top
+    </button>
+
     <script>
-      // =================================== //
-      //          HERO SLIDER LOGIC          //
-      // =================================== //
+      /* =================================== */
+      /*         MOBILE NAVBAR LOGIC         */
+      /* =================================== */
+      function toggleMobileMenu(button) {
+        const menu = document.getElementById('main-menu');
+        const opened = menu.classList.toggle('open');
+        button.setAttribute('aria-expanded', opened);
+        document.body.classList.toggle('menu-open', opened);
+        if (opened) {
+          button.innerHTML = '✕'; // Close icon
+          button.title = 'Close menu';
+        } else {
+          button.innerHTML = '☰'; // Hamburger icon
+          button.title = 'Open menu';
+        }
+      }
+      function toggleDropdown(event, dropdownId) {
+        const isMobile = window.matchMedia("(max-width: 880px)").matches;
+        if (isMobile) {
+          const dropdown = document.getElementById(dropdownId);
+          const button = dropdown.querySelector('button');
+          const opened = dropdown.classList.toggle('open');
+          button.setAttribute('aria-expanded', opened);
+        }
+      }
+
+      /* =================================== */
+      /*          HERO SLIDER LOGIC          */
+      /* =================================== */
       const slidesContainer = document.querySelector('.slides-container');
       const slides = document.querySelectorAll('.slide');
       const nextBtn = document.querySelector('.slider-arrow.right');
       const prevBtn = document.querySelector('.slider-arrow.left');
       const dots = document.querySelectorAll('.indicator-dot');
 
-      // 2. Variabel Status
       let currentIndex = 0;
       let slideInterval;
       const slideCount = slides.length;
@@ -1255,7 +1154,6 @@
         slidesContainer.style.transform = `translateX(-${index * 100}%)`;
         currentIndex = index;
 
-        // Update active dot
         dots.forEach(dot => dot.classList.remove('active'));
         dots[currentIndex].classList.add('active');
       };
@@ -1286,15 +1184,14 @@
       goToSlide(0);
       startAutoSlide();
 
-      // =================================== //
-      //      THREE.JS 3D MODEL LOGIC      //
-      // =================================== //
-
+      /* =================================== */
+      /*       THREE.JS 3D MODEL LOGIC       */
+      /* =================================== */
       const canvas = document.getElementById('3d-canvas');
-      // Pastikan elemen canvas ada dan library Three.js sudah dimuat
       if (canvas && typeof THREE !== 'undefined') {
 
-        // --- 1. Scene Setup ---
+        const isMobile = window.innerWidth < 768;
+
         const scene = new THREE.Scene();
         const container = document.querySelector('.products-3d-column');
  
@@ -1310,7 +1207,8 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         
-        // --- 2. Lighting & Scene Objects ---
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambientLight);
 
@@ -1331,7 +1229,6 @@
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         galaxyGroup.add(core);
 
-        // --- 3. Materials ---
         const solidMaterial = new THREE.MeshStandardMaterial({
           color: 0xff8800,
           emissive: 0xff8800,
@@ -1341,7 +1238,6 @@
           transparent: true,
           opacity: 0.3
         });
-
         const wireframeMaterial = new THREE.MeshBasicMaterial({
           color: 0xffae42, // Warna oranye lebih terang untuk kontras
           wireframe: true
@@ -1350,7 +1246,6 @@
         const modelPivots = [];
 
         function createOrbitingObject(object3D, orbitRadius, rotation, targetSize = 1.5) { 
-          // Normalisasi skala
           const box = new THREE.Box3().setFromObject(object3D);
           const size = box.getSize(new THREE.Vector3());
           const maxDim = Math.max(size.x, size.y, size.z);
@@ -1384,7 +1279,6 @@
           });
         }
         
-        // --- 4. Model Loading ---
         const loader = new THREE.GLTFLoader();
         function loadAndDisplayModel(path, orbitRadius, rotation) {
           loader.load(path, (gltf) => {
@@ -1400,17 +1294,18 @@
           new THREE.DodecahedronGeometry(0.6, 0)
         ];
 
-        for (let i = 0; i < 3; i++) {
+        const asteroidCount = 3;
+        for (let i = 0; i < asteroidCount; i++) {
           const geometry = asteroidGeometries[Math.floor(Math.random() * asteroidGeometries.length)];
           const asteroid = new THREE.Mesh(geometry);
           
-          const radius = Math.random() * 2 + 2.0;
+          const radius = Math.random() * 2 + 2.0; // Gunakan radius yang sama untuk semua
           const rotation = {
             x: Math.random() * Math.PI,
             y: Math.random() * Math.PI,
           };
 
-          createOrbitingObject(asteroid, radius, rotation, 0.8);
+          createOrbitingObject(asteroid, radius, rotation, 0.8); 
         }
 
         const modelsToLoad = [
@@ -1419,12 +1314,10 @@
           { path: 'assets/models/pipe.glb', radius: 4.0, rotation: { x: 0.8, y: 4 } }
         ];
 
-        // Loop dan panggil fungsi pemuat untuk setiap model
         modelsToLoad.forEach(modelInfo => {
           loadAndDisplayModel(modelInfo.path, modelInfo.radius, modelInfo.rotation);
         });
         
-        // --- 5. Animation & Interaction ---
         let mouse = { x: 0, y: 0 };
         let targetRotation = { x: 0, y: 0 };
 
@@ -1437,22 +1330,13 @@
 
         function animate() {
           requestAnimationFrame(animate);
-          
-          // Rotasi seluruh sistem berdasarkan mouse
-          targetRotation.y = mouse.x * 0.5;
-          targetRotation.x = mouse.y * 0.5;
-          galaxyGroup.rotation.y += (targetRotation.y - galaxyGroup.rotation.y) * 0.05;
-          galaxyGroup.rotation.x += (targetRotation.x - galaxyGroup.rotation.x) * 0.05;
+          controls.update();
 
           modelPivots.forEach(item => {
-            // Rotasi orbit
             item.pivot.rotation.z += item.speed;
-
-            // Rotasi model pada porosnya sendiri
             item.model.rotation.y += 0.005;
           });
 
-          // Animasikan inti pusat
           core.rotation.y += 0.001;
           core.rotation.x += 0.001;
 
@@ -1467,10 +1351,9 @@
         });
       }
 
-      // =================================== //
-      //    DYNAMIC CUSTOMERS LOGO LOGIC   //
-      // =================================== //
-      
+      /* =================================== */
+      /*    DYNAMIC CUSTOMERS LOGO LOGIC     */
+      /* =================================== */
       const clientDatabase = [
         { name: 'PLN', logoUrl: 'assets/logos/pln.png' },
         { name: 'Sinarmas', logoUrl: 'assets/logos/sinarmas.png' },
@@ -1485,7 +1368,6 @@
       ];
 
       const logoContainer = document.getElementById('logo-grid-container');
-
       function shuffleArray(array) {
         let currentIndex = array.length, randomIndex;
         while (currentIndex != 0) {
@@ -1495,7 +1377,6 @@
         }
         return array;
       }
-
       function updateDisplayedLogos() {
         if (!logoContainer) return;
 
@@ -1516,6 +1397,119 @@
         updateDisplayedLogos();
         setInterval(updateDisplayedLogos, 5000);
       }
+
+      /* =================================== */
+      /*       SMART SCROLL-SNAP LOGIC       */
+      /* =================================== */
+      document.addEventListener('DOMContentLoaded', () => {
+        const SCROLL_END_DELAY = 1500; // Jeda dalam milidetik sebelum snap dianggap selesai (1.5 detik)
+        const SNAP_DURATION = 1200;    // Durasi animasi scroll dalam milidetik (dibuat lebih lama agar smooth)
+
+        let scrollTimeout;      // Untuk menampung ID dari setTimeout
+        let isSnapping = false; // Flag untuk mencegah loop saat scroll otomatis berjalan
+
+        const customSmoothScroll = (targetY, duration) => {
+          const startY = window.scrollY;
+          const distance = targetY - startY;
+          let startTime = null;
+
+          const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+          const animation = (currentTime) => {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1); // Pastikan progress tidak melebihi 1
+            const easedProgress = easeInOutCubic(progress);
+
+            window.scrollTo(0, startY + distance * easedProgress);
+
+            if (timeElapsed < duration) {
+              requestAnimationFrame(animation);
+            }
+          };
+          requestAnimationFrame(animation);
+        };
+
+        const onScrollEnd = () => {
+          if (window.innerWidth < 768) {
+            return;
+          }
+
+          if (isSnapping) {
+            return;
+          }
+
+          const topThreshold = window.innerHeight * 0.5; // Jangan snap jika masih di setengah atas hero section
+          const bottomThreshold = document.body.scrollHeight - window.innerHeight - 50; // Jangan snap jika sudah dekat footer
+
+          if (window.scrollY < topThreshold || window.scrollY > bottomThreshold) {
+            return;
+          }
+
+          const sections = document.querySelectorAll('section[id]');
+          if (sections.length === 0) return;
+
+          let closestSection = null;
+          let minDistance = Infinity;
+
+          sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const distance = Math.abs(rect.top);
+
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestSection = section;
+            }
+          });
+
+          if (closestSection) {
+            isSnapping = true;
+            const targetY = closestSection.getBoundingClientRect().top + window.scrollY;
+            customSmoothScroll(targetY, SNAP_DURATION);
+
+            setTimeout(() => {
+              isSnapping = false;
+            }, SNAP_DURATION + 100); // Cooldown sedikit lebih lama dari durasi animasi
+          }
+        };
+
+        window.addEventListener('scroll', () => {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(onScrollEnd, SCROLL_END_DELAY);
+        }, { passive: true });
+      });
+
+      /* =================================== */
+      /*         MISC & ENHANCEMENTS         */
+      /* =================================== */
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        navbar.style.boxShadow =
+          window.scrollY > 8 ? "0 8px 30px rgba(0,0,0,.6)" : "none";
+      });
+
+      document.addEventListener("keydown", (ev) => {
+        if (ev.key === "Escape") {
+          const menu = document.getElementById("main-menu");
+          if (menu.classList.contains("open")) { toggleMobileMenu(document.querySelector(".hamburger")); }
+        }
+      });
+
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+      const backTopBtn = document.getElementById("backToTop");
+      if (backTopBtn) {
+        window.addEventListener("scroll", () => {
+          const shouldShow = window.scrollY > 280;
+          backTopBtn.style.display = shouldShow ? 'inline-flex' : 'none';
+        });
+        backTopBtn.addEventListener("click", () =>
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        );
+      }
+
     </script>
   </body>
 </html>
