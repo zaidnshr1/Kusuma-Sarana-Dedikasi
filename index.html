@@ -845,7 +845,42 @@
         }
 
         #services-section {
-          padding: 60px 5%;
+          padding: 50px 5%;
+        }
+        #services-section h2 {
+          font-size: 1.6rem;
+          margin-bottom: 30px;
+          text-align: center;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr;             /* satu kolom penuh */
+          gap: 16px;                              /* jarak antar item */
+        }
+        .gallery-item {
+          border-radius: 10px;
+          aspect-ratio: 16 / 9;                   /* proporsi foto lebih cinematic */
+          box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        .gallery-item img {
+          object-fit: cover;
+          border-radius: 10px;
+        }
+
+        .gallery-button-container {
+          margin-top: 28px;
+        }
+
+        .gallery-button-container .cta-button {
+          font-size: 12px;
+          padding: 10px 22px;
+          border-radius: 8px;
+          border-color: #444;
         }
         .services-container {
           grid-template-columns: 1fr;
@@ -1062,21 +1097,30 @@
       <div class="gallery-grid">
         <a href="./gallery/" class="gallery-item">
           <img src="assets/gallery/Proses-Pemasangan-Stainless-Steel-Scrub-Station.png" alt="Installation Process of Stainless Steel Scrub Station">
-          <div class="gallery-overlay"></div>
+          <div class="gallery-overlay">
+            <div class="gallery-desc">Installation Process of Stainless Steel Scrub Station</div>
+          </div>
         </a>
         <a href="./gallery/" class="gallery-item">
           <img src="assets/gallery/Produksi-dan-Pemasangan-Aksesoris-Ruang-OK.png" alt="Production and Installation of Operating Room Accessories">
-          <div class="gallery-overlay"></div>
+          <div class="gallery-overlay">
+            <div class="gallery-desc">Production and Installation of Operating Room Accessories</div>
+          </div>
         </a>
         <a href="./gallery/" class="gallery-item">
           <img src="assets/gallery/Produksi-dan-Pemasangan-Passbox-Ruang-OK.png" alt="Production and Installation of Operating Room Pass Box">
-          <div class="gallery-overlay"></div>
+          <div class="gallery-overlay">
+            <div class="gallery-desc">Production and Installation of Operating Room Pass Box</div>
+          </div>
         </a>
         <a href="./gallery/" class="gallery-item">
           <img src="assets/gallery/Proses-Pembuatan-Stainless-Steel-Scrub-Station.png" alt="Manufacturing Process of Stainless Steel Scrub Station">
-          <div class="gallery-overlay"></div>
+          <div class="gallery-overlay">
+            <div class="gallery-desc">Manufacturing Process of Stainless Steel Scrub Station</div>
+          </div>
         </a>
       </div>
+
       <div class="gallery-button-container">
         <a href="./gallery/" class="cta-button">View Full Gallery</a>
       </div>
