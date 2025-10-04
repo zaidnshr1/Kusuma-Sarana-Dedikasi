@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="description" content="Lihat galeri proyek dan foto dokumentasi PT Kusuma Sarana Dedikasi (KSD). Tinjau bukti visual kualitas produk, proses kerja, dan layanan trading & general supplier kami.">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Gallery | PT Kusuma Sarana Dedikasi (KSD)">
+        <meta property="og:description" content="Koleksi foto proyek dan visual layanan KSD sebagai trading & general supplier terpercaya di Indonesia.">
+        <meta property="og:url" content="https://ksd.co.id/gallery/">
+        <meta property="og:image" content="https://ksd.co.id/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp">
+        <meta property="og:site_name" content="PT Kusuma Sarana Dedikasi (KSD)">
+
+        <title>Gallery | PT Kusuma Sarana Dedikasi (KSD) — Koleksi Foto Proyek</title>
+
+        <link rel="canonical" href="https://www.ksd.co.id/gallery/">
+        <link rel="icon" type="image/x-icon" href="/assets/fav/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/Logo-KSD-Favicon-32.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/Logo-KSD-Favicon180.png">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "PT Kusuma Sarana Dedikasi (KSD)",
+            "url": "https://ksd.co.id/",
+            "logo": "https://ksd.co.id/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp",
+            "image": "https://ksd.co.id/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp",
+            "description": "Perusahaan trading & general supplier untuk kebutuhan pengadaan industri dan proyek.",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3",
+                "addressLocality": "Bekasi",
+                "addressRegion": "Jawa Barat",
+                "postalCode": "17136",
+                "addressCountry": "ID"
+            },
+            "email": "Sales1.ksd@gmail.com",
+            "areaServed": "ID",
+            "openingHours": "Mo-Fr 09:00-17:00",
+            "contactPoint": [{
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "Sales1.ksd@gmail.com",
+                "areaServed": "ID",
+                "availableLanguage": ["id","en"]
+            }]
+        }
+        </script>
+
+        <style>
+            /* =====================================
+                DESIGN TOKENS
+            ====================================== */
+            :root {
+                --bg: #0b0b0d;
+                --panel: rgba(255, 255, 255, 0.04);
+                --glass: rgba(255, 255, 255, 0.03);
+                --muted: #bfc3c7;
+                --text: #eaeef2;
+                --accent: #ff8a00;
+                --success: #28a745;
+                --radius: 12px;
+                --maxw: 1100px;
+                --transition: 180ms cubic-bezier(0.2, 0.9, 0.3, 1);
+            }
+
+            /* =====================================
+                BASE / RESET
+            ====================================== */
+            * {
+                box-sizing: border-box;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                background: var(--bg);
+                color: var(--text);
+                font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto,
+                "Share Tech Mono", monospace;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            .container {
+                max-width: var(--maxw);
+                margin: 0 auto;
+                padding: 28px;
+            }
+
+            /* =====================================
+                NAVBAR
+            ====================================== */
+            nav.navbar {
+                --nav-h: 64px;
+                position: sticky;
+                top: 0;
+                z-index: 60;
+                backdrop-filter: blur(6px);
+                background: linear-gradient(
+                180deg,
+                rgba(11, 11, 13, 0.6),
+                rgba(11, 11, 13, 0.4)
+                );
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+                /* font-family: "Share Tech Mono" */
+            }
+            .nav-inner {
+                min-height: var(--nav-h);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                max-width: var(--maxw);
+                margin: 0 auto;
+                padding: 12px 20px;
+            }
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .logo img {
+                max-height: 52px;
+                width: auto;
+                display: block;
+            }
+            .brand-title {
+                font-weight: 700;
+                letter-spacing: 0.6px;
+                color: var(--muted);
+                font-size: 13px;
+            }
+            .nav-actions {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+            }
+
+            /* menu (desktop) */
+            .menu {
+                display: flex;
+                gap: 24px;
+                align-items: center;
+                font-family: "Share Tech Mono"
+            }
+            .menu a,
+            .menu button {
+                color: var(--muted);
+                border: 0;
+                background: none;
+                font-size: 13px;
+                padding: 8px;
+                cursor: pointer;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            .menu a:hover,
+            .menu button:hover {
+                color: var(--text);
+                transform: translateY(-1px);
+            }
+
+            /* caret */
+            .caret {
+                margin-left: 6px;
+                font-size: 11px;
+                opacity: 0.9;
+                display: inline-block;
+                transition: transform var(--transition);
+            }
+
+            /* dropdown (desktop) */
+            .dropdown {
+                position: relative;
+            }
+            .submenu {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%) translateY(6px);
+                top: calc(100% + 10px);
+                margin-top: 4px;
+                min-width: 240px;
+                background: var(--glass);
+                border-radius: 10px;
+                padding: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.04);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                opacity: 0;
+                pointer-events: none;
+                transform-origin: top center;
+                transition: opacity 160ms ease, transform 160ms ease;
+            }
+            .dropdown:hover .submenu {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateX(-50%) translateY(0);
+            }
+            .submenu a {
+                padding: 10px 12px;
+                border-radius: 8px;
+                color: var(--muted);
+                font-size: 13px;
+            }
+            .submenu a:hover {
+                background: rgba(255, 255, 255, 0.02);
+                color: var(--text);
+            }
+            .dropdown:hover .submenu,
+            .dropdown:focus-within .submenu {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .submenu::before {
+                content: "";
+                position: absolute;
+                top: -12px;
+                left: 0;
+                right: 0;
+                height: 12px;
+            }
+
+            /* hamburger */
+            .hamburger {
+                display: none;
+                background: none;
+                border: 0;
+                color: var(--muted);
+                font-size: 22px;
+                padding: 8px;
+                cursor: pointer;
+            }
+
+            /* =====================================
+                NAVBAR (MOBILE ≤880px)
+                - Menu anchored from top to avoid sticky/fixed jank
+                - Body scroll lock when menu open
+            ====================================== */
+            @media (max-width: 880px) {
+                .menu {
+                display: none;
+                position: fixed;
+                top: var(--nav-h);
+                left: 0;
+                right: 0;
+                z-index: 80;
+                background: linear-gradient(
+                    180deg,
+                    rgba(11, 11, 13, 0.95),
+                    rgba(11, 11, 13, 0.98)
+                );
+                padding: 18px;
+                flex-direction: column;
+                gap: 8px;
+                border-top: 1px solid rgba(255, 255, 255, 0.03);
+                max-height: calc(100dvh - var(--nav-h));
+                overflow: auto;
+                }
+                .menu.open {
+                display: flex;
+                }
+                .hamburger {
+                display: block;
+                }
+                body.menu-open {
+                overflow: hidden;
+                }
+
+                /* dropdown in mobile becomes stacked */
+                .dropdown .submenu {
+                position: static;
+                transform: none;
+                opacity: 1;
+                pointer-events: auto;
+                display: none;
+                padding-left: 10px;
+                box-shadow: none;
+                border: 0;
+                background: transparent;
+                }
+                .dropdown.open .submenu {
+                display: flex;
+                }
+            }
+
+            /* =================================== */
+            /*              FOOTER                 */
+            /* =================================== */
+            .btn {
+                display: inline-flex;
+                gap: 10px;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(90deg, var(--accent), #ff6a00);
+                color: #0b0b0b;
+                border: 0;
+                padding: 12px 16px;
+                border-radius: 10px;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 8px 20px rgba(255, 138, 0, 0.12);
+            }
+            .btn[disabled] {
+                opacity: 0.6;
+                cursor: not-allowed;
+                transform: none;
+            }
+            footer.site-footer {
+                background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.02),
+                rgba(255, 255, 255, 0.015)
+                );
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                margin-top: 40px;
+            }
+            .footer-inner {
+                max-width: var(--maxw);
+                margin: 0 auto;
+                padding: 34px 28px 18px;
+            }
+            .footer-grid {
+                display: grid;
+                grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr;
+                gap: 28px;
+            }
+            .footer-col h4 {
+                margin: 0 0 12px;
+                font-size: 14px;
+                letter-spacing: 0.6px;
+                text-transform: uppercase;
+                color: var(--muted);
+                font-weight: 700;
+            }
+            .footer-brand {
+                display: flex;
+                gap: 14px;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+            .footer-brand img {
+                height: 44px;
+                width: auto;
+                display: block;
+            }
+            .footer-brand .name {
+                font-weight: 700;
+                color: var(--text);
+                letter-spacing: 0.5px;
+            }
+
+            .footer-text {
+                color: var(--muted);
+                font-size: 13px;
+                line-height: 1.7;
+            }
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .footer-links a {
+                color: var(--muted);
+                font-size: 13px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                transition: color var(--transition), transform var(--transition);
+            }
+            .footer-links a:hover {
+                color: var(--text);
+                transform: translateX(2px);
+            }
+
+            .footer-contact {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .footer-contact .item {
+                display: flex;
+                gap: 10px;
+                align-items: flex-start;
+                color: var(--muted);
+                font-size: 13px;
+            }
+            .footer-contact svg {
+                width: 18px;
+                height: 18px;
+                opacity: 0.9;
+                flex: 0 0 18px;
+            }
+
+            .footer-meta {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                margin-top: 22px;
+                padding-top: 14px;
+                color: var(--muted);
+                font-size: 12px;
+            }
+
+            .newsletter {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                margin-top: 6px;
+            }
+            .newsletter input {
+                flex: 1;
+                background: rgba(255, 255, 255, 0.02);
+                color: var(--text);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 10px 12px;
+                border-radius: 10px;
+                font-size: 13px;
+            }
+            .newsletter input::placeholder {
+                color: rgba(255, 255, 255, 0.35);
+            }
+            .newsletter button {
+                padding: 10px 14px;
+            }
+
+            @media (max-width: 768px) {
+                .footer-grid {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                    }
+                    .footer-brand, .footer-links, .footer-contact {
+                    align-items: center;
+                    }
+                    .footer-contact .item { text-align: left; }
+                    .footer-meta {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+
+            /* =======================
+                Gallery Styles (ISI BODY)
+            ======================== */
+            .page-hero {
+                background: 
+                    linear-gradient(180deg, rgba(15,15,15,0.85), rgba(15,15,15,0.6)), 
+                    url("/assets/Office-Mock-PT-Kusuma-Sarana-Dedikasi.webp") center/cover no-repeat;
+                border-bottom: 1px solid rgba(255,255,255,.06);
+                color: #eee;
+            }
+
+            .page-hero .container {
+                padding-top: 28px; /* navbar is sticky (not fixed), no overlap */
+                padding-bottom: 18px;
+            }
+            .breadcrumbs {
+                font-size: 12px;
+                color: var(--muted);
+                letter-spacing: .3px;
+                margin-bottom: 8px;
+            }
+            .breadcrumbs a { color: var(--muted); }
+            .breadcrumbs span { opacity:.7; margin: 0 6px; }
+            .hero-head {
+                display:flex; align-items: flex-end; justify-content: space-between; gap:16px;
+            }
+            .hero-title {
+                font-size: clamp(22px, 3.2vw, 32px);
+                font-weight: 700; letter-spacing:.4px;
+            }
+            .hero-sub {
+                color: var(--muted); font-size: 14px; margin-top: 6px;
+                max-width: 70ch; line-height: 1.6;
+            }
+
+            /* Controls */
+            .controls {
+                display: grid; gap: 12px; margin-top: 18px;
+                grid-template-columns: 1fr auto;
+            }
+            @media (max-width: 760px){ .controls { grid-template-columns: 1fr; } }
+            .searchbar {
+                display:flex; align-items: center; gap:10px;
+                background: var(--glass);
+                border:1px solid rgba(255,255,255,.06);
+                border-radius: 10px; padding: 10px 12px;
+            }
+            .searchbar input {
+                flex:1; background: transparent; border:0; outline:0; color: var(--text);
+                font-size: 14px;
+            }
+            .chips {
+                display:flex; gap:8px; flex-wrap: wrap; justify-content: flex-end;
+            }
+            .chip {
+                border:1px solid rgba(255,255,255,.08);
+                background: rgba(255,255,255,.02);
+                color: var(--muted); font-size: 12px; letter-spacing: .4px;
+                padding: 8px 12px; border-radius: 999px; cursor: pointer;
+                transition: transform var(--transition), background var(--transition), color var(--transition);
+                text-transform: uppercase;
+            }
+            .chip:hover { transform: translateY(-1px); color: var(--text); }
+            .chip.active { background: var(--accent); color:#111; border-color: transparent; }
+
+            /* Grid */
+            .gallery-wrap { padding: 10px 0 42px; }
+            .gallery-grid {
+                --cols: 3; --gap: 14px;
+                display: grid; gap: var(--gap);
+                grid-template-columns: repeat(var(--cols), 1fr);
+            }
+            @media (max-width: 1100px){ .gallery-grid { --cols: 3; } }
+            @media (max-width: 900px){ .gallery-grid { --cols: 2; } }
+            @media (max-width: 560px){ .gallery-grid { --cols: 1; } }
+
+            .card {
+                position: relative; border-radius: var(--radius); overflow: hidden;
+                background: #0f1013; border:1px solid rgba(255,255,255,.06);
+                box-shadow: 0 8px 24px rgba(0,0,0,.35);
+                isolation: isolate;
+            }
+            .thumb {
+                aspect-ratio: 4/3; width: 100%; object-fit: cover; display: block;
+                filter: saturate(1.02) contrast(1.06);
+                transition: transform .35s ease, opacity .2s ease;
+            }
+            .card:hover .thumb { transform: scale(1.03); }
+            .badge {
+                position: absolute; top:10px; left:10px; z-index: 2;
+                background: rgba(0,0,0,.55); color: #fff; font-size: 11px; letter-spacing:.4px;
+                padding: 6px 8px; border-radius: 999px; border:1px solid rgba(255,255,255,.18);
+                text-transform: uppercase;
+            }
+            .meta {
+                padding: 10px 12px; font-size: 13px; color: var(--muted);
+                display:flex; align-items: center; justify-content: space-between; gap: 10px;
+                background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
+            }
+            .meta-title { color: var(--text); font-weight: 600; }
+            .cta {
+                display:inline-flex; align-items:center; gap:8px; font-size:12px;
+                color: var(--muted); padding: 6px 8px; border-radius: 8px;
+                border:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02);
+                transition: background var(--transition), color var(--transition), transform var(--transition);
+            }
+            .cta:hover { background: var(--accent); color:#111; transform: translateY(-1px); }
+
+            /* Lightbox */
+            .lightbox {
+                position: fixed; inset: 0; display: none;
+                background: rgba(0,0,0,.85); z-index: 1000;
+                align-items: center; justify-content: center; padding: 24px;
+            }
+            .lightbox.open { display: flex; }
+            .lightbox-inner {
+                width: min(1200px, 96vw); max-height: 90dvh;
+                display: grid; gap: 12px;
+            }
+            .lightbox img {
+                width: 100%; height: auto; max-height: 80dvh; object-fit: contain; display: block;
+                border-radius: 12px; border:1px solid rgba(255,255,255,.12);
+                box-shadow: 0 20px 60px rgba(0,0,0,.6);
+            }
+            .lightbox-meta {
+                display:flex; align-items: center; justify-content: space-between; gap: 12px;
+                color: var(--muted); font-size: 13px;
+            }
+            .lb-actions { display:flex; gap: 8px; }
+            .btn {
+                border:1px solid rgba(255,255,255,.15);
+                background: linear-gradient(90deg, var(--accent), #ff6a00);
+                color: var(#0b0b0b); padding: 8px 10px; border-radius: 10px; cursor: pointer;
+            }
+            .btn:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+            .back-to-top {
+                position: fixed;
+                right: 18px;
+                bottom: 18px;
+                z-index: 70;
+                display: none;
+                align-items: center;
+                gap: 8px;
+                border-radius: 999px;
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.03),
+                rgba(255, 255, 255, 0.02)
+                );
+                color: var(--text);
+                padding: 10px 12px;
+                font-size: 13px;
+                cursor: pointer;
+                box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+            }
+            .back-to-top.show {
+                display: inline-flex;
+            }
+            .back-to-top svg {
+                width: 16px;
+                height: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ===================================
+            NAVBAR
+        ==================================== -->
+        <nav class="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+            <div class="logo" aria-hidden="false">
+            <a href="/" aria-label="Home">
+                <img
+                src="/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp"
+                alt="Logo Perusahaan PT Kusuma Sarana Dedikasi"
+                onerror="this.style.display='none'"
+                />
+            </a>
+            <div>
+                <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+                <div style="font-size: 11px; color: var(--muted)">
+                Quality Distribution Solutions
+                </div>
+            </div>
+            </div>
+
+            <div class="nav-actions" role="navigation">
+            <button
+                class="hamburger"
+                aria-expanded="false"
+                aria-controls="main-menu"
+                title="Open menu"
+                onclick="toggleMobileMenu(this)"
+            >
+                ☰
+            </button>
+
+            <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+                <a role="menuitem" href="/">Home</a>
+                <a role="menuitem" href="/about-us/">About Us</a>
+
+                <div class="dropdown" id="productsDropdown">
+                <button
+                    class="menu-link"
+                    style="font-family: 'Montserrat', sans-serif;"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    onclick="toggleDropdown(event, 'productsDropdown')"
+                >
+                    Products <span class="caret">▾</span>
+                </button>
+                <div class="submenu" role="menu" aria-label="Products submenu">
+                    <a role="menuitem" href="#">Sealing Elements</a>
+                    <a role="menuitem" href="#">CNC Machined Seals</a>
+                    <a role="menuitem" href="#">Hydraulic & Pneumatic Seals</a>
+                    <a role="menuitem" href="#">O-Rings</a>
+                    <a role="menuitem" href="#">Custom Gaskets</a>
+                </div>
+                </div>
+
+                <a role="menuitem" href="/customers/">Customers</a>
+                <a role="menuitem" href="/gallery/">Gallery</a>
+                <a role="menuitem" href="/contact/">Contact</a>
+            </div>
+            </div>
+        </div>
+        </nav>
+
+        <main id="content">
+            <!-- Hero -->
+            <section class="page-hero">
+                <div class="container">
+                <div class="breadcrumbs" aria-label="Breadcrumbs">
+                    <a href="/">Home</a> <span>›</span> <strong>Gallery</strong>
+                </div>
+                <div class="hero-head">
+                    <div>
+                    <h1 class="hero-title">Gallery</h1>
+                    <p class="hero-sub">
+                        A concise portfolio of documented work that substantiates our performance.
+                    </p>
+                    </div>
+                </div>
+
+                <div class="controls" role="region" aria-label="Gallery controls">
+                    <div class="searchbar" role="search">
+                    🔎
+                    <input id="gallerySearch" type="search" placeholder="Search Photos... (ex. quality, Installation, Delivery, Scrub)"
+                            aria-label="Cari di gallery" autocomplete="off">
+                    </div>
+                    <div class="chips" aria-label="Filter kategori" role="tablist">
+                    <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+                    <button class="chip" data-filter="projects" role="tab">Projects</button>
+                    <button class="chip" data-filter="products" role="tab">Products</button>
+                    <button class="chip" data-filter="process" role="tab">Process</button>
+                    <button class="chip" data-filter="facilities" role="tab">Facilities</button>
+                    <button class="chip" data-filter="team" role="tab">Team</button>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- Grid -->
+            <section class="gallery-wrap">
+                <div class="container">
+                <div id="galleryGrid" class="gallery-grid" aria-live="polite">
+                    <!-- Products -->
+                    <figure class="card" data-cat="products" data-title="Installation Process of Stainless Steel Scrub Station">
+                    <span class="badge">Products</span>
+                    <img class="thumb" loading="lazy"
+                        src="/assets/gallery/Proses-Pemasangan-Stainless-Steel-Scrub-Station.png"
+                        alt="Installation Process of Stainless Steel Scrub Station">
+                    <figcaption class="meta">
+                        <div class="meta-title">Installation Process of Stainless Steel Scrub Station</div>
+                        <button class="cta" data-view>View</button>
+                    </figcaption>
+                    </figure>
+
+                    <!-- Process -->
+                    <figure class="card" data-cat="process" data-title="Manufacturing Process of Stainless Steel Scrub Station">
+                    <span class="badge">Process</span>
+                    <img class="thumb" loading="lazy"
+                        src="/assets/gallery/Proses-Pembuatan-Stainless-Steel-Scrub-Station.png"
+                        alt="Manufacturing Process of Stainless Steel Scrub Station">
+                    <figcaption class="meta">
+                        <div class="meta-title">Manufacturing Process of Stainless Steel Scrub Station</div>
+                        <button class="cta" data-view>View</button>
+                    </figcaption>
+                    </figure>
+
+                    <figure class="card" data-cat="process" data-title="Customer Order Quality Inspection Process">
+                    <span class="badge">Process</span>
+                    <img class="thumb" loading="lazy"
+                        src="/assets/gallery/Proses-Quality-Check-Pesanan-Customer.png"
+                        alt="Customer Order Quality Inspection Process">
+                    <figcaption class="meta">
+                        <div class="meta-title">Customer Order Quality Inspection Process</div>
+                        <button class="cta" data-view>View</button>
+                    </figcaption>
+                    </figure>
+
+                    <!-- Projects -->
+                    <figure class="card" data-cat="projects" data-title="Production and Installation of Operating Room Pass Box">
+                    <span class="badge">Projects</span>
+                    <img class="thumb" loading="lazy"
+                        src="/assets/gallery/Produksi-dan-Pemasangan-Passbox-Ruang-OK.png"
+                        alt="Production and Installation of Operating Room Pass Box">
+                    <figcaption class="meta">
+                        <div class="meta-title">Production and Installation of Operating Room Pass Box</div>
+                        <button class="cta" data-view>View</button>
+                    </figcaption>
+                    </figure>
+
+                    <figure class="card" data-cat="projects" data-title="Production and Installation of Air Blower">
+                    <span class="badge">Projects</span>
+                    <img class="thumb" loading="lazy"
+                        src="/assets/gallery/Produksi-dan-Pemasangan-Air-Blower.png"
+                        alt="Production and Installation of Air Blower">
+                    <figcaption class="meta">
+                        <div class="meta-title">Production and Installation of Air Blower</div>
+                        <button class="cta" data-view>View</button>
+                    </figcaption>
+                    </figure>
+
+                    <!-- Facilities -->
+                    <figure class="card" data-cat="facilities" data-title="Production and Installation of Operating Room Accessories">
+                    <span class="badge">Facilities</span>
+                    <img class="thumb" loading="lazy"
+                        src="/assets/gallery/Produksi-dan-Pemasangan-Aksesoris-Ruang-OK.png"
+                        alt="Production and Installation of Operating Room Accessories">
+                    <figcaption class="meta">
+                        <div class="meta-title">Production and Installation of Operating Room Accessories</div>
+                        <button class="cta" data-view>View</button>
+                    </figcaption>
+                    </figure>
+
+                    <!-- Team -->
+                    <figure class="card" data-cat="team" data-title="Product Delivery Process to Customer (One-Day Service)">
+                    <span class="badge">Team</span>
+                    <img class="thumb" loading="lazy"
+                        src="/assets/gallery/Proses-pengiriman-Barang-ke-Customer-One Day Service.png"
+                        alt="Product Delivery Process to Customer (One-Day Service)">
+                    <figcaption class="meta">
+                        <div class="meta-title">Product Delivery Process to Customer (One-Day Service)</div>
+                        <button class="cta" data-view>View</button>
+                    </figcaption>
+                    </figure>
+                    <!-- ====== /SAMPLE ITEMS ====== -->
+                </div>
+                </div>
+            </section>
+            </main>
+
+            <!-- Lightbox -->
+            <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+            <div class="lightbox-inner">
+                <img id="lbImage" alt="">
+                <div class="lightbox-meta">
+                <div id="lbTitle">—</div>
+                <div class="lb-actions">
+                    <button class="btn" id="btnPrev" aria-label="Sebelumnya">◀</button>
+                    <button class="btn" id="btnNext" aria-label="Berikutnya">▶</button>
+                    <button class="btn" id="btnClose" aria-label="Tutup">✕</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- ===================================
+                FOOTER
+            ==================================== -->
+
+            <footer class="site-footer" aria-label="Website footer">
+            <div class="footer-inner">
+                <div class="footer-grid">
+                <!-- Brand & summary -->
+                    <div class="footer-col">
+                        <div class="footer-brand">
+                        <img
+                            src="/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp"
+                            alt="Logo Perusahaan PT Kusuma Sarana Dedikasi"
+                            onerror="this.style.display='none'"
+                        />
+                        <div>
+                            <div class="name" style="font-family: 'Montserrat', sans-serif;">PT Kusuma Sarana Dedikasi</div>
+                            <div style="font-size: 12px; color: var(--muted); font-family: 'Montserrat', sans-serif;">
+                            Quality Distribution Solutions
+                            </div>
+                        </div>
+                        </div>
+                        <p class="footer-text" style="font-family: Share Tech Mono">
+                        We serve as a trusted distribution partner supporting the needs of
+                        office, industrial, construction, and laboratory sectors. With
+                        international standards, we deliver added value through superior
+                        quality and consistent service.
+                        </p>
+                    </div>
+
+                    <!-- Quick links -->
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <nav class="footer-links" aria-label="Footer navigation" style="font-family: Share Tech Mono">
+                        <a href="/">Home</a>
+                        <a href="/about-us/">About Us</a>
+                        <a href="/contact/">Contact</a>
+                        <a href="/customers/">Customers</a>
+                        <a href="/gallery/">Gallery</a>
+                        </nav>
+                    </div>
+
+                    <!-- Products -->
+                    <div class="footer-col" style="font-family: Share Tech Mono">
+                        <h4>Products</h4>
+                        <div class="footer-links">
+                        <a href="#">Sealing Elements</a>
+                        <a href="#">CNC Machined Seals</a>
+                        <a href="#">Hydraulic &amp; Pneumatic Seals</a>
+                        <a href="#">O-Rings</a>
+                        <a href="#">Custom Gaskets</a>
+                        </div>
+                    </div>
+
+                    <!-- Contact & newsletter -->
+                    <div class="footer-col" style="font-family: Share Tech Mono">
+                        <h4>Contact Us</h4>
+                        <div class="footer-contact">
+                        <div class="item">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path
+                                d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z"
+                                stroke="currentColor"
+                                stroke-width="1.4"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            </svg>
+                            <div>
+                            Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi
+                            Barat 17136
+                            </div>
+                        </div>
+                        <div class="item">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="9"
+                                stroke="currentColor"
+                                stroke-width="1.2"
+                            />
+                            <path
+                                d="M12 7v5l3 3"
+                                stroke="currentColor"
+                                stroke-width="1.2"
+                                stroke-linecap="round"
+                            />
+                            </svg>
+                            <div>Mon – Fri, 09:00 – 17:00</div>
+                        </div>
+                        <div class="item">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path
+                                d="M4 4h16v16H4z"
+                                stroke="currentColor"
+                                stroke-width="1.2"
+                            />
+                            <path
+                                d="M4 7l8 6 8-6"
+                                stroke="currentColor"
+                                stroke-width="1.2"
+                                stroke-linecap="round"
+                            />
+                            </svg>
+                            <div>
+                            <a href="mailto:zaidchilicond@gmail.com"
+                                >zaidchilicond@gmail.com</a
+                            >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="newsletter">
+                        <button
+                            class="btn"
+                            type="button"
+                            onclick="window.location.href='/contact/'"
+                            style="font-family: Share Tech Mono; margin-top: 1.5vh;"
+                        >
+                            Request a Quote
+                        </button>
+                    </div>
+                </div>
+                </div>
+
+                <div class="footer-meta">
+                <div style="font-family: 'Montserrat', sans-serif;">
+                    © <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights
+                    reserved.
+                </div>
+                </div>
+            </div>
+            </footer>
+            
+            <button class="back-to-top" id="backToTop" aria-label="Back to top" style="display: none; position: fixed; right: 18px; bottom: 18px; z-index: 70; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.06); background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02)); color: var(--text); padding: 10px 12px; font-size: 13px; cursor: pointer; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width: 16px; height: 16px;">
+                <path
+                d="M12 19V5M5 12l7-7 7 7"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                />
+            </svg>
+            Top
+            </button>
+            
+        <script>
+            /* =====================================
+                MENU / DROPDOWN
+            ====================================== */
+
+            function toggleMobileMenu(btn) {
+                const menu = document.getElementById("main-menu");
+                const opened = menu.classList.toggle("open");
+                btn.setAttribute("aria-expanded", opened ? "true" : "false");
+                document.body.classList.toggle("menu-open", opened); // lock scroll when open
+            }
+
+            function toggleDropdown(e, id) {
+                const el = document.getElementById(id);
+                const isMobile = window.matchMedia("(max-width:880px)").matches;
+                if (isMobile) {
+                el.classList.toggle("open");
+                const btn = el.querySelector(".menu-link");
+                const expanded = btn.getAttribute("aria-expanded") === "true";
+                btn.setAttribute("aria-expanded", (!expanded).toString());
+                }
+            }
+
+            let hideTimer;
+            const dropdown = document.querySelector("#productsDropdown");
+            dropdown.addEventListener("mouseenter", () => {
+                clearTimeout(hideTimer);
+                dropdown.classList.add("open");
+            });
+            dropdown.addEventListener("mouseleave", () => {
+                hideTimer = setTimeout(() => dropdown.classList.remove("open"), 150);
+            });
+
+            /* =====================================
+                NAVBAR ELEVATION (VISUAL)
+            ====================================== */
+            const navbar = document.querySelector(".navbar");
+            window.addEventListener("scroll", () => {
+                navbar.style.boxShadow =
+                window.scrollY > 8 ? "0 8px 30px rgba(0,0,0,.6)" : "none";
+            });
+
+            /* ===============================
+                Gallery Logic (filter, search, lightbox)
+            ================================ */
+            const grid = document.getElementById('galleryGrid');
+            const chips = [...document.querySelectorAll('.chip')];
+            const searchInput = document.getElementById('gallerySearch');
+
+            function applyFilter() {
+                const active = chips.find(c => c.classList.contains('active'))?.dataset.filter || 'all';
+                const q = (searchInput.value || '').trim().toLowerCase();
+
+                const items = [...grid.querySelectorAll('.card')];
+                items.forEach(el => {
+                const cat = el.dataset.cat;
+                const title = (el.dataset.title || '').toLowerCase();
+                const matchCat = (active === 'all') || (cat === active);
+                const matchText = !q || title.includes(q);
+                el.style.display = (matchCat && matchText) ? '' : 'none';
+                });
+            }
+
+            // filter chips
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                chips.forEach(c => c.setAttribute('aria-selected', c.classList.contains('active') ? 'true':'false'));
+                applyFilter();
+                });
+            });
+
+            // search
+            searchInput.addEventListener('input', () => {
+                applyFilter();
+            });
+
+            // Lightbox
+            const lightbox = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lbImage');
+            const lbTitle = document.getElementById('lbTitle');
+            const btnPrev = document.getElementById('btnPrev');
+            const btnNext = document.getElementById('btnNext');
+            const btnClose = document.getElementById('btnClose');
+
+            const items = [...grid.querySelectorAll('.card')];
+            let current = -1;
+
+            function openAt(index) {
+                if (index < 0 || index >= items.length) return;
+                current = index;
+                const el = items[current];
+                lbImg.src = el.querySelector('img.thumb').src;
+                lbImg.alt = el.querySelector('img.thumb').alt || '';
+                lbTitle.textContent = el.dataset.title || '';
+                lightbox.classList.add('open');
+                document.body.classList.add('menu-open'); // reuse to lock scroll
+            }
+            function close() {
+                lightbox.classList.remove('open');
+                document.body.classList.remove('menu-open');
+            }
+            function next() { // find next visible
+                let i = current;
+                for (let step=0; step<items.length; step++){
+                i = (i + 1) % items.length;
+                if (items[i].style.display !== 'none') { openAt(i); break; }
+                }
+            }
+            function prev() {
+                let i = current;
+                for (let step=0; step<items.length; step++){
+                i = (i - 1 + items.length) % items.length;
+                if (items[i].style.display !== 'none') { openAt(i); break; }
+                }
+            }
+
+            grid.addEventListener('click', (e) => {
+                const viewBtn = e.target.closest('[data-view]');
+                if (!viewBtn) return;
+                const card = e.target.closest('.card');
+                const index = items.indexOf(card);
+                openAt(index);
+            });
+
+            btnClose.addEventListener('click', close);
+            btnNext.addEventListener('click', next);
+            btnPrev.addEventListener('click', prev);
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+
+            // keyboard
+            window.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowRight') next();
+                if (e.key === 'ArrowLeft') prev();
+            });
+
+            // Init
+            applyFilter();
+
+            /* =====================================
+                FOOTER YEAR + TOAST + BACK TO TOP
+            ====================================== */
+            const backTopBtn = document.getElementById("backToTop");
+            if (backTopBtn) {
+                window.addEventListener("scroll", () => {
+                const shouldShow = window.scrollY > 280;
+                backTopBtn.style.display = shouldShow ? 'inline-flex' : 'none';
+                });
+                backTopBtn.addEventListener("click", () =>
+                window.scrollTo({ top: 0, behavior: "smooth" })
+                );
+            }
+        </script>
+    </body>
+</html>
