@@ -1,14 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="PT Kusuma Sarana Dedikasi (KSD) adalah perusahaan trading & general supplier yang menyediakan solusi pengadaan barang industri, konstruksi, dan kebutuhan korporasi di Indonesia.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PT Kusuma Sarana Dedikasi (KSD) — Trading & General Supplier Indonesia">
+    <meta property="og:description" content="KSD menyediakan produk berkualitas dan solusi terbaik untuk kebutuhan industri, konstruksi, dan perusahaan di seluruh Indonesia.">
+    <meta property="og:url" content="https://ksd.co.id/">
+    <meta property="og:image" content="https://ksd.co.id/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp">
+    <meta property="og:site_name" content="PT Kusuma Sarana Dedikasi (KSD)">
+
+    <title>PT Kusuma Sarana Dedikasi (KSD) — Trading & General Supplier Indonesia</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.ksd.co.id/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/fav/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/Logo-KSD-Favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/Logo-KSD-Favicon180.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">    
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "PT Kusuma Sarana Dedikasi (KSD)",
+        "url": "https://ksd.co.id/",
+        "logo": "https://ksd.co.id/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp",
+        "image": "https://ksd.co.id/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp",
+        "description": "Perusahaan trading & general supplier untuk kebutuhan pengadaan industri, konstruksi, dan korporasi.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3",
+          "addressLocality": "Bekasi",
+          "addressRegion": "Jawa Barat",
+          "postalCode": "17136",
+          "addressCountry": "ID"
+        },
+        "email": "Sales1.ksd@gmail.com",
+        "areaServed": "ID",
+        "openingHours": "Mo-Fr 09:00-17:00",
+        "contactPoint": [{
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "Sales1.ksd@gmail.com",
+          "areaServed": "ID",
+          "availableLanguage": ["id","en"]
+        }]
+      }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/examples/js/controls/OrbitControls.js"></script>
+    
     <style>
       /* =================================== */
       /*           GLOBAL STYLES             */
@@ -35,14 +89,19 @@
         overflow-x: hidden;
         min-height:200vh;
       }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
       /* =================================== */
       /*              NAVBAR                 */
       /* =================================== */
-      .navbar {
+      nav.navbar {
+        --nav-h: 64px;
         position: sticky;
         top: 0;
-        z-index: 60;
+        z-index: 1000;
         backdrop-filter: blur(6px);
         background: linear-gradient(
           180deg,
@@ -119,7 +178,7 @@
         display: inline-block;
         transition: transform var(--transition);
       }
-      .submenu{
+      .submenu {
         position: absolute;
         left: 50%;
         transform: translateX(-50%) translateY(6px);
@@ -139,22 +198,33 @@
         transform-origin: top center;
         transition: opacity 160ms ease, transform 160ms ease;
       }
-      .submenu a{
+      .dropdown:hover .submenu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+      .submenu a {
         padding: 10px 12px;
         border-radius: 8px;
         color: var(--muted);
         font-size: 13px;
-        text-transform: none;
-        letter-spacing: normal;
       }
       .submenu a:hover {
         background: rgba(255, 255, 255, 0.02);
         color: var(--text);
       }
-      .dropdown:hover .submenu{
+      .dropdown:hover .submenu,
+      .dropdown:focus-within .submenu {
         opacity: 1;
         pointer-events: auto;
-        transform: translateX(-50%) translateY(0);
+      }
+      .submenu::before {
+        content: "";
+        position: absolute;
+        top: -12px;
+        left: 0;
+        right: 0;
+        height: 12px;
       }
       /* =================================== */
       /*           HERO SECTION              */
@@ -522,6 +592,25 @@
       /* =================================== */
       /*              FOOTER                 */
       /* =================================== */
+      .btn {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(90deg, var(--accent), #ff6a00);
+        color: #0b0b0b;
+        border: 0;
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(255, 138, 0, 0.12);
+      }
+      .btn[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
       footer.site-footer {
         background: linear-gradient(
           180deg,
@@ -625,52 +714,50 @@
       /* =================================== */
 
       @media (max-width: 880px) {
-        .hamburger{ display:block; }
-        .nav-actions .menu { display: none; }
-
-        .menu.open {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 12px;
+        .menu {
+          display: none;
           position: fixed;
           top: var(--nav-h);
           left: 0;
           right: 0;
-          bottom: 0;
-          background: rgba(11, 11, 13, 0.98);
-          backdrop-filter: blur(10px);
-          padding: 24px;
-          overflow-y: auto;
-          z-index: 50;
+          z-index: 80;
+          background: linear-gradient(
+            180deg,
+            rgba(11, 11, 13, 0.95),
+            rgba(11, 11, 13, 0.98)
+          );
+          padding: 18px;
+          flex-direction: column;
+          gap: 8px;
+          border-top: 1px solid rgba(255, 255, 255, 0.03);
+          max-height: calc(100dvh - var(--nav-h));
+          overflow: auto;
         }
-        .menu a, .menu button.menu-link {
-          font-size: 16px;
-          width: 100%;
-          text-align: left;
-          padding: 12px 8px;
+        .menu.open {
+          display: flex;
+        }
+        .hamburger {
+          display: block;
         }
         body.menu-open {
           overflow: hidden;
         }
 
-        .submenu{
+        /* dropdown in mobile becomes stacked */
+        .dropdown .submenu {
           position: static;
           transform: none;
           opacity: 1;
           pointer-events: auto;
           display: none;
-          padding: 10px 0 10px 20px; /* Penyesuaian padding */
+          padding-left: 10px;
           box-shadow: none;
           border: 0;
           background: transparent;
-          min-width: unset;
-          margin-top: 8px;
-          flex-direction: column; /* BARU: Susun item ke bawah */
-          gap: 8px; /* BARU: Beri jarak antar item submenu */
         }
-        .dropdown.open .submenu { display: flex; }
-        .dropdown.open .caret{ transform:rotate(180deg); }
+        .dropdown.open .submenu {
+          display: flex;
+        }
       }
 
       @media (max-width: 768px) {
@@ -755,19 +842,22 @@
     </style>
   </head>
   <body>
+    <!-- ===================================
+        NAVBAR
+    ==================================== -->
     <nav class="navbar" aria-label="Main navigation">
       <div class="nav-inner">
         <div class="logo" aria-hidden="false">
           <a href="/" aria-label="Home">
             <img
-              src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
-              alt="PT Kusuma Sarana Dedikasi logo"
+              src="/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp"
+              alt="Logo Perusahaan PT Kusuma Sarana Dedikasi"
               onerror="this.style.display='none'"
             />
           </a>
           <div>
-            <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
-            <div style="font-size: 11px; color: var(--muted)">
+            <div class="brand-title" style="font-family: 'Montserrat', sans-serif;">PT Kusuma Sarana Dedikasi</div>
+            <div style="font-size: 11px; color: var(--muted); font-family: 'Montserrat', sans-serif;">
               Quality Distribution Solutions
             </div>
           </div>
@@ -813,7 +903,7 @@
         </div>
       </div>
     </nav>
-
+    
     <section class="hero">
       <div class="slides-container">
         <!-- Slide 1 (Konten Asli) -->
@@ -992,6 +1082,10 @@
       <a href="#" class="cta-button">View Customers</a>
     </section>
 
+    <!-- ===================================
+        FOOTER
+    ==================================== -->
+
     <footer class="site-footer" aria-label="Website footer">
       <div class="footer-inner">
         <div class="footer-grid">
@@ -999,18 +1093,18 @@
           <div class="footer-col">
             <div class="footer-brand">
               <img
-                src="assets/PT-KUSUMA-SARANA-DEDIKASI-LOGO.webp"
-                alt="Logo PT KSD"
+                src="/assets/PT-Kusuma-Sarana-Dedikasi-Logo.webp"
+                alt="Logo Perusahaan PT Kusuma Sarana Dedikasi"
                 onerror="this.style.display='none'"
               />
               <div>
-                <div class="name">PT Kusuma Sarana Dedikasi</div>
-                <div style="font-size: 12px; color: var(--muted)">
+                <div class="name" style="font-family: 'Montserrat', sans-serif;">PT Kusuma Sarana Dedikasi</div>
+                <div style="font-size: 12px; color: var(--muted); font-family: 'Montserrat', sans-serif;">
                   Quality Distribution Solutions
                 </div>
               </div>
             </div>
-            <p class="footer-text">
+            <p class="footer-text" style="font-family: Share Tech Mono">
               We serve as a trusted distribution partner supporting the needs of
               office, industrial, construction, and laboratory sectors. With
               international standards, we deliver added value through superior
@@ -1021,7 +1115,7 @@
           <!-- Quick links -->
           <div class="footer-col">
             <h4>Navigation</h4>
-            <nav class="footer-links" aria-label="Footer navigation">
+            <nav class="footer-links" aria-label="Footer navigation" style="font-family: Share Tech Mono">
               <a href="/">Home</a>
               <a href="/about-us/">About Us</a>
               <a href="/contact/">Contact</a>
@@ -1031,7 +1125,7 @@
           </div>
 
           <!-- Products -->
-          <div class="footer-col">
+          <div class="footer-col" style="font-family: Share Tech Mono">
             <h4>Products</h4>
             <div class="footer-links">
               <a href="#">Sealing Elements</a>
@@ -1043,7 +1137,7 @@
           </div>
 
           <!-- Contact & newsletter -->
-          <div class="footer-col">
+          <div class="footer-col" style="font-family: Share Tech Mono">
             <h4>Contact Us</h4>
             <div class="footer-contact">
               <div class="item">
@@ -1063,6 +1157,24 @@
               </div>
               <div class="item">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                  />
+                  <path
+                    d="M12 7v5l3 3"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <div>Mon – Fri, 09:00 – 17:00</div>
+              </div>
+              <div class="item">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path
                     d="M4 4h16v16H4z"
                     stroke="currentColor"
@@ -1076,17 +1188,27 @@
                   />
                 </svg>
                 <div>
-                  <a href="mailto:m.zaidanshori04@gmail.com"
-                    >m.zaidanshori04@gmail.com</a
+                  <a href="mailto:zaidchilicond@gmail.com"
+                    >zaidchilicond@gmail.com</a
                   >
                 </div>
               </div>
+            </div>
+            <div class="newsletter">
+              <button
+                class="btn"
+                type="button"
+                onclick="window.location.href='/contact/'"
+                style="font-family: Share Tech Mono; margin-top: 1.5vh;"
+              >
+                Request a Quote
+              </button>
             </div>
           </div>
         </div>
 
         <div class="footer-meta">
-          <div>
+          <div style="font-family: 'Montserrat', sans-serif;">
             © <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights
             reserved.
           </div>
