@@ -92,6 +92,10 @@
         overflow-x: hidden;
         min-height:200vh;
       }
+      html, body{
+        max-width: 100%;
+        overflow-x: hidden;
+      }
       a {
         color: inherit;
         text-decoration: none;
@@ -811,10 +815,33 @@
           font-size: 2rem;
         }
         .products-grid {
-          grid-template-columns: 1fr;
+          position: relative; 
+          z-index: 1; 
+        }
+        .product-card {
+          background: rgba(0,0,0,0.35);
+          border-color: #444;
+        }
+          .products-grid-column::after{
+          content:"";
+          position:absolute; inset:0; z-index:-1;
+          background: radial-gradient(70% 60% at 50% 40%,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,.45) 70%,
+            rgba(0,0,0,.65) 100%);
+          pointer-events:none;
         }
         .products-3d-column {
-          min-height: 400px;
+          display: none;
+        }
+
+        #products-3d-bg.as-bg{
+          position:absolute; inset:0; z-index:0; pointer-events:none;
+        }
+        
+        .products-grid-column { 
+          position: relative; 
+          overflow: hidden;
         }
 
         #services-section {
@@ -1033,20 +1060,20 @@
     <section id="services-section">
       <h2>Our Gallery</h2>
       <div class="gallery-grid">
-        <a href="gallery.html" class="gallery-item">
-          <img src="assets/portfolio/image-1.jpg" alt="Deskripsi gambar portofolio 1">
+        <a href="./gallery/" class="gallery-item">
+          <img src="assets/gallery/Proses-Pemasangan-Stainless-Steel-Scrub-Station.png" alt="Installation Process of Stainless Steel Scrub Station">
           <div class="gallery-overlay"></div>
         </a>
-        <a href="gallery.html" class="gallery-item">
-          <img src="assets/portfolio/image-2.jpg" alt="Deskripsi gambar portofolio 2">
+        <a href="./gallery/" class="gallery-item">
+          <img src="assets/gallery/Produksi-dan-Pemasangan-Aksesoris-Ruang-OK.png" alt="Production and Installation of Operating Room Accessories">
           <div class="gallery-overlay"></div>
         </a>
-        <a href="gallery.html" class="gallery-item">
-          <img src="assets/portfolio/image-3.jpg" alt="Deskripsi gambar portofolio 3">
+        <a href="./gallery/" class="gallery-item">
+          <img src="assets/gallery/Produksi-dan-Pemasangan-Passbox-Ruang-OK.png" alt="Production and Installation of Operating Room Pass Box">
           <div class="gallery-overlay"></div>
         </a>
-        <a href="gallery.html" class="gallery-item">
-          <img src="assets/portfolio/image-4.jpg" alt="Deskripsi gambar portofolio 4">
+        <a href="./gallery/" class="gallery-item">
+          <img src="assets/gallery/Proses-Pembuatan-Stainless-Steel-Scrub-Station.png" alt="Manufacturing Process of Stainless Steel Scrub Station">
           <div class="gallery-overlay"></div>
         </a>
       </div>
@@ -1057,7 +1084,6 @@
 
     <!-- ABOUT US / COMPANY PROFILE SECTION -->
     <section id="about-section">
-      <!-- 1. New "box" container wrapping the content -->
       <div class="about-box">
         <div class="about-container">
           <div class="about-text-column">
@@ -1068,7 +1094,7 @@
             <p>
               With a vision to become a leading and trusted company, we are committed to being the solution for all your business needs. We provide high-quality products supported by fast, responsive, and professional service, making us a reliable 'one-stop solution' partner.
             </p>
-            <a href="./contact/" class="cta-button">FIND OUT MORE</a>
+            <a href="./about-us/" class="cta-button">FIND OUT MORE</a>
           </div>
           <div class="about-image-column">
             <img src="assets/images/team-photo.jpg" alt="Tim PT Kusuma Sarana Dedikasi">
@@ -1494,6 +1520,219 @@
           renderer.setSize(container.clientWidth, container.clientHeight);
         });
       }
+
+      /* ============================================================
+        3D BG MOBILE untuk section "Our Products" (DESKTOP TIDAK DIUBAH)
+        - Membuat kanvas baru HANYA saat mobile (<768px)
+        - Me-render 3D ringan di belakang kartu Our Products
+        - Saat kembali ke desktop, 3D mobile dibersihkan total
+      ============================================================ */
+      (function () {
+        if (typeof THREE === 'undefined') return;
+
+        const mq = window.matchMedia('(max-width: 768px)');
+        const host = document.querySelector('.products-grid-column'); // kolom yang berisi kartu Our Products
+        if (!host) return;
+
+        let canvas, renderer, scene, camera, group, rafId, resizeObs;
+
+        function initMobileScene() {
+          if (canvas) return; // sudah aktif
+
+          // buat kanvas khusus mobile
+          canvas = document.createElement('canvas');
+          canvas.id = 'products-3d-bg';
+          canvas.className = 'as-bg';
+          host.appendChild(canvas);
+
+          // scene ringan
+          scene = new THREE.Scene();
+          group = new THREE.Group();
+          scene.add(group);
+
+          // core wireframe
+          const core = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(0.75, 2),
+            new THREE.MeshBasicMaterial({ color: 0xff9955, wireframe: true, transparent: true, opacity: 0.65 })
+          );
+          group.add(core);
+
+          // ambient + sedikit arah cahaya
+          scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+          const dir = new THREE.DirectionalLight(0xffffff, 0.35);
+          dir.position.set(3, 6, 4);
+          scene.add(dir);
+
+          // kamera
+          camera = new THREE.PerspectiveCamera(65, 1, 0.1, 100);
+          camera.position.set(0, 0, 5);
+
+          // renderer
+          renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+          renderer.setPixelRatio(window.devicePixelRatio || 1);
+
+          const mats = [
+            new THREE.MeshStandardMaterial({
+              color: 0xff8800,        // warna utama brand
+              emissive: 0xff7700,
+              metalness: 0.6,
+              roughness: 0.4,
+              transparent: true,
+              opacity: 0.28
+            }),
+            new THREE.MeshBasicMaterial({
+              color: 0xffc266,        // aksen emas muda (wireframe/detail)
+              wireframe: true,
+              transparent: true,
+              opacity: 0.6
+            })
+          ];
+
+          // ===== Helper: Factory objek-objek brand (ATK/Perkakas/Industrial) =====
+          function createPen(){ // PENA
+            const g = new THREE.Group();
+            const body = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1.2, 16), mats[0]);
+            const tip  = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.18, 16), mats[0]);
+            tip.position.y = -0.69;
+            g.add(body, tip);
+            return g;
+          }
+
+          function createRuler(){ // PENGGARIS
+            const g = new THREE.Group();
+            const plate = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.08, 0.22), mats[0]);
+            g.add(plate);
+            // garis ukur (tick) tipis
+            for (let i = 0; i <= 10; i++){
+              const h = (i % 5 === 0) ? 0.06 : 0.035;
+              const tick = new THREE.Mesh(new THREE.BoxGeometry(0.004, 0.001, h), mats[1]);
+              tick.position.set(-0.52 + i*0.104, 0.045, 0.0);
+              tick.rotation.x = Math.PI/2;
+              g.add(tick);
+            }
+            return g;
+          }
+
+          function createBolt(){ // BAUT (kepala heksagonal + batang)
+            const g = new THREE.Group();
+            const head  = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.12, 6), mats[0]); // 6 sisi = hexa
+            head.position.y = 0.35;
+            const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.7, 16), mats[0]);
+            g.add(shaft, head);
+            return g;
+          }
+
+          function createPackage(){ // KARDUS/PAKET logistik
+            const g = new THREE.Group();
+            const body = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.35, 0.4), mats[0]);
+            const tape = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.36, 0.41), mats[1]);
+            g.add(body, tape);
+            return g;
+          }
+
+          function createPipe(){ // PIPA industri (silinder berongga + cincin)
+            const g = new THREE.Group();
+            const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.8, 24, 1, true), mats[0]); // open-ended
+            const ring1 = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.02, 12, 24), mats[1]);
+            ring1.rotation.x = Math.PI/2; ring1.position.y = 0.4;
+            const ring2 = ring1.clone(); ring2.position.y = -0.4;
+            g.add(pipe, ring1, ring2);
+            return g;
+          }
+
+          // ===== Susun objek pada orbit (hemat & smooth) =====
+          const factories = [ createPen, createRuler, createBolt, createPackage, createPipe ];
+          const pivots = [];
+
+          for (let i = 0; i < factories.length; i++) {
+            const obj = factories[i]();
+
+            // holder untuk scaling/rotasi halus
+            const holder = new THREE.Group();
+            holder.add(obj);
+            holder.position.x = 1.6 + i * 0.32;            // radius orbit makin menjauh tipis
+
+            // pivot untuk perputaran orbit
+            const pivot = new THREE.Group();
+            pivot.rotation.x = Math.random() * Math.PI;
+            pivot.rotation.y = Math.random() * Math.PI;
+            pivot.add(holder);
+
+            group.add(pivot);
+            pivots.push({ pivot, node: holder, speed: 0.003 + Math.random() * 0.004 });
+          }
+
+          // parallax ringan
+          const mouse = {x:0,y:0};
+          function onMove(e){
+            const r = canvas.getBoundingClientRect();
+            mouse.x = ((e.clientX - r.left)/Math.max(r.width,1))*2 - 1;
+            mouse.y = -((e.clientY - r.top)/Math.max(r.height,1))*2 + 1;
+          }
+          window.addEventListener('mousemove', onMove, { passive:true });
+
+          // size & observe
+          function fit(){
+            const w = host.clientWidth || 1;
+            const h = host.clientHeight || 320; // fallback jika belum punya tinggi
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h, false);
+          }
+          fit();
+          resizeObs = new ResizeObserver(fit);
+          resizeObs.observe(host);
+
+          // loop
+          const animate = () => {
+            rafId = requestAnimationFrame(animate);
+            group.rotation.y += (mouse.x*0.35 - group.rotation.y)*0.02;
+            group.rotation.x += (-mouse.y*0.25 - group.rotation.x)*0.02;
+            pivots.forEach(p => { p.pivot.rotation.z += p.speed; p.node.rotation.y += 0.005; });
+            renderer.render(scene, camera);
+          };
+          animate();
+
+          // simpan cleanup di element untuk berjaga-jaga
+          canvas._cleanup = function(){
+            window.removeEventListener('mousemove', onMove);
+            if (resizeObs){ try{ resizeObs.disconnect(); }catch(e){} }
+            if (rafId) cancelAnimationFrame(rafId);
+            renderer && renderer.dispose();
+            // buang geometries & materials
+            scene.traverse(obj=>{
+              if (obj.geometry) obj.geometry.dispose?.();
+              if (obj.material){
+                if (Array.isArray(obj.material)) obj.material.forEach(m=>m.dispose?.());
+                else obj.material.dispose?.();
+              }
+            });
+            scene = camera = renderer = group = null;
+          };
+        }
+
+        function destroyMobileScene() {
+          if (!canvas) return;
+          canvas._cleanup && canvas._cleanup();
+          canvas.remove();
+          canvas = null;
+        }
+
+        function sync() {
+          if (mq.matches) {
+            // MOBILE: aktifkan bg 3D khusus mobile
+            initMobileScene();
+          } else {
+            // DESKTOP: matikan bg mobile; versi desktop tetap seperti semula
+            destroyMobileScene();
+          }
+        }
+
+        // init + listeners
+        sync();
+        mq.addEventListener('change', sync);
+        window.addEventListener('orientationchange', sync);
+      })();
 
       /* =================================== */
       /*    DYNAMIC CUSTOMERS LOGO LOGIC     */
