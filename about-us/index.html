@@ -135,27 +135,39 @@
       box-shadow:0 10px 30px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:6px;
       opacity:0; pointer-events:none; transition:opacity 160ms ease, transform 160ms ease;
     }
-    .dropdown:hover .submenu{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+    @media (hover:hover) and (pointer:fine){.dropdown:hover .submenu{opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);}}
     .submenu a{ padding:10px 12px; border-radius:8px; color:var(--muted); font-size:13px; }
     .submenu a:hover{ background:rgba(255,255,255,.02); color:var(--text); }
     .hamburger{ display:none; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
 
     @media (max-width:880px){
       .menu{
-        display:none; position:fixed; top:var(--nav-h); left:0; right:0; z-index:80;
+        display:none; position:fixed; inset:var(--nav-h) 0 auto 0;
         background:rgba(11,11,13,1);
-        padding:18px; flex-direction:column; gap:8px; border-top:1px solid rgba(255,255,255,.06);
+        padding:18px; display:none; flex-direction:column; gap:8px;
+        border-top:1px solid rgba(255,255,255,.06);
         max-height:calc(100dvh - var(--nav-h)); overflow:auto;
+        -webkit-overflow-scrolling:touch;
       }
       .menu.open{ display:flex; }
       .hamburger{ display:block; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
       body.menu-open{ overflow:hidden; }
       .dropdown .submenu{
-        position:static; transform:none; opacity:1; pointer-events:auto; display:none; padding-left:10px;
+        position:static !important;
         box-shadow:none; border:0; background:transparent;
+        padding-left:10px;
+        display:block;
+        max-height:0;
+        overflow:hidden;
+        transition:max-height 220ms var(--ease);
+        width:100%;
+        margin-top:6px;
+      }
+      .dropdown.open .submenu{ max-height:600px; }
+      .dropdown.open .caret{ transform:rotate(180deg); }
+      nav.navbar, .submenu, .caret, .menu a, .menu .menu-link{
         transition:none !important;
       }
-      .dropdown.open .submenu{ display:flex; }
       nav.navbar, .menu, .submenu, .caret, .menu a, .menu .menu-link{
       transition:none !important;
       }
@@ -322,7 +334,7 @@
               We prioritize spec-driven quality, clear ETAs, and responsive service.
             </p>
             <div class="spacer"></div>
-            <button class="btn" type="button" onclick="window.location.href='./contact/'">Request a Quote</button>
+            <button class="btn" type="button" onclick="window.location.href='../contact/'">Request a Quote</button>
           </div>
 
           <div class="hero-card" role="note" aria-label="Our commitments">
@@ -570,7 +582,7 @@
             </div>
           </div>
           <div class="spacer"></div>
-          <button class="btn" type="button" onclick="window.location.href='./contact/'" style="font-family:'Share Tech Mono';">Request a Quote</button>
+          <button class="btn" type="button" onclick="window.location.href='../contact/'" style="font-family:'Share Tech Mono';">Request a Quote</button>
         </div>
       </div>
 
@@ -584,6 +596,15 @@
        SCRIPTS
   ============================ -->
   <script>
+    // helper: tutup semua dropdown
+    function closeAllDropdowns(){
+      document.querySelectorAll('.dropdown.open').forEach(dd=>{
+        dd.classList.remove('open');
+        const trigger = dd.querySelector('.menu-link');
+        if(trigger) trigger.setAttribute('aria-expanded','false');
+      });
+    }
+
     // ===== Sticky navbar: aktifkan state "scrolled" + elevasi bayangan =====
     (function(){
       const navbar = document.querySelector(".navbar");
@@ -602,23 +623,37 @@
       const opened = menu.classList.toggle("open");
       btn.setAttribute("aria-expanded", opened ? "true" : "false");
       document.body.classList.toggle("menu-open", opened);
+      if(!opened){ closeAllDropdowns(); }
     }
 
-    // ===== Products link behavior:
-    // Desktop => klik menuju ../products/
-    // Mobile  => cegah navigasi & toggle submenu
+    // Products click di mobile -> accordion
     function onProductsClick(e){
       const isMobile = window.matchMedia("(max-width:880px)").matches;
       const dd = document.getElementById("productsDropdown");
       const trigger = dd.querySelector(".menu-link");
+
       if(isMobile){
         e.preventDefault();
-        dd.classList.toggle("open");
-        const expanded = trigger.getAttribute("aria-expanded") === "true";
-        trigger.setAttribute("aria-expanded", (!expanded).toString());
+        // tutup dropdown lain dulu
+        document.querySelectorAll('.dropdown.open').forEach(other=>{
+          if(other !== dd){ other.classList.remove('open'); }
+        });
+        const willOpen = !dd.classList.contains('open');
+        dd.classList.toggle("open", willOpen);
+        trigger.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        e.stopPropagation();
       }
-      // jika desktop, biarkan default navigate
+      // desktop: biarkan navigate
     }
+
+    // Tap di luar untuk menutup submenu (mobile)
+    document.addEventListener('click', function(e){
+      const isMobile = window.matchMedia("(max-width:880px)").matches;
+      if(!isMobile) return;
+      const menu = document.getElementById("main-menu");
+      if(!menu.classList.contains('open')) return;
+      if(!e.target.closest('.dropdown')){ closeAllDropdowns(); }
+    });
 
     // ===== Desktop hover open/close dengan jeda agar user sempat menuju submenu =====
     (function(){
