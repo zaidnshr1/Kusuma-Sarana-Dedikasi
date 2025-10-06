@@ -8,7 +8,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#0b0b0d" />
 
-  <title>PT Kusuma Sarana Dedikasi (KSD) | Trading & General Supplier</title>
+  <title>About Us | PT Kusuma Sarana Dedikasi (KSD) — Trading & General Supplier Indonesia</title>
   <link rel="canonical" href="https://www.ksd.co.id/" />
 
   <!-- Icons -->
@@ -35,57 +35,33 @@
 
   <!-- JSON-LD: Organization + WebSite + ItemList kategori -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "name": "PT Kusuma Sarana Dedikasi (KSD)",
-        "url": "https://www.ksd.co.id/",
-        "logo": "https://www.ksd.co.id/assets/pt-kusuma-sarana-dedikasi-logo.webp",
-        "foundingDate": "2024-10-10",
-        "address": {
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "PT Kusuma Sarana Dedikasi (KSD)",
+      "url": "https://ksd.co.id/",
+      "logo": "https://ksd.co.id/assets/pt-kusuma-sarana-dedikasi-logo.webp",
+      "image": "https://ksd.co.id/assets/pt-kusuma-sarana-dedikasi-logo.webp",
+      "description": "Perusahaan trading & general supplier untuk kebutuhan pengadaan industri dan proyek.",
+      "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3",
+          "streetAddress": "Cluster Ubud Blok U39 No.12 RT 004/051, Kelurahan Bahagia, Kecamatan Babelan, Kab Bekasi 17610",
           "addressLocality": "Bekasi",
           "addressRegion": "Jawa Barat",
-          "postalCode": "17136",
+          "postalCode": "17610",
           "addressCountry": "ID"
-        },
-        "contactPoint": [{
+      },
+      "email": "Sales1.ksd@gmail.com",
+      "areaServed": "ID",
+      "openingHours": "Mo-Fr 09:00-17:00",
+      "contactPoint": [{
           "@type": "ContactPoint",
           "contactType": "customer service",
           "email": "Sales1.ksd@gmail.com",
           "areaServed": "ID",
           "availableLanguage": ["id","en"]
-        }]
-      },
-      {
-        "@type": "WebSite",
-        "url": "https://www.ksd.co.id/",
-        "name": "PT Kusuma Sarana Dedikasi (KSD)",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://www.ksd.co.id/search?q={query}",
-          "query-input": "required name=query"
-        }
-      },
-      {
-        "@type": "ItemList",
-        "name": "Product Categories",
-        "itemListElement": [
-          {"@type": "ListItem","position": 1,"name":"Consumables"},
-          {"@type": "ListItem","position": 2,"name":"Safety Equipment"},
-          {"@type": "ListItem","position": 3,"name":"Technical Tools"},
-          {"@type": "ListItem","position": 4,"name":"Building Materials"},
-          {"@type": "ListItem","position": 5,"name":"Electronics"},
-          {"@type": "ListItem","position": 6,"name":"IT & Communications"},
-          {"@type": "ListItem","position": 7,"name":"Office Stationery (ATK)"},
-          {"@type": "ListItem","position": 8,"name":"Stainless Steel Fabrication"}
-        ]
-      }
-    ]
-  }
+      }]
+    }
   </script>
 
   <style>
@@ -122,8 +98,17 @@
       --nav-h:64px;
       position:sticky; top:0; z-index:60;
       backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(11,11,13,.7), rgba(11,11,13,.4));
+      background: transparent;
       border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    nav.navbar.scrolled{
+      background: rgba(11,11,13,.60);          /* cukup gelap untuk kontras */
+      border-bottom:1px solid rgba(255,255,255,.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))){
+      nav.navbar.scrolled{ background: rgba(11,11,13,.82); }
     }
     .nav-inner{
       min-height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px;
@@ -134,16 +119,18 @@
     .brand-title{ font-weight:700; letter-spacing:.6px; color:var(--muted); font-size:13px; }
     .nav-actions{ display:flex; align-items:center; gap:18px; }
     .menu{ display:flex; gap:24px; align-items:center; font-family:"Share Tech Mono"; }
-    .menu a,.menu button{
+    .menu a,.menu .menu-link{
       color:var(--muted); border:0; background:none; font-size:13px; padding:8px; cursor:pointer;
       text-transform:uppercase; letter-spacing:1px;
     }
-    .menu a:hover,.menu button:hover{ color:var(--text); transform:translateY(-1px); }
+    .menu a:hover,.menu .menu-link:hover{ color:var(--text); transform:translateY(-1px); }
+    .dropdown{ position:relative; }
+    .caret{ margin-left:6px; font-size:11px; opacity:.9; transition: transform var(--t); }
     .dropdown{ position:relative; }
     .caret{ margin-left:6px; font-size:11px; opacity:.9; transition: transform var(--t); }
     .submenu{
       position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
-      top:calc(100% + 10px); min-width:240px; background:var(--glass);
+      top:calc(100% + 10px); min-width:260px; background:var(--glass);
       border-radius:10px; padding:8px; border:1px solid rgba(255,255,255,.06);
       box-shadow:0 10px 30px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:6px;
       opacity:0; pointer-events:none; transition:opacity 160ms ease, transform 160ms ease;
@@ -156,17 +143,22 @@
     @media (max-width:880px){
       .menu{
         display:none; position:fixed; top:var(--nav-h); left:0; right:0; z-index:80;
-        background:linear-gradient(180deg, rgba(11,11,13,.98), rgba(11,11,13,.98));
+        background:rgba(11,11,13,1);
         padding:18px; flex-direction:column; gap:8px; border-top:1px solid rgba(255,255,255,.06);
         max-height:calc(100dvh - var(--nav-h)); overflow:auto;
       }
       .menu.open{ display:flex; }
-      .hamburger{ display:block; }
+      .hamburger{ display:block; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
       body.menu-open{ overflow:hidden; }
       .dropdown .submenu{
-        position:static; transform:none; opacity:1; pointer-events:auto; display:none; padding-left:10px; box-shadow:none; border:0; background:transparent;
+        position:static; transform:none; opacity:1; pointer-events:auto; display:none; padding-left:10px;
+        box-shadow:none; border:0; background:transparent;
+        transition:none !important;
       }
       .dropdown.open .submenu{ display:flex; }
+      nav.navbar, .menu, .submenu, .caret, .menu a, .menu .menu-link{
+      transition:none !important;
+      }
     }
 
     /* Hero */
@@ -281,21 +273,30 @@
 
       <div class="nav-actions" role="navigation">
         <button class="hamburger" aria-expanded="false" aria-controls="main-menu" title="Open menu" onclick="toggleMobileMenu(this)">☰</button>
+
         <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
           <a role="menuitem" href="../">Home</a>
           <a role="menuitem" href="../about-us/">About Us</a>
+
+          <!-- Products dropdown -->
           <div class="dropdown" id="productsDropdown">
-            <button class="menu-link" style="font-family:'Share Tech Mono'" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown(event,'productsDropdown')">
+            <!-- NOTE: anchor (not button) so it can navigate on desktop;
+                on mobile we preventDefault & toggle submenu -->
+            <a class="menu-link" href="../products/" aria-haspopup="true" aria-expanded="false" onclick="onProductsClick(event)">
               Products <span class="caret">▾</span>
-            </button>
+            </a>
             <div class="submenu" role="menu" aria-label="Products submenu">
-              <a role="menuitem" href="#products">Consumables</a>
-              <a role="menuitem" href="#products">Safety</a>
-              <a role="menuitem" href="#products">Tools</a>
-              <a role="menuitem" href="#products">Piping & Valves</a>
-              <a role="menuitem" href="#products">Stainless Fabrication</a>
+              <a role="menuitem" href="../products/#consumables">Consumables</a>
+              <a role="menuitem" href="../products/#safety-ppe">Occupational Safety (PPE)</a>
+              <a role="menuitem" href="../products/#technical-tools">Technical Tools & Equipment</a>
+              <a role="menuitem" href="../products/#building-site">Building & Site Materials</a>
+              <a role="menuitem" href="../products/#electrical-electronics">Electrical & Electronics</a>
+              <a role="menuitem" href="../products/#it-comms">IT & Communications</a>
+              <a role="menuitem" href="../products/#office-stationery">Office Stationery (ATK)</a>
+              <a role="menuitem" href="../products/#stainless">Stainless-Steel Products & Fabrication</a>
             </div>
           </div>
+
           <a role="menuitem" href="../customers/">Customers</a>
           <a role="menuitem" href="../gallery/">Gallery</a>
           <a role="menuitem" href="../contact/">Contact</a>
@@ -583,11 +584,17 @@
        SCRIPTS
   ============================ -->
   <script>
-    // Navbar elevation
-    const navbar = document.querySelector(".navbar");
-    window.addEventListener("scroll", () => {
-      navbar.style.boxShadow = window.scrollY > 8 ? "0 8px 30px rgba(0,0,0,.6)" : "none";
-    });
+    // ===== Sticky navbar: aktifkan state "scrolled" + elevasi bayangan =====
+    (function(){
+      const navbar = document.querySelector(".navbar");
+      const onScroll = () => {
+        const scrolled = window.scrollY > 2;
+        navbar.classList.toggle("scrolled", scrolled);
+        navbar.style.boxShadow = scrolled ? "0 8px 30px rgba(0,0,0,.6)" : "none";
+      };
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll(); // set initial
+    })();
 
     // Mobile menu toggle
     function toggleMobileMenu(btn){
@@ -597,26 +604,48 @@
       document.body.classList.toggle("menu-open", opened);
     }
 
-    // Dropdown on mobile
-    function toggleDropdown(e,id){
-      const el = document.getElementById(id);
+    // ===== Products link behavior:
+    // Desktop => klik menuju ../products/
+    // Mobile  => cegah navigasi & toggle submenu
+    function onProductsClick(e){
       const isMobile = window.matchMedia("(max-width:880px)").matches;
+      const dd = document.getElementById("productsDropdown");
+      const trigger = dd.querySelector(".menu-link");
       if(isMobile){
-        el.classList.toggle("open");
-        const btn = el.querySelector(".menu-link");
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", (!expanded).toString());
+        e.preventDefault();
+        dd.classList.toggle("open");
+        const expanded = trigger.getAttribute("aria-expanded") === "true";
+        trigger.setAttribute("aria-expanded", (!expanded).toString());
       }
+      // jika desktop, biarkan default navigate
     }
 
-    // Desktop hover open/close (with a tiny delay to avoid flicker)
-    let hideTimer;
-    const dropdown = document.querySelector("#productsDropdown");
-    dropdown.addEventListener("mouseenter", () => { clearTimeout(hideTimer); dropdown.classList.add("open"); });
-    dropdown.addEventListener("mouseleave", () => { hideTimer = setTimeout(()=> dropdown.classList.remove("open"),150); });
+    // ===== Desktop hover open/close dengan jeda agar user sempat menuju submenu =====
+    (function(){
+      const dd = document.getElementById("productsDropdown");
+      if(!dd) return;
 
-    // Footer year
-    (function(){ const y = document.getElementById("year"); if(y){ y.textContent = new Date().getFullYear(); } })();
+      let hideTimer;
+      const open = () => { clearTimeout(hideTimer); dd.classList.add("open"); };
+      const close = () => { hideTimer = setTimeout(() => dd.classList.remove("open"), 5000); }; // jeda lebih panjang
+
+      // buka ketika mengarah ke trigger atau submenu
+      dd.addEventListener("mouseenter", open);
+      dd.addEventListener("mouseleave", close);
+
+      // Aksesibilitas keyboard: open saat focus-in, close saat focus-out
+      dd.addEventListener("focusin", open);
+      dd.addEventListener("focusout", () => {
+        // beri sedikit jeda agar navigasi keyboard ke item berikutnya tidak langsung menutup
+        hideTimer = setTimeout(() => dd.classList.remove("open"), 260);
+      });
+    })();
+
+    // ===== Footer year (tetap) =====
+    (function(){
+      const y = document.getElementById("year");
+      if(y){ y.textContent = new Date().getFullYear(); }
+    })();
   </script>
 </body>
 </html>
