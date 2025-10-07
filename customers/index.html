@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Daftar klien dan partner yang telah mempercayai PT Kusuma Sarana Dedikasi (KSD) sebagai supplier untuk kebutuhan industri, konstruksi, dan korporat mereka." />
+  <meta name="keywords" content="klien ksd, customer ksd, partner kusuma sarana dedikasi," />
+  <meta name="robots" content="index,follow" />
+
+  <title>Our Customers | PT Kusuma Sarana Dedikasi (KSD)</title>
+  <link rel="canonical" href="https://www.ksd.co.id/customers/" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/x-icon" href="../assets/fav/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/fav/Logo-KSD-Favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/fav/Logo-KSD-Favicon180.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Our Customers | PT Kusuma Sarana Dedikasi (KSD)">
+  <meta property="og:description" content="Klien dan partner yang telah mempercayai KSD untuk solusi pengadaan barang industri, konstruksi, dan kebutuhan korporasi.">
+  <meta property="og:url" content="https://www.ksd.co.id/customers/">
+  <meta property="og:image" content="https://www.ksd.co.id/assets/pt-kusuma-sarana-dedikasi-logo.webp">
+  <meta property="og:site_name" content="PT Kusuma Sarana Dedikasi (KSD)">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Our Customers | PT Kusuma Sarana Dedikasi (KSD)",
+      "url": "https://www.ksd.co.id/customers/",
+      "description": "Daftar klien dan partner yang telah mempercayai PT Kusuma Sarana Dedikasi (KSD) sebagai supplier untuk kebutuhan industri, konstruksi, dan korporat mereka.",
+      "publisher": {
+        "@type": "LocalBusiness",
+        "name": "PT Kusuma Sarana Dedikasi (KSD)",
+        "url": "https://ksd.co.id/",
+        "logo": "https://ksd.co.id/assets/pt-kusuma-sarana-dedikasi-logo.webp",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3",
+            "addressLocality": "Bekasi",
+            "addressRegion": "Jawa Barat",
+            "postalCode": "17136",
+            "addressCountry": "ID"
+        },
+        "email": "Sales1.ksd@gmail.com",
+        "openingHours": "Mo-Fr 09:00-17:00"
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b0b0d;
+      --glass:rgba(255,255,255,.03);
+      --muted:#bfc3c7;
+      --text:#eaeef2;
+      --accent:#ff8a00;
+      --maxw:1180px;
+      --t: 180ms cubic-bezier(.2,.9,.3,1);
+    }
+    *{ box-sizing:border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,"Share Tech Mono",monospace;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--maxw); margin:0 auto; padding:28px; }
+
+    /* Navbar */
+    nav.navbar{
+      --nav-h:64px;
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(6px);
+      background: transparent;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    nav.navbar.scrolled{
+      background: rgba(11,11,13,.60);
+      border-bottom:1px solid rgba(255,255,255,.05);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner{
+      min-height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px;
+      max-width:var(--maxw); margin:0 auto; padding:10px 20px;
+    }
+    .logo{ display:flex; align-items:center; gap:12px; }
+    .logo img{ max-height:52px; width:auto; display:block; }
+    .brand-title{ font-weight:700; letter-spacing:.6px; color:var(--muted); font-size:13px; }
+    .nav-actions{ display:flex; align-items:center; gap:18px; }
+    .menu{ display:flex; gap:24px; align-items:center; font-family:"Share Tech Mono"; }
+    .menu a,.menu .menu-link{
+      color:var(--muted); border:0; background:none; font-size:13px; padding:8px; cursor:pointer;
+      text-transform:uppercase; letter-spacing:1px;
+    }
+    .menu a:hover,.menu .menu-link:hover{ color:var(--text); transform:translateY(-1px); }
+    .dropdown{ position:relative; }
+    .caret{ margin-left:6px; font-size:11px; opacity:.9; transition: transform var(--t); }
+    .submenu{
+      position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
+      top:calc(100% + 10px); min-width:260px; background:var(--glass);
+      border-radius:10px; padding:8px; border:1px solid rgba(255,255,255,.06);
+      box-shadow:0 10px 30px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:6px;
+      opacity:0; pointer-events:none; transition:opacity 160ms ease, transform 160ms ease;
+    }
+    @media (hover:hover) and (pointer:fine){.dropdown:hover .submenu{opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);}}
+    .submenu a{ padding:10px 12px; border-radius:8px; color:var(--muted); font-size:13px; }
+    .submenu a:hover{ background:rgba(255,255,255,.02); color:var(--text); }
+    .hamburger{ display:none; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
+
+    @media (max-width:880px){
+      .menu{
+        display:none; position:fixed; inset:var(--nav-h) 0 auto 0;
+        background:rgba(11,11,13,1);
+        padding:18px; display:none; flex-direction:column; gap:8px;
+        border-top:1px solid rgba(255,255,255,.06);
+        max-height:calc(100dvh - var(--nav-h)); overflow:auto;
+      }
+      .menu.open{ display:flex; }
+      .hamburger{ display:block; }
+      body.menu-open{ overflow:hidden; }
+      .dropdown .submenu{
+        position:static !important; box-shadow:none; border:0; background:transparent;
+        padding-left:10px; display:block; max-height:0; overflow:hidden;
+        transition:max-height 220ms ease; width:100%; margin-top:6px;
+      }
+      .dropdown.open .submenu{ max-height:400px; }
+      .dropdown.open .caret{ transform:rotate(180deg); }
+      nav.navbar, .submenu, .caret, .menu a, .menu .menu-link{ transition:none !important; }
+    }
+
+    /* Main Content */
+    main {
+      min-height: 60vh; /* Ensure there's enough content to scroll */
+    }
+
+    /* Main Content */
+    .hero{
+      padding: 4rem 0;
+      text-align: center;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--text);
+      margin: 0 0 0.5rem;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+    .logo-section {
+      padding: 4rem 0;
+    }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+    .logo-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      aspect-ratio: 16/9;
+      /* Animation */
+      opacity: 0;
+      transform: translateY(15px);
+      animation: fadeUp 0.5s ease-out forwards;
+    }
+    .logo-item img {
+      max-width: 95%;
+      max-height: 110px;
+      filter: invert(1) grayscale(0.5) brightness(1.2);
+      opacity: 0.85;
+      transition: all 0.3s ease;
+    }
+    .logo-item:hover img {
+      opacity: 1;
+      filter: invert(1) grayscale(0) brightness(1.5);
+      transform: scale(1.05);
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 70;
+      display: none; /* Initially hidden */
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+      color: var(--text);
+      padding: 10px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+    }
+    .back-to-top svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Footer */
+    footer.site-footer{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.015));
+      border-top:1px solid rgba(255,255,255,.05); margin-top:40px;
+    }
+    .footer-inner{ max-width:var(--maxw); margin:0 auto; padding:34px 28px 18px; }
+    .footer-grid{ display:grid; grid-template-columns:2fr 1.2fr 1.2fr 1.6fr; gap:28px; }
+    .footer-col h4{ margin:0 0 12px; font-size:14px; letter-spacing:.6px; text-transform:uppercase; color:var(--muted); font-weight:700; }
+    .footer-brand{ display:flex; gap:14px; align-items:center; margin-bottom:12px; }
+    .footer-brand img{ height:44px; width:auto; display:block; }
+    .footer-brand .name{ font-weight:700; color:var(--text); letter-spacing:.5px; }
+    .footer-text{ color:var(--muted); font-size:13px; line-height:1.7; }
+    .footer-links{ display:flex; flex-direction:column; gap:8px; }
+    .footer-links a{ color:var(--muted); font-size:13px; display:inline-flex; align-items:center; gap:8px; transition: color var(--t), transform var(--t); }
+    .footer-links a:hover{ color:var(--text); transform: translateX(2px); }
+    .footer-contact{ display:flex; flex-direction:column; gap:10px; }
+    .footer-contact .item{ display:flex; gap:10px; align-items:flex-start; color:var(--muted); font-size:13px; }
+    .footer-contact svg {
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+      flex: 0 0 18px;
+    }
+    .footer-meta{ display:flex; justify-content:space-between; align-items:center; gap:16px; border-top:1px solid rgba(255,255,255,.05); margin-top:22px; padding-top:14px; color:var(--muted); font-size:12px; }    
+    @media (max-width: 768px) {
+      .logo-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+    @media (max-width:720px){.footer-grid{grid-template-columns:1fr;}.footer-meta{flex-direction:column;align-items:flex-start;}}
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <div class="logo">
+        <a href="../" aria-label="Home">
+          <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="PT Kusuma Sarana Dedikasi Logo" onerror="this.style.display='none'"/>
+        </a>
+        <div>
+          <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+          <div style="font-size:11px;color:var(--muted)">Quality Distribution Solutions</div>
+        </div>
+      </div>
+      <div class="nav-actions" role="navigation">
+        <button class="hamburger" aria-expanded="false" aria-controls="main-menu" title="Open menu" onclick="toggleMobileMenu(this)">☰</button>
+        <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+          <a role="menuitem" href="../">Home</a>
+          <a role="menuitem" href="../about-us/">About Us</a>
+          <div class="dropdown" id="productsDropdown">
+            <a class="menu-link" href="../products/" aria-haspopup="true" aria-expanded="false" onclick="onProductsClick(event)">
+              Products <span class="caret">▾</span>
+            </a>
+            <div class="submenu" role="menu" aria-label="Products submenu">
+              <a role="menuitem" href="../products/#consumables">Consumables</a>
+              <a role="menuitem" href="../products/#safety-ppe">Occupational Safety (PPE)</a>
+              <a role="menuitem" href="../products/#technical-tools">Technical Tools & Equipment</a>
+              <a role="menuitem" href="../products/#building-site">Building & Site Materials</a>
+              <a role="menuitem" href="../products/#electrical-electronics">Electrical & Electronics</a>
+              <a role="menuitem" href="../products/#it-comms">IT & Communications</a>
+              <a role="menuitem" href="../products/#office-stationery">Office Stationery (ATK)</a>
+              <a role="menuitem" href="../products/#stainless">Stainless-Steel Products & Fabrication</a>
+            </div>
+          </div>
+          <a role="menuitem" href="./">Customers</a>
+          <a role="menuitem" href="../gallery/">Gallery</a>
+          <a role="menuitem" href="../contact/">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="content">
+    <header class="hero">
+      <div class="container">
+        <h1>Trusted By Industry Leaders</h1>
+        <p>We are proud to have collaborated with and earned the trust of a diverse range of clients, from national corporations to multinational industry leaders.</p>
+      </div>
+    </header>
+
+    <section class="logo-section">
+      <div class="container">
+        <div class="logo-grid" id="logo-grid-container">
+          <!-- Logos will be dynamically inserted here -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Website footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="PT Kusuma Sarana Dedikasi Logo" onerror="this.style.display='none'"/>
+            <div>
+              <div class="name" style="font-family:'Montserrat',sans-serif;">PT Kusuma Sarana Dedikasi</div>
+              <div style="font-size:12px;color:var(--muted);font-family:'Montserrat',sans-serif;">Quality Distribution Solutions</div>
+            </div>
+          </div>
+          <p class="footer-text" style="font-family: 'Share Tech Mono'">
+            Trusted distribution partner supporting industrial, construction, and corporate sectors with consistent quality and service.
+          </p>
+        </div>
+        <div class="footer-col" style="font-family: 'Share Tech Mono'">
+          <h4>Navigation</h4>
+          <nav class="footer-links" aria-label="Footer navigation">
+            <a href="../">Home</a>
+            <a href="../about-us/">About Us</a>
+            <a href="./">Customers</a>
+            <a href="../gallery/">Gallery</a>
+            <a href="../contact/">Contact</a>
+          </nav>
+        </div>
+        <div class="footer-col" style="font-family:'Share Tech Mono'">
+          <h4>Products</h4>
+          <div class="footer-links">
+            <a href="../products/#consumables">Consumables</a>
+            <a href="../products/#safety-ppe">Safety & PPE</a>
+            <a href="../products/#technical-tools">Technical Tools</a>
+          </div>
+        </div>
+        <div class="footer-col" style="font-family:'Share Tech Mono'">
+          <h4>Contact Us</h4>
+          <div class="footer-contact">
+            <div class="item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi Barat 17136</div>
+            </div>
+            <div class="item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <div>Mon – Fri, 09:00 – 17:00</div>
+            </div>
+            <div class="item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <div><a href="mailto:Sales1.ksd@gmail.com">Sales1.ksd@gmail.com</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-meta">
+        <div style="font-family:'Montserrat',sans-serif;">© <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Top
+  </button>
+
+  <script>
+    // helper: tutup semua dropdown
+    function closeAllDropdowns(){
+      document.querySelectorAll('.dropdown.open').forEach(dd=>{
+        dd.classList.remove('open');
+        const trigger = dd.querySelector('.menu-link');
+        if(trigger) trigger.setAttribute('aria-expanded','false');
+      });
+    }
+
+    // ===== Sticky navbar: aktifkan state "scrolled" + elevasi bayangan =====
+    (function(){
+      const navbar = document.querySelector(".navbar");
+      const onScroll = () => {
+        const scrolled = window.scrollY > 2;
+        navbar.classList.toggle("scrolled", scrolled);
+      };
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll(); // set initial
+    })();
+
+    // Mobile menu toggle
+    function toggleMobileMenu(btn){
+      const menu = document.getElementById("main-menu");
+      const opened = menu.classList.toggle("open");
+      btn.setAttribute("aria-expanded", opened ? "true" : "false");
+      document.body.classList.toggle("menu-open", opened);
+      if(!opened){ closeAllDropdowns(); }
+    }
+
+    // Products click di mobile -> accordion
+    function onProductsClick(e){
+      const isMobile = window.matchMedia("(max-width:880px)").matches;
+      const dd = document.getElementById("productsDropdown");
+      const trigger = dd.querySelector(".menu-link");
+
+      if(isMobile){
+        e.preventDefault();
+        // tutup dropdown lain dulu
+        document.querySelectorAll('.dropdown.open').forEach(other=>{
+          if(other !== dd){ other.classList.remove('open'); }
+        });
+        const willOpen = !dd.classList.contains('open');
+        dd.classList.toggle("open", willOpen);
+        trigger.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        e.stopPropagation();
+      }
+      // desktop: biarkan navigate
+    }
+
+    // Tap di luar untuk menutup submenu (mobile)
+    document.addEventListener('click', function(e){
+      const isMobile = window.matchMedia("(max-width:880px)").matches;
+      if(!isMobile) return;
+      const menu = document.getElementById("main-menu");
+      if(!menu.classList.contains('open')) return;
+      if(!e.target.closest('.dropdown')){ closeAllDropdowns(); }
+    });
+
+    // ===== Footer year + Dynamic Logos (tetap) =====
+    (function(){
+      const y = document.getElementById("year");
+      if(y){ y.textContent = new Date().getFullYear(); }
+      
+      const clientDatabase = [ { name: 'Xuilong', logoUrl: '../assets/logos/Xuilong.png' }, { name: 'Kiantaka', logoUrl: '../assets/logos/Kiantaka.png' }, { name: 'Cilikon', logoUrl: '../assets/logos/Cilikon.png' }, ];
+      const logoContainer = document.getElementById('logo-grid-container');
+      if (logoContainer) { clientDatabase.forEach((client, index) => { const item = document.createElement('div'); item.className = 'logo-item'; const img = document.createElement('img'); img.src = client.logoUrl; img.alt = `Logo ${client.name}`; item.appendChild(img); logoContainer.appendChild(item); item.style.animationDelay = `${index * 100}ms`; }); }
+    })();
+
+    // Back to top button
+    const backTopBtn = document.getElementById("backToTop");
+    if (backTopBtn) {
+      window.addEventListener("scroll", () => {
+        const shouldShow = window.scrollY > 280;
+        backTopBtn.style.display = shouldShow ? 'inline-flex' : 'none';
+      }, { passive: true });
+      backTopBtn.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+    }
+  </script>
+</body>
+</html>
