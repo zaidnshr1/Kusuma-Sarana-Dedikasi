@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+  <!-- =========================
+      SEO — Products (KSD)
+  ========================== -->
+  <title>Products | PT Kusuma Sarana Dedikasi (KSD) — Industrial, Construction & Office Supplies</title>
+  <meta name="description" content="Explore KSD’s product range: Consumables, Safety Equipment, Technical Tools, Building Materials, Electronics, IT & Communications, Office Stationery (ATK), and Stainless-Steel Fabrication."/>
+  <meta name="keywords" content="KSD products, consumables, safety equipment, PPE, technical tools, building materials, electronics, IT communications, ATK, stainless steel fabrication, Indonesia supplier"/>
+  <meta name="robots" content="index,follow,max-image-preview:large"/>
+  <meta name="theme-color" content="#0b0b0d"/>
+  <link rel="canonical" href="https://www.ksd.co.id/products/"/>
+
+  <!-- Icons -->
+  <link rel="icon" type="image/x-icon" href="../assets/fav/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/fav/Logo-KSD-Favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/fav/Logo-KSD-Favicon180.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KSD Products — Industrial, Construction & Office Supplies">
+  <meta property="og:description" content="Spec-driven products with reliable coordination and support.">
+  <meta property="og:url" content="https://www.ksd.co.id/products/">
+  <meta property="og:image" content="https://www.ksd.co.id/assets/pt-kusuma-sarana-dedikasi-logo.webp">
+  <meta property="og:site_name" content="PT Kusuma Sarana Dedikasi (KSD)">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- =========================
+      JSON-LD — CollectionPage
+  ========================== -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"KSD Products",
+    "url":"https://www.ksd.co.id/products/",
+    "description":"Product range of PT Kusuma Sarana Dedikasi (KSD).",
+    "about":{"@type":"Organization","name":"PT Kusuma Sarana Dedikasi (KSD)","url":"https://www.ksd.co.id/"},
+    "hasPart":{"@type":"ItemList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Consumables","url":"#consumables"},
+      {"@type":"ListItem","position":2,"name":"Safety Equipment","url":"#safety-equipment"},
+      {"@type":"ListItem","position":3,"name":"Technical Tools","url":"#technical-tools"},
+      {"@type":"ListItem","position":4,"name":"Building Materials","url":"#building-materials"},
+      {"@type":"ListItem","position":5,"name":"Electronics","url":"#electronics"},
+      {"@type":"ListItem","position":6,"name":"IT & Communications","url":"#it-communications"},
+      {"@type":"ListItem","position":7,"name":"Office Stationery (ATK)","url":"#office-stationery"},
+      {"@type":"ListItem","position":8,"name":"Stainless-Steel Fabrication","url":"#stainless-steel-fabrication"}
+    ]}
+  }
+  </script>
+
+  <style>
+    /* =====================================
+                 DESIGN TOKENS
+    ====================================== */
+    :root{
+      --bg:#0b0b0d;
+      --panel:rgba(255,255,255,.04);
+      --glass:rgba(255,255,255,.03);
+      --muted:#bfc3c7;
+      --text:#eaeef2;
+      --accent:#ff8a00;
+      --accent-2:#ff6a00;
+      --ok:#2ecc71;
+      --radius:14px;
+      --maxw:1180px;
+      --ease:cubic-bezier(.2,.9,.3,1);
+      --t:180ms var(--ease);
+      --shadow:0 10px 34px rgba(0,0,0,.55);
+    }
+
+    *{ box-sizing:border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    html,body{ height:100% }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,"Share Tech Mono",monospace;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--maxw); margin:0 auto; padding:28px; }
+
+    /* =====================================
+                 NAVBAR
+    ====================================== */
+    nav.navbar{
+      --nav-h:64px;
+      position:sticky; top:0; z-index:60;
+      backdrop-filter:blur(6px);
+      background:transparent;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    nav.navbar.scrolled{
+      background:rgba(11,11,13,.60);
+      border-bottom:1px solid rgba(255,255,255,.05);
+      backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    }
+    .nav-inner{ min-height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:var(--maxw); margin:0 auto; padding:10px 20px; }
+    .logo{ display:flex; align-items:center; gap:12px; }
+    .logo img{ max-height:52px; width:auto; display:block; }
+    .brand-title{ font-weight:700; letter-spacing:.6px; color:var(--muted); font-size:13px; }
+    .nav-actions{ display:flex; align-items:center; gap:18px; }
+    .menu{ display:flex; gap:24px; align-items:center; font-family:"Share Tech Mono"; }
+    .menu a,.menu .menu-link{
+      color:var(--muted); border:0; background:none; font-size:13px; padding:8px; cursor:pointer;
+      text-transform:uppercase; letter-spacing:1px;
+    }
+    .menu a:hover,.menu .menu-link:hover{ color:var(--text); transform:translateY(-1px); }
+    .dropdown{ position:relative; }
+    .caret{ margin-left:6px; font-size:11px; opacity:.9; transition:transform var(--t); }
+    .submenu{
+      position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
+      top:calc(100% + 10px); min-width:260px; background:var(--glass);
+      border-radius:10px; padding:8px; border:1px solid rgba(255,255,255,.06);
+      box-shadow:0 10px 30px rgba(0,0,0,.45);
+      display:flex; flex-direction:column; gap:6px;
+      opacity:0; pointer-events:none;
+      transition:opacity 160ms ease, transform 160ms ease;
+    }
+    @media (hover:hover) and (pointer:fine){
+      .dropdown:hover .submenu{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+    }
+    .submenu a{ padding:10px 12px; border-radius:8px; color:var(--muted); font-size:13px; }
+    .submenu a:hover{ background:rgba(255,255,255,.02); color:var(--text); }
+
+    .hamburger{ display:none; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
+
+    @media (max-width:880px){
+      .menu{
+        display:none; position:fixed; inset:var(--nav-h) 0 auto 0;
+        background:rgba(11,11,13,1);
+        padding:18px; flex-direction:column; gap:8px;
+        border-top:1px solid rgba(255,255,255,.06);
+        max-height:calc(100dvh - var(--nav-h)); overflow:auto; -webkit-overflow-scrolling:touch;
+      }
+      .menu.open{ display:flex; }
+      .hamburger{ display:block; }
+      body.menu-open{ overflow:hidden; }
+
+      .dropdown .submenu{
+        position:static !important; box-shadow:none; border:0; background:transparent;
+        display:block; width:100%; max-height:0; overflow:hidden; opacity:0; pointer-events:none; margin:0; padding:0 0 0 10px;
+        transition:max-height 220ms var(--ease), opacity 120ms ease; transform:none !important;
+      }
+      .dropdown.open .submenu{ max-height:600px; opacity:1; pointer-events:auto; padding-top:6px; }
+      .dropdown.open .caret{ transform:rotate(180deg); }
+
+      .menu a,.menu .menu-link{ display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px 10px; line-height:1.2; gap:10px; }
+      .menu .dropdown{ display:flex; flex-direction:column; width:100%; }
+      .menu .menu-link .caret{ margin-left:auto; display:inline-block; line-height:1; transform-origin:center; }
+    }
+
+    /* =====================================
+                 PAGE HERO
+    ====================================== */
+    .page-hero{
+      background:
+        linear-gradient(180deg, rgba(15,15,15,0.86), rgba(15,15,15,0.6)),
+        url("../assets/hero/industrial-dark-texture.webp") center/cover no-repeat;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color:#eee;
+    }
+    .page-hero .container{ padding-top:28px; padding-bottom:18px; }
+    .breadcrumbs{ font-size:12px; color:var(--muted); letter-spacing:.3px; margin-bottom:8px; }
+    .breadcrumbs a{ color:var(--muted); }
+    .breadcrumbs span{ opacity:.7; margin:0 6px; }
+    .hero-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; }
+    .hero-title{ font-size: clamp(22px, 3.2vw, 32px); font-weight:700; letter-spacing:.4px; }
+    .hero-sub{ color:var(--muted); font-size:14px; margin-top:6px; max-width:72ch; line-height:1.6; }
+
+    /* =====================================
+                 CONTROLS
+    ====================================== */
+    .controls{ display:grid; gap:12px; margin-top:18px; grid-template-columns: 1fr auto; align-items:center; }
+    @media (max-width: 760px){ .controls{ grid-template-columns:1fr; } }
+    .searchbar{
+      display:flex; align-items:center; gap:10px; background:var(--glass);
+      border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:10px 12px;
+    }
+    .searchbar input{ flex:1; background:transparent; border:0; outline:0; color:var(--text); font-size:14px; }
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .chip{
+      border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02);
+      color:var(--muted); font-size:12px; letter-spacing:.4px;
+      padding:8px 12px; border-radius:999px; cursor:pointer; user-select:none;
+      transition:transform var(--t), background var(--t), color var(--t);
+      text-transform:uppercase;
+    }
+    .chip:hover{ transform:translateY(-1px); color:var(--text); }
+    .chip.active{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#111; border-color:transparent; }
+
+    /* =====================================
+                 SECTIONS + GRID
+    ====================================== */
+    .section{ padding: 8px 0 30px; }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:10px;
+      border-bottom:1px dashed rgba(255,255,255,.06); padding-bottom:8px;
+    }
+    .section .h2{ font-size: clamp(18px, 2.6vw, 24px); margin:0; letter-spacing:.4px; }
+    .mono{ font-family:"Share Tech Mono"; }
+    .muted{ color:var(--muted); }
+
+    .grid{ --cols:3; --gap:14px; display:grid; gap:var(--gap); grid-template-columns: repeat(var(--cols), 1fr); }
+    @media (max-width: 1100px){ .grid{ --cols:3; } }
+    @media (max-width: 900px){ .grid{ --cols:2; } }
+    @media (max-width: 560px){ .grid{ --cols:1; } }
+
+    .card{
+      position:relative; border-radius:var(--radius); overflow:hidden; background:#0f1013;
+      border:1px solid rgba(255,255,255,.06); box-shadow:var(--shadow); isolation:isolate;
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .card:hover{ transform:translateY(-2px); border-color:rgba(255,255,255,.12); box-shadow:0 14px 36px rgba(0,0,0,.6); }
+    .thumb{ aspect-ratio: 4/3; width:100%; object-fit:cover; display:block; filter:saturate(1.02) contrast(1.06); transition:transform .35s ease, opacity .2s ease; }
+    .card:hover .thumb{ transform:scale(1.03); }
+    .badge{
+      position:absolute; top:10px; left:10px; z-index:2; background:rgba(0,0,0,.55); color:#fff; font-size:11px; letter-spacing:.4px;
+      padding:6px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.18); text-transform:uppercase;
+    }
+    .meta{
+      padding:10px 12px; font-size:13px; color:var(--muted); display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
+    }
+    .meta-title{ color:var(--text); font-weight:600; }
+    .cta{
+      display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--muted);
+      padding:6px 8px; border-radius:8px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02);
+      transition: background var(--t), color var(--t), transform var(--t);
+    }
+    .cta:hover{ background:var(--accent); color:#111; transform:translateY(-1px); }
+
+    /* Hidden section state */
+    .section[data-hidden="true"]{ display:none; }
+
+    /* Utilities */
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* =====================================
+                 BACK TO TOP
+    ====================================== */
+    .back-to-top{
+      position: fixed; right: 18px; bottom: 18px; z-index: 70; display: none;
+      align-items: center; gap: 8px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+      color: var(--text); padding: 10px 12px; font-size: 13px; cursor: pointer; box-shadow: 0 10px 24px rgba(0,0,0,.5);
+    }
+    .back-to-top.show{ display:inline-flex; }
+
+    /* =====================================
+                 FOOTER (simple)
+    ====================================== */
+    footer.site-footer{ background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.015)); border-top:1px solid rgba(255,255,255,.05); margin-top: 34px; }
+    .footer-inner{ max-width:var(--maxw); margin:0 auto; padding: 28px; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <!-- =========================
+      NAVBAR
+  ========================== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <div class="logo" aria-hidden="false">
+        <a href="../" aria-label="Home">
+          <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="PT Kusuma Sarana Dedikasi Logo" onerror="this.style.display='none'"/>
+        </a>
+        <div>
+          <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+          <div style="font-size:11px;color:var(--muted)">Quality Distribution Solutions</div>
+        </div>
+      </div>
+
+      <div class="nav-actions" role="navigation">
+        <button class="hamburger" aria-expanded="false" aria-controls="main-menu" title="Open menu" onclick="toggleMobileMenu(this)">☰</button>
+
+        <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+          <a role="menuitem" href="../">Home</a>
+          <a role="menuitem" href="../about-us/">About Us</a>
+
+          <!-- Products dropdown -->
+          <div class="dropdown" id="productsDropdown">
+            <!-- Desktop: navigate; Mobile: toggle submenu -->
+            <a class="menu-link" href="../products/" aria-haspopup="true" aria-expanded="false" onclick="onProductsClick(event)">
+              Products <span class="caret">▾</span>
+            </a>
+            <div class="submenu" role="menu" aria-label="Products submenu">
+              <a role="menuitem" href="#consumables">Consumables</a>
+              <a role="menuitem" href="#safety-equipment">Safety Equipment</a>
+              <a role="menuitem" href="#technical-tools">Technical Tools</a>
+              <a role="menuitem" href="#building-materials">Building Materials</a>
+              <a role="menuitem" href="#electronics">Electronics</a>
+              <a role="menuitem" href="#it-communications">IT & Communications</a>
+              <a role="menuitem" href="#office-stationery">Office Stationery (ATK)</a>
+              <a role="menuitem" href="#stainless-steel-fabrication">Stainless-Steel Fabrication</a>
+            </div>
+          </div>
+
+          <a role="menuitem" href="../customers/">Customers</a>
+          <a role="menuitem" href="../gallery/">Gallery</a>
+          <a role="menuitem" href="../contact/">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================
+      HERO
+  ========================== -->
+  <header class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumbs">
+        <a href="../">Home</a> <span>›</span> <strong>Products</strong>
+      </nav>
+      <div class="hero-head">
+        <div>
+          <h1 class="hero-title">Products</h1>
+          <p class="hero-sub">Spec-guided supply across industrial, construction, and corporate needs—curated for reliable operations and clear coordination.</p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls" role="region" aria-label="Products controls">
+        <div class="searchbar" role="search">
+          🔎
+          <input id="prodSearch" type="search" placeholder="Search products… (e.g., gloves, drill, cable ties)" aria-label="Search products" autocomplete="off">
+        </div>
+        <div class="chips mono" aria-label="Filter categories" role="tablist">
+          <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="chip" data-filter="consumables" role="tab">Consumables</button>
+          <button class="chip" data-filter="safety-equipment" role="tab">Safety</button>
+          <button class="chip" data-filter="technical-tools" role="tab">Technical Tools</button>
+          <button class="chip" data-filter="building-materials" role="tab">Building</button>
+          <button class="chip" data-filter="electronics" role="tab">Electronics</button>
+          <button class="chip" data-filter="it-communications" role="tab">IT & Comms</button>
+          <button class="chip" data-filter="office-stationery" role="tab">ATK</button>
+          <button class="chip" data-filter="stainless-steel-fabrication" role="tab">Stainless</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================
+      SECTIONS
+  ========================== -->
+  <main id="content">
+
+    <!-- ========== Consumables ========= -->
+    <section id="consumables" class="section" data-section="consumables">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Consumables</h2>
+          <div class="mono muted">Adhesives, tapes, abrasives, fasteners</div>
+        </div>
+
+        <div class="grid">
+          <!-- Sample Cards -->
+          <article class="card" data-cat="consumables" data-title="Industrial Cable Ties UV-Resistant">
+            <span class="badge">Consumables</span>
+            <a href="./consumables/cable-ties.html">
+              <img class="thumb" loading="lazy" src="../assets/products/consumables/cable-ties.webp" alt="Industrial Cable Ties" onerror="this.style.display='none'">
+              <div class="meta">
+                <div class="meta-title">Industrial Cable Ties (UV)</div>
+                <span class="cta">View →</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="consumables" data-title="Double-Sided Industrial Tape Acrylic">
+            <span class="badge">Consumables</span>
+            <a href="./consumables/double-sided-tape.html">
+              <img class="thumb" loading="lazy" src="../assets/products/consumables/double-tape.webp" alt="Double-Sided Industrial Tape" onerror="this.style.display='none'">
+              <div class="meta">
+                <div class="meta-title">Double-Sided Industrial Tape</div>
+                <span class="cta">View →</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="consumables" data-title="Abrasive Flap Disc Stainless">
+            <span class="badge">Consumables</span>
+            <a href="./consumables/flap-disc.html">
+              <img class="thumb" loading="lazy" src="../assets/products/consumables/flap-disc.webp" alt="Abrasive Flap Disc" onerror="this.style.display='none'">
+              <div class="meta">
+                <div class="meta-title">Abrasive Flap Disc</div>
+                <span class="cta">View →</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Safety Equipment ========= -->
+    <section id="safety-equipment" class="section" data-section="safety-equipment">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Safety Equipment</h2>
+          <div class="mono muted">PPE for site & factory compliance</div>
+        </div>
+
+        <div class="grid">
+          <article class="card" data-cat="safety-equipment" data-title="Nitrile Coated Safety Gloves">
+            <span class="badge">Safety</span>
+            <a href="./safety/gloves-nitrile.html">
+              <img class="thumb" loading="lazy" src="../assets/products/safety/gloves-nitrile.webp" alt="Safety Gloves" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Nitrile Coated Gloves</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="safety-equipment" data-title="Industrial Safety Helmet ABS Class E">
+            <span class="badge">Safety</span>
+            <a href="./safety/safety-helmet.html">
+              <img class="thumb" loading="lazy" src="../assets/products/safety/helmet.webp" alt="Safety Helmet" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Safety Helmet ABS</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="safety-equipment" data-title="Safety Shoes Steel Toe">
+            <span class="badge">Safety</span>
+            <a href="./safety/safety-shoes.html">
+              <img class="thumb" loading="lazy" src="../assets/products/safety/shoes.webp" alt="Safety Shoes" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Safety Shoes (Steel Toe)</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Technical Tools ========= -->
+    <section id="technical-tools" class="section" data-section="technical-tools">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Technical Tools</h2>
+          <div class="mono muted">Hand & power tools for maintenance</div>
+        </div>
+
+        <div class="grid">
+          <article class="card" data-cat="technical-tools" data-title="Cordless Impact Wrench 1/2 inch">
+            <span class="badge">Tools</span>
+            <a href="./tools/impact-wrench.html">
+              <img class="thumb" loading="lazy" src="../assets/products/tools/impact-wrench.webp" alt="Impact Wrench" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Cordless Impact Wrench</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="technical-tools" data-title="Adjustable Wrench Chrome Vanadium">
+            <span class="badge">Tools</span>
+            <a href="./tools/adjustable-wrench.html">
+              <img class="thumb" loading="lazy" src="../assets/products/tools/adjustable-wrench.webp" alt="Adjustable Wrench" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Adjustable Wrench</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="technical-tools" data-title="Digital Caliper IP54 150mm">
+            <span class="badge">Tools</span>
+            <a href="./tools/digital-caliper.html">
+              <img class="thumb" loading="lazy" src="../assets/products/tools/digital-caliper.webp" alt="Digital Caliper" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Digital Caliper 150mm</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Building Materials ========= -->
+    <section id="building-materials" class="section" data-section="building-materials">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Building Materials</h2>
+          <div class="mono muted">Site-ready materials & fittings</div>
+        </div>
+
+        <div class="grid">
+          <article class="card" data-cat="building-materials" data-title="PVC Pipe & Fittings Schedule 40">
+            <span class="badge">Building</span>
+            <a href="./building/pvc-pipe.html">
+              <img class="thumb" loading="lazy" src="../assets/products/building/pvc-pipe.webp" alt="PVC Pipe" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">PVC Pipe & Fittings</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="building-materials" data-title="Galvanized Steel Grating">
+            <span class="badge">Building</span>
+            <a href="./building/steel-grating.html">
+              <img class="thumb" loading="lazy" src="../assets/products/building/steel-grating.webp" alt="Steel Grating" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Steel Grating</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="building-materials" data-title="Cement Board Water Resistant">
+            <span class="badge">Building</span>
+            <a href="./building/cement-board.html">
+              <img class="thumb" loading="lazy" src="../assets/products/building/cement-board.webp" alt="Cement Board" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Cement Board</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Electronics ========= -->
+    <section id="electronics" class="section" data-section="electronics">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Electronics</h2>
+          <div class="mono muted">Electrical & low-voltage components</div>
+        </div>
+
+        <div class="grid">
+          <article class="card" data-cat="electronics" data-title="LED High Bay Light IP65">
+            <span class="badge">Electronics</span>
+            <a href="./electronics/led-highbay.html">
+              <img class="thumb" loading="lazy" src="../assets/products/electronics/led-highbay.webp" alt="LED High Bay" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">LED High Bay IP65</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="electronics" data-title="Industrial Extension Cord Reel">
+            <span class="badge">Electronics</span>
+            <a href="./electronics/extension-reel.html">
+              <img class="thumb" loading="lazy" src="../assets/products/electronics/extension-reel.webp" alt="Extension Reel" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Extension Cord Reel</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="electronics" data-title="Surge Protector 6-Outlet">
+            <span class="badge">Electronics</span>
+            <a href="./electronics/surge-protector.html">
+              <img class="thumb" loading="lazy" src="../assets/products/electronics/surge-protector.webp" alt="Surge Protector" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Surge Protector 6-Outlet</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== IT & Communications ========= -->
+    <section id="it-communications" class="section" data-section="it-communications">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">IT & Communications</h2>
+          <div class="mono muted">Networking & device essentials</div>
+        </div>
+
+        <div class="grid">
+          <article class="card" data-cat="it-communications" data-title="Cat6 UTP Network Cable Solid Copper">
+            <span class="badge">IT & Comms</span>
+            <a href="./it/cat6-cable.html">
+              <img class="thumb" loading="lazy" src="../assets/products/it/cat6.webp" alt="Cat6 Cable" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Cat6 UTP Cable</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="it-communications" data-title="RJ45 Modular Plug Shielded">
+            <span class="badge">IT & Comms</span>
+            <a href="./it/rj45-plug.html">
+              <img class="thumb" loading="lazy" src="../assets/products/it/rj45.webp" alt="RJ45 Plug" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">RJ45 Modular Plug</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="it-communications" data-title="Wireless Access Point Dual-Band">
+            <span class="badge">IT & Comms</span>
+            <a href="./it/wireless-ap.html">
+              <img class="thumb" loading="lazy" src="../assets/products/it/wap.webp" alt="Wireless Access Point" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Wireless Access Point</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Office Stationery (ATK) ========= -->
+    <section id="office-stationery" class="section" data-section="office-stationery">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Office Stationery (ATK)</h2>
+          <div class="mono muted">Daily office supply essentials</div>
+        </div>
+
+        <div class="grid">
+          <article class="card" data-cat="office-stationery" data-title="A4 Copy Paper 80 gsm">
+            <span class="badge">ATK</span>
+            <a href="./atk/a4-paper.html">
+              <img class="thumb" loading="lazy" src="../assets/products/atk/a4-paper.webp" alt="A4 Copy Paper" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">A4 Copy Paper 80gsm</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="office-stationery" data-title="Whiteboard Marker Low-Odor">
+            <span class="badge">ATK</span>
+            <a href="./atk/whiteboard-marker.html">
+              <img class="thumb" loading="lazy" src="../assets/products/atk/marker.webp" alt="Whiteboard Marker" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Whiteboard Marker</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="office-stationery" data-title="Stapler Heavy-Duty 100 Sheets">
+            <span class="badge">ATK</span>
+            <a href="./atk/stapler-heavy-duty.html">
+              <img class="thumb" loading="lazy" src="../assets/products/atk/stapler.webp" alt="Heavy Duty Stapler" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Heavy-Duty Stapler</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Stainless-Steel Fabrication ========= -->
+    <section id="stainless-steel-fabrication" class="section" data-section="stainless-steel-fabrication">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Stainless-Steel Fabrication</h2>
+          <div class="mono muted">Custom build to spec (SUS 304/316)</div>
+        </div>
+
+        <div class="grid">
+          <article class="card" data-cat="stainless-steel-fabrication" data-title="Stainless Scrub Station SUS304">
+            <span class="badge">Stainless</span>
+            <a href="./stainless/scrub-station.html">
+              <img class="thumb" loading="lazy" src="../assets/products/stainless/scrub-station.webp" alt="Stainless Scrub Station" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Scrub Station SUS304</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="stainless-steel-fabrication" data-title="Custom Pass Box Cleanroom">
+            <span class="badge">Stainless</span>
+            <a href="./stainless/pass-box.html">
+              <img class="thumb" loading="lazy" src="../assets/products/stainless/passbox.webp" alt="Pass Box" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Custom Pass Box</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+
+          <article class="card" data-cat="stainless-steel-fabrication" data-title="Stainless Workbench With Backsplash">
+            <span class="badge">Stainless</span>
+            <a href="./stainless/workbench.html">
+              <img class="thumb" loading="lazy" src="../assets/products/stainless/workbench.webp" alt="Stainless Workbench" onerror="this.style.display='none'">
+              <div class="meta"><div class="meta-title">Stainless Workbench</div><span class="cta">View →</span></div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:16px;height:16px">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Top
+  </button>
+
+  <!-- =========================
+      FOOTER (simple)
+  ========================== -->
+  <footer class="site-footer" aria-label="Website footer">
+    <div class="footer-inner mono">
+      © <span id="year"></span> PT Kusuma Sarana Dedikasi — All rights reserved.
+    </div>
+  </footer>
+
+  <!-- =========================
+      SCRIPTS
+  ========================== -->
+  <script>
+    /* --- Sticky navbar state / elevation --- */
+    (function(){
+      const navbar = document.querySelector('.navbar');
+      const onScroll = () => {
+        const scrolled = window.scrollY > 2;
+        navbar.classList.toggle('scrolled', scrolled);
+        navbar.style.boxShadow = scrolled ? '0 8px 30px rgba(0,0,0,.6)' : 'none';
+      };
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+    })();
+
+    /* --- Toggle mobile menu --- */
+    function toggleMobileMenu(btn){
+      const menu = document.getElementById('main-menu');
+      const opened = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      document.body.classList.toggle('menu-open', opened);
+
+      if(!opened){
+        document.querySelectorAll('.dropdown.open').forEach(dd=>{
+          dd.classList.remove('open');
+          const sm = dd.querySelector('.submenu'); if(sm) sm.style.maxHeight = '0px';
+          const tg = dd.querySelector('.menu-link'); if(tg) tg.setAttribute('aria-expanded','false');
+        });
+      }
+    }
+
+    /* --- Products click: mobile accordion / desktop navigate --- */
+    function onProductsClick(e){
+      const isMobile = window.matchMedia('(max-width:880px)').matches;
+      const dd = document.getElementById('productsDropdown');
+      const trigger = dd.querySelector('.menu-link');
+      const submenu = dd.querySelector('.submenu');
+
+      if(isMobile){
+        e.preventDefault();
+
+        // close others
+        document.querySelectorAll('.dropdown.open').forEach(other=>{
+          if(other !== dd){
+            other.classList.remove('open');
+            const sm = other.querySelector('.submenu'); if(sm) sm.style.maxHeight = '0px';
+            const tg = other.querySelector('.menu-link'); if(tg) tg.setAttribute('aria-expanded','false');
+          }
+        });
+
+        const willOpen = !dd.classList.contains('open');
+        dd.classList.toggle('open', willOpen);
+        trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        submenu.style.maxHeight = willOpen ? submenu.scrollHeight + 'px' : '0px';
+        e.stopPropagation();
+      }
+    }
+
+    /* --- Desktop hover open/close with delay --- */
+    (function(){
+      const dd = document.getElementById('productsDropdown');
+      if(!dd) return;
+      const canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+      if(!canHover) return;
+
+      let hideTimer;
+      const open = () => { clearTimeout(hideTimer); dd.classList.add('open'); };
+      const close = () => { hideTimer = setTimeout(() => dd.classList.remove('open'), 5000); };
+
+      dd.addEventListener('mouseenter', open);
+      dd.addEventListener('mouseleave', close);
+      dd.addEventListener('focusin', open);
+      dd.addEventListener('focusout', () => {
+        hideTimer = setTimeout(() => dd.classList.remove('open'), 260);
+      });
+    })();
+
+    /* =========================================
+       PRODUCTS — search + filter + auto-hide section
+    ========================================== */
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const searchInput = document.getElementById('prodSearch');
+    const sections = Array.from(document.querySelectorAll('section.section'));
+    const allCards = Array.from(document.querySelectorAll('.card'));
+
+    function applyFilter(){
+      const active = chips.find(c => c.classList.contains('active'))?.dataset.filter || 'all';
+      const q = (searchInput.value || '').trim().toLowerCase();
+
+      // 1) Show/hide cards
+      allCards.forEach(card => {
+        const cat = card.dataset.cat;
+        const title = (card.dataset.title || '').toLowerCase();
+        const matchCat = (active === 'all') || (cat === active);
+        const matchText = !q || title.includes(q);
+        card.style.display = (matchCat && matchText) ? '' : 'none';
+      });
+
+      // 2) Hide empty sections
+      sections.forEach(sec => {
+        const cards = Array.from(sec.querySelectorAll('.card'));
+        const anyVisible = cards.some(c => c.style.display !== 'none');
+        sec.dataset.hidden = anyVisible ? 'false' : 'true';
+      });
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        chips.forEach(c => c.setAttribute('aria-selected', c.classList.contains('active') ? 'true':'false'));
+        applyFilter();
+
+        // if a specific category was chosen, scroll to the first visible section
+        const cat = chip.dataset.filter;
+        if(cat !== 'all'){
+          const targetSection = document.querySelector(`section[data-section="${cat}"]`);
+          if(targetSection && targetSection.dataset.hidden !== 'true'){
+            targetSection.scrollIntoView({ behavior:'smooth', block:'start' });
+          }
+        }
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilter);
+
+    // On load
+    applyFilter();
+
+    /* Back to top */
+    const backTopBtn = document.getElementById('backToTop');
+    if (backTopBtn) {
+      window.addEventListener('scroll', () => {
+        const shouldShow = window.scrollY > 280;
+        backTopBtn.classList.toggle('show', shouldShow);
+      }, {passive:true});
+      backTopBtn.addEventListener('click', () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+    }
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
