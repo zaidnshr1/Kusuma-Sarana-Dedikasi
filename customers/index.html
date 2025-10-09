@@ -73,68 +73,47 @@
     }
     a{ color:inherit; text-decoration:none; }
     .container{ max-width:var(--maxw); margin:0 auto; padding:28px; }
-
-    /* Navbar */
-    nav.navbar{
-      --nav-h:64px;
-      position:sticky; top:0; z-index:60;
-      backdrop-filter: blur(6px);
-      background: transparent;
-      border-bottom:1px solid rgba(255,255,255,.05);
-    }
-    nav.navbar.scrolled{
-      background: rgba(11,11,13,.60);
-      border-bottom:1px solid rgba(255,255,255,.05);
-      backdrop-filter: blur(8px);
-    }
-    .nav-inner{
-      min-height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px;
-      max-width:var(--maxw); margin:0 auto; padding:10px 20px;
-    }
-    .logo{ display:flex; align-items:center; gap:12px; }
-    .logo img{ max-height:52px; width:auto; display:block; }
-    .brand-title{ font-weight:700; letter-spacing:.6px; color:var(--muted); font-size:13px; }
-    .nav-actions{ display:flex; align-items:center; gap:18px; }
-    .menu{ display:flex; gap:24px; align-items:center; font-family:"Share Tech Mono"; }
-    .menu a,.menu .menu-link{
-      color:var(--muted); border:0; background:none; font-size:13px; padding:8px; cursor:pointer;
-      text-transform:uppercase; letter-spacing:1px;
-    }
-    .menu a:hover,.menu .menu-link:hover{ color:var(--text); transform:translateY(-1px); }
-    .dropdown{ position:relative; }
-    .caret{ margin-left:6px; font-size:11px; opacity:.9; transition: transform var(--t); }
-    .submenu{
-      position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
-      top:calc(100% + 10px); min-width:260px; background:var(--glass);
-      border-radius:10px; padding:8px; border:1px solid rgba(255,255,255,.06);
-      box-shadow:0 10px 30px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:6px;
-      opacity:0; pointer-events:none; transition:opacity 160ms ease, transform 160ms ease;
-    }
-    @media (hover:hover) and (pointer:fine){.dropdown:hover .submenu{opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);}}
-    .submenu a{ padding:10px 12px; border-radius:8px; color:var(--muted); font-size:13px; }
-    .submenu a:hover{ background:rgba(255,255,255,.02); color:var(--text); }
-    .hamburger{ display:none; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
-
-    @media (max-width:880px){
-      .menu{
-        display:none; position:fixed; inset:var(--nav-h) 0 auto 0;
-        background:rgba(11,11,13,1);
-        padding:18px; display:none; flex-direction:column; gap:8px;
-        border-top:1px solid rgba(255,255,255,.06);
-        max-height:calc(100dvh - var(--nav-h)); overflow:auto;
+    .btn{
+        display:inline-flex; gap:10px; align-items:center; justify-content:center;
+        background:linear-gradient(90deg, var(--accent), #ff6a00); color:#0b0b0b;
+        border:0; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer;
+        box-shadow:0 8px 20px rgba(255,138,0,.12); transition: transform var(--transition), filter var(--transition);
       }
-      .menu.open{ display:flex; }
-      .hamburger{ display:block; }
-      body.menu-open{ overflow:hidden; }
-      .dropdown .submenu{
-        position:static !important; box-shadow:none; border:0; background:transparent;
-        padding-left:10px; display:block; max-height:0; overflow:hidden;
-        transition:max-height 220ms ease; width:100%; margin-top:6px;
+      .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+      .btn[disabled]{ opacity:.6; cursor:not-allowed; transform:none; }
+
+    /* =====================================
+                  NAVBAR
+      ====================================== */
+      nav.navbar{--nav-h:64px;position:sticky;top:0;z-index:60;backdrop-filter:blur(6px);background:transparent;border-bottom:1px solid rgba(255,255,255,.05)}
+      nav.navbar.scrolled{background:rgba(11,11,13,.60);border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+      .nav-inner{min-height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:var(--maxw);margin:0 auto;padding:10px 20px}
+      .logo{display:flex;align-items:center;gap:12px}
+      .logo img{max-height:52px;width:auto;display:block}
+      .brand-title{font-weight:700;letter-spacing:.6px;color:var(--muted);font-size:13px}
+      .nav-actions{display:flex;align-items:center;gap:18px}
+      .menu{display:flex;gap:24px;align-items:center;font-family:"Share Tech Mono"}
+      .menu a,.menu .menu-link{color:var(--muted);border:0;background:none;font-size:13px;padding:8px;cursor:pointer;text-transform:uppercase;letter-spacing:1px}
+      .menu a:hover,.menu .menu-link:hover{color:var(--text);transform:translateY(-1px)}
+      .dropdown{position:relative}
+      .caret{margin-left:6px;font-size:11px;opacity:.9;transition:transform var(--t)}
+      .submenu{position:absolute;left:50%;transform:translateX(-50%) translateY(6px);top:calc(100% + 10px);min-width:260px;background:var(--glass);border-radius:10px;padding:8px;border:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:6px;opacity:0;pointer-events:none;transition:opacity 160ms ease,transform 160ms ease}
+      @media (hover:hover) and (pointer:fine){.dropdown:hover .submenu{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}}
+      .submenu a{padding:10px 12px;border-radius:8px;color:var(--muted);font-size:13px}
+      .submenu a:hover{background:rgba(255,255,255,.02);color:var(--text)}
+      .hamburger{display:none;background:none;border:0;color:var(--muted);font-size:22px;padding:8px;cursor:pointer}
+      @media (max-width:880px){
+      .menu{display:none;position:fixed;inset:var(--nav-h) 0 auto 0;background:rgba(11,11,13,1);padding:18px;flex-direction:column;gap:8px;border-top:1px solid rgba(255,255,255,.06);max-height:calc(100dvh - var(--nav-h));overflow:auto;-webkit-overflow-scrolling:touch}
+      .menu.open{display:flex}
+      .hamburger{display:block}
+      body.menu-open{overflow:hidden}
+      .dropdown .submenu{position:static!important;box-shadow:none;border:0;background:transparent;display:block;width:100%;max-height:0;overflow:hidden;opacity:0;pointer-events:none;margin:0;padding:0 0 0 10px;transition:max-height 220ms var(--ease),opacity 120ms ease;transform:none!important}
+      .dropdown.open .submenu{max-height:600px;opacity:1;pointer-events:auto;padding-top:6px}
+      .dropdown.open .caret{transform:rotate(180deg)}
+      .menu a,.menu .menu-link{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 10px;line-height:1.2;gap:10px}
+      .menu .dropdown{display:flex;flex-direction:column;width:100%}
+      .menu .menu-link .caret{margin-left:auto;display:inline-block;line-height:1;transform-origin:center}
       }
-      .dropdown.open .submenu{ max-height:400px; }
-      .dropdown.open .caret{ transform:rotate(180deg); }
-      nav.navbar, .submenu, .caret, .menu a, .menu .menu-link{ transition:none !important; }
-    }
 
     /* Main Content */
     main {
@@ -194,52 +173,6 @@
       transform: scale(1.05);
     }
 
-    .back-to-top {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 70;
-      display: none; /* Initially hidden */
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
-      color: var(--text);
-      padding: 10px 12px;
-      font-size: 13px;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
-    }
-    .back-to-top svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    /* Footer */
-    footer.site-footer{
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.015));
-      border-top:1px solid rgba(255,255,255,.05); margin-top:40px;
-    }
-    .footer-inner{ max-width:var(--maxw); margin:0 auto; padding:34px 28px 18px; }
-    .footer-grid{ display:grid; grid-template-columns:2fr 1.2fr 1.2fr 1.6fr; gap:28px; }
-    .footer-col h4{ margin:0 0 12px; font-size:14px; letter-spacing:.6px; text-transform:uppercase; color:var(--muted); font-weight:700; }
-    .footer-brand{ display:flex; gap:14px; align-items:center; margin-bottom:12px; }
-    .footer-brand img{ height:44px; width:auto; display:block; }
-    .footer-brand .name{ font-weight:700; color:var(--text); letter-spacing:.5px; }
-    .footer-text{ color:var(--muted); font-size:13px; line-height:1.7; }
-    .footer-links{ display:flex; flex-direction:column; gap:8px; }
-    .footer-links a{ color:var(--muted); font-size:13px; display:inline-flex; align-items:center; gap:8px; transition: color var(--t), transform var(--t); }
-    .footer-links a:hover{ color:var(--text); transform: translateX(2px); }
-    .footer-contact{ display:flex; flex-direction:column; gap:10px; }
-    .footer-contact .item{ display:flex; gap:10px; align-items:flex-start; color:var(--muted); font-size:13px; }
-    .footer-contact svg {
-      width: 18px;
-      height: 18px;
-      opacity: 0.9;
-      flex: 0 0 18px;
-    }
-    .footer-meta{ display:flex; justify-content:space-between; align-items:center; gap:16px; border-top:1px solid rgba(255,255,255,.05); margin-top:22px; padding-top:14px; color:var(--muted); font-size:12px; }    
     @media (max-width: 768px) {
       .logo-grid {
         grid-template-columns: 1fr 1fr;
@@ -254,49 +187,60 @@
         transform: translateY(0);
       }
     }
-
+    /* =====================================
+                FOOTER
+      ====================================== */
+      footer.site-footer{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.015));border-top:1px solid rgba(255,255,255,.05);margin-top:40px}.footer-inner{max-width:var(--maxw);margin:0 auto;padding:34px 28px 18px}.footer-grid{display:grid;grid-template-columns:2fr 1.2fr 1.2fr 1.6fr;gap:28px}.footer-col h4{margin:0 0 12px;font-size:14px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);font-weight:700}.footer-brand{display:flex;gap:14px;align-items:center;margin-bottom:12px}.footer-brand img{height:44px;width:auto;display:block}.footer-brand .name{font-weight:700;color:var(--text);letter-spacing:.5px}.footer-text{color:var(--muted);font-size:13px;line-height:1.7}.footer-links{display:flex;flex-direction:column;gap:8px}.footer-links a{color:var(--muted);font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:color var(--transition),transform var(--transition)}.footer-links a:hover{color:var(--text);transform:translateX(2px)}.footer-contact{display:flex;flex-direction:column;gap:10px}.footer-contact .item{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:13px}.footer-contact svg{width:18px;height:18px;opacity:.9;flex:0 0 18px}.newsletter{display:flex;gap:8px;align-items:center;margin-top:6px}.newsletter input{flex:1;background:rgba(255,255,255,.02);color:var(--text);border:1px solid rgba(255,255,255,.05);padding:10px 12px;border-radius:10px;font-size:13px}.newsletter input::placeholder{color:rgba(255,255,255,.35)}.newsletter button{padding:10px 14px}.footer-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid rgba(255,255,255,.05);margin-top:22px;padding-top:14px;color:var(--muted);font-size:12px}.footer-social{display:flex;gap:10px}.footer-social a{display:inline-flex;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,.06)}.footer-social a:hover{background:rgba(255,255,255,.03)}.back-to-top{position:fixed;right:18px;bottom:18px;z-index:70;display:none;align-items:center;gap:8px;border-radius:999px;border:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));color:var(--text);padding:10px 12px;font-size:13px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.5)}.back-to-top.show{display:inline-flex}.back-to-top svg{width:16px;height:16px}@media (max-width:980px){.footer-grid{grid-template-columns:1.6fr 1fr 1fr}}@media (max-width:720px){.footer-grid{grid-template-columns:1fr}.footer-meta{flex-direction:column;align-items:flex-start}}.footer-contact.footer-contact-compact{gap:16px}.footer-contact .contact-top{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}.footer-contact .mini{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:13px}.footer-contact .mini svg{width:16px;height:16px;flex:0 0 16px;opacity:.9}.footer-contact .loc-head{margin-top:4px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;border-top:1px solid rgba(255,255,255,.05);padding-top:10px}.footer-contact .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 16px}.footer-contact .loc-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:12.5px;line-height:1.55}.footer-contact .loc-card .label{color:var(--text);font-weight:700;font-size:12.5px;margin-bottom:4px}.footer-contact .wa-link{text-decoration:none}.footer-contact .wa-ico{color:#25D366}@media (max-width:1100px){.footer-contact .loc-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width:720px){.footer-contact .contact-top{grid-template-columns:1fr}.footer-contact .loc-grid{grid-template-columns:1fr}}.footer-locations-bar{border-top:1px solid rgba(255,255,255,.08);margin-top:30px;padding-top:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:13px;line-height:1.5}.footer-locations-bar .loc{flex:1 1 30%;min-width:220px}.footer-locations-bar .loc strong{display:block;font-weight:600;color:var(--text);margin-bottom:2px}@media (max-width:900px){.footer-locations-bar{flex-direction:column;gap:10px}}.footer-contact .mini.inline{display:flex;align-items:center;gap:8px}.footer-contact .mini.inline strong{margin-right:6px}.footer-contact .mini.inline .value{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media (max-width:720px){.footer-contact .mini.inline .value{white-space:normal}}
   </style>
 </head>
 <body>
-
-  <nav class="navbar" aria-label="Main navigation">
-    <div class="nav-inner">
-      <div class="logo">
-        <a href="../" aria-label="Home">
-          <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="PT Kusuma Sarana Dedikasi Logo" onerror="this.style.display='none'"/>
-        </a>
-        <div>
-          <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
-          <div style="font-size:11px;color:var(--muted)">Quality Distribution Solutions</div>
-        </div>
-      </div>
-      <div class="nav-actions" role="navigation">
-        <button class="hamburger" aria-expanded="false" aria-controls="main-menu" title="Open menu" onclick="toggleMobileMenu(this)">☰</button>
-        <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
-          <a role="menuitem" href="../">Home</a>
-          <a role="menuitem" href="../about-us/">About Us</a>
-          <div class="dropdown" id="productsDropdown">
-            <a class="menu-link" href="../products/" aria-haspopup="true" aria-expanded="false" onclick="onProductsClick(event)">
-              Products <span class="caret">▾</span>
+    <!-- =========================
+        NAVBAR
+    ========================== -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+        <div class="logo" aria-hidden="false">
+            <a href="../" aria-label="Home">
+            <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="PT Kusuma Sarana Dedikasi Logo" onerror="this.style.display='none'"/>
             </a>
-            <div class="submenu" role="menu" aria-label="Products submenu">
-              <a role="menuitem" href="../products/#consumables">Consumables</a>
-              <a role="menuitem" href="../products/#safety-ppe">Occupational Safety (PPE)</a>
-              <a role="menuitem" href="../products/#technical-tools">Technical Tools & Equipment</a>
-              <a role="menuitem" href="../products/#building-site">Building & Site Materials</a>
-              <a role="menuitem" href="../products/#electrical-electronics">Electrical & Electronics</a>
-              <a role="menuitem" href="../products/#it-comms">IT & Communications</a>
-              <a role="menuitem" href="../products/#office-stationery">Office Stationery (ATK)</a>
-              <a role="menuitem" href="../products/#stainless">Stainless-Steel Products & Fabrication</a>
+            <div>
+            <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+            <div style="font-size:11px;color:var(--muted)">Quality Distribution Solutions</div>
             </div>
-          </div>
-          <a role="menuitem" href="./">Customers</a>
-          <a role="menuitem" href="../gallery/">Gallery</a>
-          <a role="menuitem" href="../contact/">Contact</a>
         </div>
-      </div>
-    </div>
-  </nav>
+
+        <div class="nav-actions" role="navigation">
+            <button class="hamburger" aria-expanded="false" aria-controls="main-menu" title="Open menu" onclick="toggleMobileMenu(this)">☰</button>
+
+            <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+            <a role="menuitem" href="../">Home</a>
+            <a role="menuitem" href="../about-us/">About Us</a>
+
+            <!-- Products dropdown -->
+            <div class="dropdown" id="productsDropdown">
+                <!-- Desktop: navigate; Mobile: toggle submenu -->
+                <a class="menu-link" href="../products/" aria-haspopup="true" aria-expanded="false" onclick="onProductsClick(event)">
+                Products <span class="caret">▾</span>
+                </a>
+                <div class="submenu" role="menu" aria-label="Products submenu">
+                <a role="menuitem" href="#consumables">Consumables</a>
+                <a role="menuitem" href="#safety-equipment">Safety Equipment</a>
+                <a role="menuitem" href="#technical-tools">Technical Tools</a>
+                <a role="menuitem" href="#building-materials">Building Materials</a>
+                <a role="menuitem" href="#electronics">Electronics</a>
+                <a role="menuitem" href="#it-communications">IT & Communications</a>
+                <a role="menuitem" href="#office-stationery">Office Stationery (ATK)</a>
+                <a role="menuitem" href="#stainless-steel-fabrication">Stainless-Steel Fabrication</a>
+                </div>
+            </div>
+
+            <a role="menuitem" href="../customers/">Customers</a>
+            <a role="menuitem" href="../gallery/">Gallery</a>
+            <a role="menuitem" href="../contact/">Contact</a>
+            </div>
+        </div>
+        </div>
+    </nav>
 
   <main id="content">
     <header class="hero">
@@ -315,150 +259,214 @@
     </section>
   </main>
 
-  <footer class="site-footer" aria-label="Website footer">
-    <div class="footer-inner">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="footer-brand">
-            <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="PT Kusuma Sarana Dedikasi Logo" onerror="this.style.display='none'"/>
-            <div>
-              <div class="name" style="font-family:'Montserrat',sans-serif;">PT Kusuma Sarana Dedikasi</div>
-              <div style="font-size:12px;color:var(--muted);font-family:'Montserrat',sans-serif;">Quality Distribution Solutions</div>
+  <!-- ===================================
+        FOOTER
+    ==================================== -->
+    <footer class="site-footer" aria-label="Website footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-brand">
+              <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="Logo Perusahaan PT Kusuma Sarana Dedikasi" onerror="this.style.display='none'"/>
+              <div>
+                <div class="name">PT Kusuma Sarana Dedikasi</div>
+                <div style="font-size: 12px; color: var(--muted)">Quality Distribution Solutions</div>
+              </div>
+            </div>
+            <p class="footer-text" style="font-family: Share Tech Mono">
+              We serve as a trusted distribution partner supporting the needs of office, industrial, construction, and laboratory sectors. With international standards, we deliver added value through superior quality and consistent service.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <nav class="footer-links" aria-label="Footer navigation" style="font-family: Share Tech Mono">
+              <a href="../">Home</a>
+              <a href="../about-us/">About Us</a>
+              <a href="../contact/">Contact</a>
+              <a href="../customers/">Customers</a>
+              <a href="../gallery/">Gallery</a>
+            </nav>
+          </div>
+          <div class="footer-col" style="font-family: Share Tech Mono">
+            <h4>Products</h4>
+            <div class="footer-links">
+              <a href="#">Sealing Elements</a>
+              <a href="#">CNC Machined Seals</a>
+              <a href="#">Hydraulic &amp; Pneumatic Seals</a>
+              <a href="#">O-Rings</a>
+              <a href="#">Custom Gaskets</a>
             </div>
           </div>
-          <p class="footer-text" style="font-family: 'Share Tech Mono'">
-            Trusted distribution partner supporting industrial, construction, and corporate sectors with consistent quality and service.
-          </p>
-        </div>
-        <div class="footer-col" style="font-family: 'Share Tech Mono'">
-          <h4>Navigation</h4>
-          <nav class="footer-links" aria-label="Footer navigation">
-            <a href="../">Home</a>
-            <a href="../about-us/">About Us</a>
-            <a href="./">Customers</a>
-            <a href="../gallery/">Gallery</a>
-            <a href="../contact/">Contact</a>
-          </nav>
-        </div>
-        <div class="footer-col" style="font-family:'Share Tech Mono'">
-          <h4>Products</h4>
-          <div class="footer-links">
-            <a href="../products/#consumables">Consumables</a>
-            <a href="../products/#safety-ppe">Safety & PPE</a>
-            <a href="../products/#technical-tools">Technical Tools</a>
-          </div>
-        </div>
-        <div class="footer-col" style="font-family:'Share Tech Mono'">
-          <h4>Contact Us</h4>
-          <div class="footer-contact">
-            <div class="item">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div>Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi Barat 17136</div>
-            </div>
-            <div class="item">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-              <div>Mon – Fri, 09:00 – 17:00</div>
-            </div>
-            <div class="item">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-              <div><a href="mailto:Sales1.ksd@gmail.com">Sales1.ksd@gmail.com</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-meta">
-        <div style="font-family:'Montserrat',sans-serif;">© <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights reserved.</div>
-      </div>
-    </div>
-  </footer>
+            <div class="footer-contact footer-contact-compact">
+              <!-- Baris atas: ringkas 2 kolom -->
+              <div class="contact-top">
+                <!-- WhatsApp -->
+                <div class="mini inline">
+                  <svg class="wa-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M20 3H4a1 1 0 0 0-1 1v16l4-4h13a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1Z"
+                      stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <strong>WhatsApp</strong>
+                  <a class="wa-link value" href="https://wa.me/6281299988563?text=Halo%20KSD,%20saya%20ingin%20menanyakan%20produk."
+                    target="_blank" rel="noopener">+62 812-9998-8563</a>
+                </div>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Top
-  </button>
+                <!-- Email -->
+                <div class="mini inline">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                  <strong>Email</strong>
+                  <a class="value" href="mailto:Sales1.ksd@gmail.com">Sales1.ksd@gmail.com</a>
+                </div>
+
+                <!-- Jam Operasional -->
+                <div class="mini inline">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                  <strong>Hours</strong>
+                  <span class="value">Mon–Fri 09:00–17:00</span>
+                </div>
+              </div>
+
+              <!-- CTA kecil tetap -->
+              <div class="newsletter" style="margin-top: 6px;">
+                <button class="btn" type="button" onclick="window.location.href='../contact/'" style="font-family: Share Tech Mono">Request a Quote</button>
+              </div>
+            </div>
+        </div>
+        <div class="footer-locations-bar" style="font-family: Share Tech Mono">
+          <div class="loc">
+            <strong>Head Office</strong>
+            Cluster Ubud Blok U39 No.12 RT 004/051, Kel. Bahagia, Kec. Babelan, Bekasi 17610
+          </div>
+          <div class="loc">
+            <strong>Branch Office</strong>
+            Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi Barat 17136
+          </div>
+          <div class="loc">
+            <strong>Workshop</strong>
+            Jl. Kali Jambe No.77, Lambangsari, Tambun Selatan, Kab. Bekasi 17510
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div>© <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights reserved.</div>
+        </div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Top
+    </button>
 
   <script>
-    // helper: tutup semua dropdown
-    function closeAllDropdowns(){
-      document.querySelectorAll('.dropdown.open').forEach(dd=>{
-        dd.classList.remove('open');
-        const trigger = dd.querySelector('.menu-link');
-        if(trigger) trigger.setAttribute('aria-expanded','false');
-      });
-    }
+    /* =================================== */
+       /*               NAVBAR                */
+      /* =================================== */
+      /* --- Sticky navbar state / elevation --- */
+      (function(){
+        const navbar=document.querySelector('.navbar');
+        const onScroll=()=>{const scrolled=window.scrollY>2;
+          navbar.classList.toggle('scrolled',scrolled);
+          navbar.style.boxShadow=scrolled?'0 8px 30px rgba(0,0,0,.6)':'none';
+        };
+        window.addEventListener('scroll',onScroll,{passive:true});
+        onScroll();
+      })();
 
-    // ===== Sticky navbar: aktifkan state "scrolled" + elevasi bayangan =====
-    (function(){
-      const navbar = document.querySelector(".navbar");
-      const onScroll = () => {
-        const scrolled = window.scrollY > 2;
-        navbar.classList.toggle("scrolled", scrolled);
-      };
-      window.addEventListener("scroll", onScroll, { passive:true });
-      onScroll(); // set initial
-    })();
-
-    // Mobile menu toggle
-    function toggleMobileMenu(btn){
-      const menu = document.getElementById("main-menu");
-      const opened = menu.classList.toggle("open");
-      btn.setAttribute("aria-expanded", opened ? "true" : "false");
-      document.body.classList.toggle("menu-open", opened);
-      if(!opened){ closeAllDropdowns(); }
-    }
-
-    // Products click di mobile -> accordion
-    function onProductsClick(e){
-      const isMobile = window.matchMedia("(max-width:880px)").matches;
-      const dd = document.getElementById("productsDropdown");
-      const trigger = dd.querySelector(".menu-link");
-
-      if(isMobile){
-        e.preventDefault();
-        // tutup dropdown lain dulu
-        document.querySelectorAll('.dropdown.open').forEach(other=>{
-          if(other !== dd){ other.classList.remove('open'); }
-        });
-        const willOpen = !dd.classList.contains('open');
-        dd.classList.toggle("open", willOpen);
-        trigger.setAttribute("aria-expanded", willOpen ? "true" : "false");
-        e.stopPropagation();
+      /* --- Toggle mobile menu --- */
+      function toggleMobileMenu(btn){
+        const menu=document.getElementById('main-menu');
+        const opened=menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded',opened?'true':'false');
+        document.body.classList.toggle('menu-open',opened);
+        if(!opened){
+          document.querySelectorAll('.dropdown.open').forEach(dd=>{
+            dd.classList.remove('open');
+            const sm=dd.querySelector('.submenu');if(sm)sm.style.maxHeight='0px';
+            const tg=dd.querySelector('.menu-link');if(tg)tg.setAttribute('aria-expanded','false');
+          });
+        }
       }
-      // desktop: biarkan navigate
-    }
 
-    // Tap di luar untuk menutup submenu (mobile)
-    document.addEventListener('click', function(e){
-      const isMobile = window.matchMedia("(max-width:880px)").matches;
-      if(!isMobile) return;
-      const menu = document.getElementById("main-menu");
-      if(!menu.classList.contains('open')) return;
-      if(!e.target.closest('.dropdown')){ closeAllDropdowns(); }
-    });
+      /* --- Products click: mobile accordion / desktop navigate --- */
+      function onProductsClick(e){
+        const isMobile=window.matchMedia('(max-width:880px)').matches;
+        const dd=document.getElementById('productsDropdown');
+        const trigger=dd.querySelector('.menu-link');
+        const submenu=dd.querySelector('.submenu');
+        if(isMobile){
+          e.preventDefault();
+          document.querySelectorAll('.dropdown.open').forEach(other=>{
+            if(other!==dd){
+              other.classList.remove('open');
+              const sm=other.querySelector('.submenu');if(sm)sm.style.maxHeight='0px';
+              const tg=other.querySelector('.menu-link');if(tg)tg.setAttribute('aria-expanded','false');
+            }
+          });
+          const willOpen=!dd.classList.contains('open');
+          dd.classList.toggle('open',willOpen);
+          trigger.setAttribute('aria-expanded',willOpen?'true':'false');
+          submenu.style.maxHeight=willOpen?submenu.scrollHeight+'px':'0px';
+          e.stopPropagation();
+        }
+      }
 
-    // ===== Footer year + Dynamic Logos (tetap) =====
-    (function(){
-      const y = document.getElementById("year");
-      if(y){ y.textContent = new Date().getFullYear(); }
-      
-      const clientDatabase = [ { name: 'Xuilong', logoUrl: '../assets/logos/Xuilong.png' }, { name: 'Kiantaka', logoUrl: '../assets/logos/Kiantaka.png' }, { name: 'Cilikon', logoUrl: '../assets/logos/Cilikon.png' }, ];
-      const logoContainer = document.getElementById('logo-grid-container');
-      if (logoContainer) { clientDatabase.forEach((client, index) => { const item = document.createElement('div'); item.className = 'logo-item'; const img = document.createElement('img'); img.src = client.logoUrl; img.alt = `Logo ${client.name}`; item.appendChild(img); logoContainer.appendChild(item); item.style.animationDelay = `${index * 100}ms`; }); }
-    })();
+      /* --- Desktop hover open/close with delay --- */
+      (function(){
+        const dd=document.getElementById('productsDropdown');
+        if(!dd)return;
+        const canHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+        if(!canHover)return;
+        let hideTimer;
+        const open=()=>{clearTimeout(hideTimer);dd.classList.add('open');};
+        const close=()=>{hideTimer=setTimeout(()=>dd.classList.remove('open'),5000);};
+        dd.addEventListener('mouseenter',open);
+        dd.addEventListener('mouseleave',close);
+        dd.addEventListener('focusin',open);
+        dd.addEventListener('focusout',()=>{hideTimer=setTimeout(()=>dd.classList.remove('open'),260);});
+      })();
 
-    // Back to top button
-    const backTopBtn = document.getElementById("backToTop");
-    if (backTopBtn) {
-      window.addEventListener("scroll", () => {
-        const shouldShow = window.scrollY > 280;
-        backTopBtn.style.display = shouldShow ? 'inline-flex' : 'none';
-      }, { passive: true });
-      backTopBtn.addEventListener("click", () =>
-        window.scrollTo({ top: 0, behavior: "smooth" })
-      );
-    }
+      /* =====================================
+        KEYBOARD HANDLING (TIDAK DIUBAH)
+      ====================================== */
+      document.addEventListener("keydown",(ev)=>{
+        if(ev.key==="Escape"){
+          const menu=document.getElementById("main-menu");
+          if(menu.classList.contains("open")){
+            menu.classList.remove("open");
+            document.querySelector(".hamburger").setAttribute("aria-expanded","false");
+            document.body.classList.remove("menu-open");
+          }
+          const dropdown=document.getElementById("productsDropdown");
+          if(dropdown.classList.contains("open")) dropdown.classList.remove("open");
+        }
+      });
+      (function(){const handleFirstTab=(e)=>{if(e.key==="Tab"){document.body.classList.add("user-is-tabbing");window.removeEventListener("keydown",handleFirstTab)}};window.addEventListener("keydown",handleFirstTab)})();
+
+    /* =====================================
+        FOOTER YEAR + BACK TO TOP (TIDAK DIUBAH)
+      ====================================== */
+      document.getElementById("year").textContent=new Date().getFullYear();
+      const backTop=document.getElementById("backToTop");
+      window.addEventListener("scroll",()=>{backTop.classList.toggle("show",window.scrollY>280)});
+      backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+      /* =====================================
+        UTIL: Copy address
+      ====================================== */
+      function copyAddress(){
+        const txt = "Cluster Ubud Blok U39 No.12 RT 004/051, Kelurahan Bahagia, Kecamatan Babelan, Kab Bekasi 17610";
+        navigator.clipboard.writeText(txt).then(()=>{
+          showToast();
+        });
+      }
   </script>
 </body>
 </html>
