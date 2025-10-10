@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+    <!-- =========================
+        SEO — Products (KSD)
+    ========================== -->
+    <title>Pen | Office Stationery (ATK) — PT Kusuma Sarana Dedikasi (KSD)</title>
+    <meta name="description" content="High-quality pens for professional and office use. Explore KSD’s reliable stationery supplies including ballpoint pens, gel pens, and fine writing tools for business operations."/>
+    <meta name="keywords" content="KSD pen, office stationery, ballpoint pen, gel pen, fine writing, ATK, office supplies Indonesia, PT Kusuma Sarana Dedikasi, KSD stationery"/>
+    <meta name="robots" content="index,follow,max-image-preview:large"/>
+    <meta name="theme-color" content="#0b0b0d"/>
+    <link rel="canonical" href="https://www.ksd.co.id/products/stationery-pen/"/>
+
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="../../../assets/fav/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/fav/Logo-KSD-Favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/fav/Logo-KSD-Favicon180.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="Pen — Office Stationery by KSD">
+    <meta property="og:description" content="Durable and smooth-writing pens for professional and office environments. Distributed by PT Kusuma Sarana Dedikasi (KSD).">
+    <meta property="og:url" content="https://www.ksd.co.id/products/stationery-pen/">
+    <meta property="og:image" content="https://www.ksd.co.id/assets/products/stationery-pen.webp">
+    <meta property="og:site_name" content="PT Kusuma Sarana Dedikasi (KSD)">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- =========================
+        JSON-LD — ProductPage
+    ========================== -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Office Pen",
+    "image": "https://www.ksd.co.id/assets/products/stationery-pen.webp",
+    "description": "High-quality pens for professional and office use distributed by PT Kusuma Sarana Dedikasi (KSD).",
+    "brand": {
+        "@type": "Organization",
+        "name": "PT Kusuma Sarana Dedikasi (KSD)",
+        "url": "https://www.ksd.co.id/"
+    },
+    "category": "Office Stationery (ATK)",
+    "sku": "PEN-KSD",
+    "url": "https://www.ksd.co.id/products/stationery-pen/"
+    }
+    </script>
+
+    <style>
+        /* =====================================
+                    DESIGN TOKENS
+        ====================================== */
+        :root{
+        --bg:#0b0b0d;
+        --panel:rgba(255,255,255,.04);
+        --glass:rgba(255,255,255,.03);
+        --muted:#bfc3c7;
+        --text:#eaeef2;
+        --accent:#ff8a00;
+        --accent-2:#ff6a00;
+        --ok:#2ecc71;
+        --radius:14px;
+        --maxw:1180px;
+        --ease:cubic-bezier(.2,.9,.3,1);
+        --t:180ms var(--ease);
+        --shadow:0 10px 34px rgba(0,0,0,.55);
+        }
+
+        *{ box-sizing:border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+        html,body{ height:100% }
+        html{ scroll-behavior:smooth; }
+        body{
+        margin:0; background:var(--bg); color:var(--text);
+        font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,"Share Tech Mono",monospace;
+        overflow-x:hidden;
+        }
+        a{ color:inherit; text-decoration:none; }
+        .container{ max-width:var(--maxw); margin:0 auto; padding:28px; }
+
+        .btn{
+        display:inline-flex; gap:10px; align-items:center; justify-content:center;
+        background:linear-gradient(90deg, var(--accent), #ff6a00); color:#0b0b0b;
+        border:0; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer;
+        box-shadow:0 8px 20px rgba(255,138,0,.12); transition: transform var(--transition), filter var(--transition);
+        }
+        .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+        .btn[disabled]{ opacity:.6; cursor:not-allowed; transform:none; }
+
+        /* =====================================
+                    NAVBAR
+        ====================================== */
+        nav.navbar{
+        --nav-h:64px;
+        position:sticky; top:0; z-index:60;
+        backdrop-filter:blur(6px);
+        background:transparent;
+        border-bottom:1px solid rgba(255,255,255,.05);
+        }
+        nav.navbar.scrolled{
+        background:rgba(11,11,13,.60);
+        border-bottom:1px solid rgba(255,255,255,.05);
+        backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+        }
+        .nav-inner{ min-height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:var(--maxw); margin:0 auto; padding:10px 20px; }
+        .logo{ display:flex; align-items:center; gap:12px; }
+        .logo img{ max-height:52px; width:auto; display:block; }
+        .brand-title{ font-weight:700; letter-spacing:.6px; color:var(--muted); font-size:13px; }
+        .nav-actions{ display:flex; align-items:center; gap:18px; }
+        .menu{ display:flex; gap:24px; align-items:center; font-family:"Share Tech Mono"; }
+        .menu a,.menu .menu-link{
+        color:var(--muted); border:0; background:none; font-size:13px; padding:8px; cursor:pointer;
+        text-transform:uppercase; letter-spacing:1px;
+        }
+        .menu a:hover,.menu .menu-link:hover{ color:var(--text); transform:translateY(-1px); }
+        .dropdown{ position:relative; }
+        .caret{ margin-left:6px; font-size:11px; opacity:.9; transition:transform var(--t); }
+        .submenu{
+        position:absolute; left:50%; transform:translateX(-50%) translateY(6px);
+        top:calc(100% + 10px); min-width:260px; background:var(--glass);
+        border-radius:10px; padding:8px; border:1px solid rgba(255,255,255,.06);
+        box-shadow:0 10px 30px rgba(0,0,0,.45);
+        display:flex; flex-direction:column; gap:6px;
+        opacity:0; pointer-events:none;
+        transition:opacity 160ms ease, transform 160ms ease;
+        }
+        @media (hover:hover) and (pointer:fine){
+        .dropdown:hover .submenu{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+        }
+        .submenu a{ padding:10px 12px; border-radius:8px; color:var(--muted); font-size:13px; }
+        .submenu a:hover{ background:rgba(255,255,255,.02); color:var(--text); }
+
+        .hamburger{ display:none; background:none; border:0; color:var(--muted); font-size:22px; padding:8px; cursor:pointer; }
+
+        @media (max-width:880px){
+        .menu{
+            display:none; position:fixed; inset:var(--nav-h) 0 auto 0;
+            background:rgba(11,11,13,1);
+            padding:18px; flex-direction:column; gap:8px;
+            border-top:1px solid rgba(255,255,255,.06);
+            max-height:calc(100dvh - var(--nav-h)); overflow:auto; -webkit-overflow-scrolling:touch;
+        }
+        .menu.open{ display:flex; }
+        .hamburger{ display:block; }
+        body.menu-open{ overflow:hidden; }
+
+        .dropdown .submenu{
+            position:static !important; box-shadow:none; border:0; background:transparent;
+            display:block; width:100%; max-height:0; overflow:hidden; opacity:0; pointer-events:none; margin:0; padding:0 0 0 10px;
+            transition:max-height 220ms var(--ease), opacity 120ms ease; transform:none !important;
+        }
+        .dropdown.open .submenu{ max-height:600px; opacity:1; pointer-events:auto; padding-top:6px; }
+        .dropdown.open .caret{ transform:rotate(180deg); }
+
+        .menu a,.menu .menu-link{ display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px 10px; line-height:1.2; gap:10px; }
+        .menu .dropdown{ display:flex; flex-direction:column; width:100%; }
+        .menu .menu-link .caret{ margin-left:auto; display:inline-block; line-height:1; transform-origin:center; }
+        }
+
+        /* =====================================
+                    PRODUCT STAGE
+        ====================================== */
+        .product-stage{--bgurl:url("../../assets/products/alat-tulis-kantor/Pen-With-Warm-White.png");}
+        .product-stage{position:relative;isolation:isolate;background:var(--bgurl)
+            right 0px top 30%/clamp(340px,42vw,620px) auto no-repeat,radial-gradient(1200px 600px at 20% 10%,rgba(255,255,255,.06),rgba(255,255,255,0) 60%),linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01) 40%,transparent),linear-gradient(180deg,#0b0b0d 0%,#0a0a0c 60%,#09090b 100%);padding:64px 0 42px;overflow:clip}.stage-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:34px;align-items:center}@media(max-width:980px){.stage-grid{grid-template-columns:1fr;gap:28px}}.stage-media{position:relative}.hero-frame{margin:0;aspect-ratio:4/3;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow);overflow:hidden;transform:perspective(1200px) rotateY(-8deg) rotateX(2deg) translateZ(0)}.hero-frame img{width:120%;height:120%;object-fit:contain;object-position:center;transform:translate(-8%,-6%) scale(1.06);filter:drop-shadow(0 30px 60px rgba(0,0,0,.7))}.thumbs{margin-top:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:3px}.thumb{aspect-ratio:1.2/1;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:transform .18s var(--ease),border-color .18s var(--ease)}.thumb:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.12)}.thumb img{width:100%;height:100%;object-fit:contain}.stage-copy{padding:10px}.h-title{margin:0 0 10px;font-size:clamp(26px,3.4vw,40px);letter-spacing:.3px;line-height:1.2}.lead{color:var(--muted);font-size:clamp(14px,1.8vw,16.5px);line-height:1.85;margin:8px 0 18px;max-width:46ch}.cta-row{display:flex;gap:10px;flex-wrap:wrap}.ghost{display:inline-flex;gap:8px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;transition:transform .18s var(--ease),background .18s var(--ease)}.ghost:hover{background:rgba(255,255,255,.04);transform:translateY(-1px)}.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 12px;margin:18px 0 0;padding:0;list-style:none;color:var(--muted);font-family:"Share Tech Mono";font-size:12.5px}@media(max-width:720px){.meta{grid-template-columns:1fr}.lead{max-width:none}}
+        .thumb{cursor:pointer}.thumb.active{border-color:rgba(255,255,255,.22);transform:translateY(-2px)}
+
+        /* =====================================
+                    BACK TO TOP
+        ====================================== */
+        .back-to-top{
+        position: fixed; right: 18px; bottom: 18px; z-index: 70; display: none;
+        align-items: center; gap: 8px; border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+        color: var(--text); padding: 10px 12px; font-size: 13px; cursor: pointer; box-shadow: 0 10px 24px rgba(0,0,0,.5);
+        }
+        .back-to-top.show{ display:inline-flex; }
+
+        /* =====================================
+                FOOTER
+        ====================================== */
+      footer.site-footer{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.015));border-top:1px solid rgba(255,255,255,.05);margin-top:40px}.footer-inner{max-width:var(--maxw);margin:0 auto;padding:34px 28px 18px}.footer-grid{display:grid;grid-template-columns:2fr 1.2fr 1.2fr 1.6fr;gap:28px}.footer-col h4{margin:0 0 12px;font-size:14px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);font-weight:700}.footer-brand{display:flex;gap:14px;align-items:center;margin-bottom:12px}.footer-brand img{height:44px;width:auto;display:block}.footer-brand .name{font-weight:700;color:var(--text);letter-spacing:.5px}.footer-text{color:var(--muted);font-size:13px;line-height:1.7}.footer-links{display:flex;flex-direction:column;gap:8px}.footer-links a{color:var(--muted);font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:color var(--transition),transform var(--transition)}.footer-links a:hover{color:var(--text);transform:translateX(2px)}.footer-contact{display:flex;flex-direction:column;gap:10px}.footer-contact .item{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:13px}.footer-contact svg{width:18px;height:18px;opacity:.9;flex:0 0 18px}.newsletter{display:flex;gap:8px;align-items:center;margin-top:6px}.newsletter input{flex:1;background:rgba(255,255,255,.02);color:var(--text);border:1px solid rgba(255,255,255,.05);padding:10px 12px;border-radius:10px;font-size:13px}.newsletter input::placeholder{color:rgba(255,255,255,.35)}.newsletter button{padding:10px 14px}.footer-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid rgba(255,255,255,.05);margin-top:22px;padding-top:14px;color:var(--muted);font-size:12px}.footer-social{display:flex;gap:10px}.footer-social a{display:inline-flex;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,.06)}.footer-social a:hover{background:rgba(255,255,255,.03)}.back-to-top{position:fixed;right:18px;bottom:18px;z-index:70;display:none;align-items:center;gap:8px;border-radius:999px;border:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));color:var(--text);padding:10px 12px;font-size:13px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.5)}.back-to-top.show{display:inline-flex}.back-to-top svg{width:16px;height:16px}@media (max-width:980px){.footer-grid{grid-template-columns:1.6fr 1fr 1fr}}@media (max-width:720px){.footer-grid{grid-template-columns:1fr}.footer-meta{flex-direction:column;align-items:flex-start}}.footer-contact.footer-contact-compact{gap:16px}.footer-contact .contact-top{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}.footer-contact .mini{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:13px}.footer-contact .mini svg{width:16px;height:16px;flex:0 0 16px;opacity:.9}.footer-contact .loc-head{margin-top:4px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;border-top:1px solid rgba(255,255,255,.05);padding-top:10px}.footer-contact .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 16px}.footer-contact .loc-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:12.5px;line-height:1.55}.footer-contact .loc-card .label{color:var(--text);font-weight:700;font-size:12.5px;margin-bottom:4px}.footer-contact .wa-link{text-decoration:none}.footer-contact .wa-ico{color:#25D366}@media (max-width:1100px){.footer-contact .loc-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width:720px){.footer-contact .contact-top{grid-template-columns:1fr}.footer-contact .loc-grid{grid-template-columns:1fr}}.footer-locations-bar{border-top:1px solid rgba(255,255,255,.08);margin-top:30px;padding-top:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:13px;line-height:1.5}.footer-locations-bar .loc{flex:1 1 30%;min-width:220px}.footer-locations-bar .loc strong{display:block;font-weight:600;color:var(--text);margin-bottom:2px}@media (max-width:900px){.footer-locations-bar{flex-direction:column;gap:10px}}.footer-contact .mini.inline{display:flex;align-items:center;gap:8px}.footer-contact .mini.inline strong{margin-right:6px}.footer-contact .mini.inline .value{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media (max-width:720px){.footer-contact .mini.inline .value{white-space:normal}}
+    </style>
+</head>
+<body>
+    <!-- =========================
+        NAVBAR
+    ========================== -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="nav-inner">
+        <div class="logo" aria-hidden="false">
+            <a href="../../" aria-label="Home">
+            <img src="../../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="PT Kusuma Sarana Dedikasi Logo" onerror="this.style.display='none'"/>
+            </a>
+            <div>
+            <div class="brand-title">PT Kusuma Sarana Dedikasi</div>
+            <div style="font-size:11px;color:var(--muted)">Quality Distribution Solutions</div>
+            </div>
+        </div>
+
+        <div class="nav-actions" role="navigation">
+            <button class="hamburger" aria-expanded="false" aria-controls="main-menu" title="Open menu" onclick="toggleMobileMenu(this)">☰</button>
+
+            <div id="main-menu" class="menu" role="menubar" aria-label="Primary">
+            <a role="menuitem" href="../../">Home</a>
+            <a role="menuitem" href="../../about-us/">About Us</a>
+
+            <!-- Products dropdown -->
+            <div class="dropdown" id="productsDropdown">
+                <!-- Desktop: navigate; Mobile: toggle submenu -->
+                <a class="menu-link" href="../../products/" aria-haspopup="true" aria-expanded="false" onclick="onProductsClick(event)">
+                Products <span class="caret">▾</span>
+                </a>
+                <div class="submenu" role="menu" aria-label="Products submenu">
+                <a role="menuitem" href="#consumables">Consumables</a>
+                <a role="menuitem" href="#safety-equipment">Safety Equipment</a>
+                <a role="menuitem" href="#technical-tools">Technical Tools</a>
+                <a role="menuitem" href="#building-materials">Building Materials</a>
+                <a role="menuitem" href="#electronics">Electronics</a>
+                <a role="menuitem" href="#it-communications">IT & Communications</a>
+                <a role="menuitem" href="#office-stationery">Office Stationery (ATK)</a>
+                <a role="menuitem" href="#stainless-steel-fabrication">Stainless-Steel Fabrication</a>
+                </div>
+            </div>
+
+            <a role="menuitem" href="../../customers/">Customers</a>
+            <a role="menuitem" href="../../gallery/">Gallery</a>
+            <a role="menuitem" href="../../contact/">Contact</a>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+    <!-- ===================================
+        MAIN CONTENT
+    ==================================== -->
+    <main>
+        <section class="product-stage" aria-label="Product spotlight">
+            <div class="container stage-grid">
+            <div class="stage-media">
+                <figure class="hero-frame">
+                    <img src="../../assets/products/alat-tulis-kantor/Pulpen.png" alt="High quality office pen product image" loading="eager" decoding="async"/>
+                </figure>
+                <div class="thumbs">
+                <figure class="thumb"><img src="../../assets/products/alat-tulis-kantor/Pulpen.png" alt="Product view 1" loading="lazy" decoding="async"/></figure>
+                <!-- <figure class="thumb"><img src="../../assets/products/alat-tulis-kantor/Pulpen.png" alt="Product view 2 (slot siap)" loading="lazy" decoding="async"/></figure>
+                <figure class="thumb"><img src="../../assets/products/alat-tulis-kantor/Pulpen.png" alt="Product view 3 (slot siap)" loading="lazy" decoding="async"/></figure> -->
+                </div>
+            </div>
+
+            <div class="stage-copy">
+                <h1 class="h-title">Office Stationery — Premium Writing Tools</h1>
+                <p class="lead">
+                Smooth, consistent, and built for volume. Our writing tools are engineered for daily operations—reliable ink flow, comfortable handling, and durable components. Purchase individually or in bulk with quality control you can trust and supply continuity for teams and projects.
+                </p>
+                <div class="cta-row">
+                <a class="btn" href="../../contact">Request Bulk Quote</a>
+                <a class="ghost" href="https://wa.me/6281299988563?text=Halo%20KSD,%20saya%20ingin%20menanyakan%20produk%20alat%20tulis%20(khusus%20pulpen)."
+                    target="_blank" rel="noopener">Chat WhatsApp</a>
+                </div>
+                <ul class="meta">
+                <li>Fast fulfillment for corporate needs</li>
+                <li>Consistent quality & batch control</li>
+                <li>Flexible procurement and shipping</li>
+                </ul>
+            </div>
+            </div>
+        </section>
+        </main>
+
+    <!-- ===================================
+        FOOTER
+    ==================================== -->
+    <footer class="site-footer" aria-label="Website footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-brand">
+              <img src="../assets/pt-kusuma-sarana-dedikasi-logo.webp" alt="Logo Perusahaan PT Kusuma Sarana Dedikasi" onerror="this.style.display='none'"/>
+              <div>
+                <div class="name">PT Kusuma Sarana Dedikasi</div>
+                <div style="font-size: 12px; color: var(--muted)">Quality Distribution Solutions</div>
+              </div>
+            </div>
+            <p class="footer-text" style="font-family: Share Tech Mono">
+              We serve as a trusted distribution partner supporting the needs of office, industrial, construction, and laboratory sectors. With international standards, we deliver added value through superior quality and consistent service.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <nav class="footer-links" aria-label="Footer navigation" style="font-family: Share Tech Mono">
+              <a href="../">Home</a>
+              <a href="../about-us/">About Us</a>
+              <a href="../contact/">Contact</a>
+              <a href="../customers/">Customers</a>
+              <a href="../gallery/">Gallery</a>
+            </nav>
+          </div>
+          <div class="footer-col" style="font-family: Share Tech Mono">
+            <h4>Products</h4>
+            <div class="footer-links">
+              <a href="#">Sealing Elements</a>
+              <a href="#">CNC Machined Seals</a>
+              <a href="#">Hydraulic &amp; Pneumatic Seals</a>
+              <a href="#">O-Rings</a>
+              <a href="#">Custom Gaskets</a>
+            </div>
+          </div>
+            <div class="footer-contact footer-contact-compact">
+              <!-- Baris atas: ringkas 2 kolom -->
+              <div class="contact-top">
+                <!-- WhatsApp -->
+                <div class="mini inline">
+                  <svg class="wa-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M20 3H4a1 1 0 0 0-1 1v16l4-4h13a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1Z"
+                      stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <strong>WhatsApp</strong>
+                  <a class="wa-link value" href="https://wa.me/6281299988563?text=Halo%20KSD,%20saya%20ingin%20menanyakan%20produk."
+                    target="_blank" rel="noopener">+62 812-9998-8563</a>
+                </div>
+
+                <!-- Email -->
+                <div class="mini inline">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                  <strong>Email</strong>
+                  <a class="value" href="mailto:Sales1.ksd@gmail.com">Sales1.ksd@gmail.com</a>
+                </div>
+
+                <!-- Jam Operasional -->
+                <div class="mini inline">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                  <strong>Hours</strong>
+                  <span class="value">Mon–Fri 09:00–17:00</span>
+                </div>
+              </div>
+
+              <!-- CTA kecil tetap -->
+              <div class="newsletter" style="margin-top: 6px;">
+                <button class="btn" type="button" onclick="window.location.href='../contact/'" style="font-family: Share Tech Mono;">Request a Quote</button>
+              </div>
+            </div>
+        </div>
+        <div class="footer-locations-bar" style="font-family: Share Tech Mono">
+          <div class="loc">
+            <strong>Head Office</strong>
+            Cluster Ubud Blok U39 No.12 RT 004/051, Kel. Bahagia, Kec. Babelan, Bekasi 17610
+          </div>
+          <div class="loc">
+            <strong>Branch Office</strong>
+            Jl. Bintara Raya, Komplek Ruko Bintara Permai Blok D3, Bekasi Barat 17136
+          </div>
+          <div class="loc">
+            <strong>Workshop</strong>
+            Jl. Kali Jambe No.77, Lambangsari, Tambun Selatan, Kab. Bekasi 17510
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div>© <span id="year"></span> PT Kusuma Sarana Dedikasi. All rights reserved.</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:16px;height:16px">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Top
+    </button>
+    
+    <script>
+        /* --- Sticky navbar state / elevation --- */
+        (function(){
+        const navbar = document.querySelector('.navbar');
+        const onScroll = () => {
+            const scrolled = window.scrollY > 2;
+            navbar.classList.toggle('scrolled', scrolled);
+            navbar.style.boxShadow = scrolled ? '0 8px 30px rgba(0,0,0,.6)' : 'none';
+        };
+        window.addEventListener('scroll', onScroll, { passive:true });
+        onScroll();
+        })();
+
+        /* --- Toggle mobile menu --- */
+        function toggleMobileMenu(btn){
+        const menu = document.getElementById('main-menu');
+        const opened = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        document.body.classList.toggle('menu-open', opened);
+
+        if(!opened){
+            document.querySelectorAll('.dropdown.open').forEach(dd=>{
+            dd.classList.remove('open');
+            const sm = dd.querySelector('.submenu'); if(sm) sm.style.maxHeight = '0px';
+            const tg = dd.querySelector('.menu-link'); if(tg) tg.setAttribute('aria-expanded','false');
+            });
+        }
+        }
+
+        /* --- Products click: mobile accordion / desktop navigate --- */
+        function onProductsClick(e){
+        const isMobile = window.matchMedia('(max-width:880px)').matches;
+        const dd = document.getElementById('productsDropdown');
+        const trigger = dd.querySelector('.menu-link');
+        const submenu = dd.querySelector('.submenu');
+
+        if (!isMobile) return; // desktop: biarkan link jalan normal
+
+        const willOpen = !dd.classList.contains('open');
+
+        if (willOpen){
+          // Tap pertama di mobile: buka dropdown & cegah navigasi
+          e.preventDefault();
+          // tutup dropdown lain
+          document.querySelectorAll('.dropdown.open').forEach(other=>{
+            if(other!==dd){
+              other.classList.remove('open');
+              const sm=other.querySelector('.submenu'); if(sm) sm.style.maxHeight='0px';
+              const tg=other.querySelector('.menu-link'); if(tg) tg.setAttribute('aria-expanded','false');
+            }
+          });
+          dd.classList.add('open');
+          trigger.setAttribute('aria-expanded','true');
+          submenu.style.maxHeight = submenu.scrollHeight + 'px';
+          e.stopPropagation();
+        } else {
+          // Tap kedua: JANGAN preventDefault -> biarkan href menuju ./products/
+          // opsional rapikan state
+          trigger.setAttribute('aria-expanded','false');
+        }
+      }
+
+        /* --- Desktop hover open/close with delay --- */
+        (function(){
+        const dd = document.getElementById('productsDropdown');
+        if(!dd) return;
+        const canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+        if(!canHover) return;
+
+        let hideTimer;
+        const open = () => { clearTimeout(hideTimer); dd.classList.add('open'); };
+        const close = () => { hideTimer = setTimeout(() => dd.classList.remove('open'), 5000); };
+
+        dd.addEventListener('mouseenter', open);
+        dd.addEventListener('mouseleave', close);
+        dd.addEventListener('focusin', open);
+        dd.addEventListener('focusout', () => {
+            hideTimer = setTimeout(() => dd.classList.remove('open'), 260);
+        });
+        })();
+
+        // --- Swap hero image from thumbs (mini) ---
+        (()=>{const hero=document.querySelector(".hero-frame img"), thumbs=[...document.querySelectorAll(".thumb img")]; if(!hero||!thumbs.length)return; const set=i=>{hero.src=i.dataset.full||i.src; hero.alt=i.alt||"Product image"; document.querySelectorAll(".thumb").forEach(t=>t.classList.remove("active")); i.closest(".thumb")?.classList.add("active");}; thumbs.forEach((img,ix)=>{img.addEventListener("click",()=>set(img)); if(ix===0) img.closest(".thumb")?.classList.add("active");});})();
+
+        /* =====================================
+        FOOTER YEAR + BACK TO TOP (TIDAK DIUBAH)
+      ====================================== */
+      document.getElementById("year").textContent=new Date().getFullYear();
+      const backTop=document.getElementById("backToTop");
+      window.addEventListener("scroll",()=>{backTop.classList.toggle("show",window.scrollY>280)});
+      backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+      /* =====================================
+        UTIL: Copy address
+      ====================================== */
+      function copyAddress(){
+        const txt = "Cluster Ubud Blok U39 No.12 RT 004/051, Kelurahan Bahagia, Kecamatan Babelan, Kab Bekasi 17610";
+        navigator.clipboard.writeText(txt).then(()=>{
+          showToast();
+        });
+      }
+    </script>
+</body>
+</html>
