@@ -456,6 +456,36 @@
       });
       (function(){const handleFirstTab=(e)=>{if(e.key==="Tab"){document.body.classList.add("user-is-tabbing");window.removeEventListener("keydown",handleFirstTab)}};window.addEventListener("keydown",handleFirstTab)})();
 
+        // === Inject logos ke grid ===
+      (function renderCustomerLogos(){
+        const logos = [
+          // Ganti path sesuai asetmu. Karena halaman ini ada di /customers/, prefix "../assets/..."
+          {src:"../assets/logos/Kiantaka.png", alt:"Logo Perusahaan Kiantaka"},
+          {src:"../assets/logos/Xuilong.png", alt:"Logo Persahaan Xuilong"},
+          {src:"../assets/logos/Cilikon.png", alt:"Logo Perusahaan Cilikon"}
+        ];
+
+        const grid = document.getElementById("logo-grid-container");
+        if(!grid) return;
+
+        logos.forEach((item, idx) => {
+          const card = document.createElement("div");
+          card.className = "logo-item";
+          // optional: sedikit stagger animasi
+          card.style.animationDelay = (idx * 60) + "ms";
+
+          const img = document.createElement("img");
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.src = item.src;
+          img.alt = item.alt || "Customer logo";
+          img.onerror = function(){ this.closest(".logo-item")?.remove(); };
+
+          card.appendChild(img);
+          grid.appendChild(card);
+        });
+      })();
+
     /* =====================================
         FOOTER YEAR + BACK TO TOP (TIDAK DIUBAH)
       ====================================== */
