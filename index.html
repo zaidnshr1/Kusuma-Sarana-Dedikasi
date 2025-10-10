@@ -1059,24 +1059,34 @@
 
       /* --- Products click: mobile accordion / desktop navigate --- */
       function onProductsClick(e){
-        const isMobile=window.matchMedia('(max-width:880px)').matches;
-        const dd=document.getElementById('productsDropdown');
-        const trigger=dd.querySelector('.menu-link');
-        const submenu=dd.querySelector('.submenu');
-        if(isMobile){
+        const isMobile = window.matchMedia('(max-width:880px)').matches;
+        const dd = document.getElementById('productsDropdown');
+        const trigger = dd.querySelector('.menu-link');
+        const submenu = dd.querySelector('.submenu');
+
+        if (!isMobile) return; // desktop: biarkan link jalan normal
+
+        const willOpen = !dd.classList.contains('open');
+
+        if (willOpen){
+          // Tap pertama di mobile: buka dropdown & cegah navigasi
           e.preventDefault();
+          // tutup dropdown lain
           document.querySelectorAll('.dropdown.open').forEach(other=>{
             if(other!==dd){
               other.classList.remove('open');
-              const sm=other.querySelector('.submenu');if(sm)sm.style.maxHeight='0px';
-              const tg=other.querySelector('.menu-link');if(tg)tg.setAttribute('aria-expanded','false');
+              const sm=other.querySelector('.submenu'); if(sm) sm.style.maxHeight='0px';
+              const tg=other.querySelector('.menu-link'); if(tg) tg.setAttribute('aria-expanded','false');
             }
           });
-          const willOpen=!dd.classList.contains('open');
-          dd.classList.toggle('open',willOpen);
-          trigger.setAttribute('aria-expanded',willOpen?'true':'false');
-          submenu.style.maxHeight=willOpen?submenu.scrollHeight+'px':'0px';
+          dd.classList.add('open');
+          trigger.setAttribute('aria-expanded','true');
+          submenu.style.maxHeight = submenu.scrollHeight + 'px';
           e.stopPropagation();
+        } else {
+          // Tap kedua: JANGAN preventDefault -> biarkan href menuju ./products/
+          // opsional rapikan state
+          trigger.setAttribute('aria-expanded','false');
         }
       }
 
