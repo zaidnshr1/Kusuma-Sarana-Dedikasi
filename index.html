@@ -526,6 +526,75 @@
         }
       }
 
+      /* ----- WhatsApp floating button ----- */
+      .whatsapp-fab {
+        position: fixed;
+        right: 18px;
+        bottom: 92px; /* di atas back-to-top (yang ada di 18px) */
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(90deg,#25D366,#1ebe5a);
+        color: white;
+        padding: 12px 14px;
+        border-radius: 999px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.45);
+        font-family: "Share Tech Mono", monospace;
+        text-decoration: none;
+        transition: transform 180ms cubic-bezier(.2,.9,.3,1), opacity 160ms ease;
+        will-change: transform, opacity;
+      }
+      .whatsapp-fab:hover { transform: translateY(-4px); opacity: .98; }
+
+      /* icon circle */
+      .whatsapp-fab .wa-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #25D366;
+        font-size: 18px;
+        flex: 0 0 36px;
+        box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      }
+
+      /* optional label hidden on very small screens */
+      .whatsapp-fab .wa-label {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        display: inline-block;
+      }
+
+      /* small floating badge (optional unread) */
+      .whatsapp-fab .wa-badge {
+        position: absolute;
+        right: 8px;
+        top: -6px;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 6px;
+        border-radius: 999px;
+        background: #ff3b30;
+        color: #fff;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 12px rgba(0,0,0,.25);
+      }
+
+      /* responsive: sembunyikan label di layar sangat kecil */
+      @media (max-width:420px){
+        .whatsapp-fab { padding: 10px; bottom: 74px; }
+        .whatsapp-fab .wa-label { display: none; }
+      }
+
       /* =================================== */
       /*              FOOTER                 */
       /* =================================== */
@@ -963,7 +1032,7 @@
                       stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                   <strong>WhatsApp</strong>
-                  <a class="wa-link value" href="https://wa.me/6281299988563?text=Halo%20KSD,%20saya%20ingin%20menanyakan%20produk."
+                  <a class="wa-link value" href="https://api.whatsapp.com/send?phone=6281299988563&text=Halo%20KSD%2C%20saya%20ingin%20menanyakan%20produk"
                     target="_blank" rel="noopener">+62 812-9998-8563</a>
                 </div>
 
@@ -1026,6 +1095,13 @@
       </svg>
       Top
     </button>
+
+    <!-- WhatsApp Floating Button -->
+    <a id="whatsappFab" class="whatsapp-fab" href="https://api.whatsapp.com/send?phone=6281299988563&text=Halo%20KSD%2C%20saya%20ingin%20menanyakan%20produk" target="_blank" rel="noopener" aria-label="Chat via WhatsApp">
+      <span class="wa-icon" aria-hidden="true">
+        <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i>
+      </span>
+    </a>
 
     <script>
         /* =================================== */
@@ -1660,6 +1736,28 @@
           window.scrollTo({ top: 0, behavior: "smooth" })
         );
       }
+
+      /* =================================== */
+      /*            WHATSAPP POP UP          */
+      /* =================================== */
+      (function(){
+        const fab = document.getElementById('whatsappFab');
+        if(!fab) return;
+
+        fab.style.opacity = 0;
+        fab.style.transform = 'translateY(6px)';
+        fab.style.pointerEvents = 'auto';
+
+        setTimeout(()=> {
+          fab.style.transition = 'opacity 260ms ease, transform 260ms cubic-bezier(.2,.9,.3,1)';
+          fab.style.opacity = 1;
+          fab.style.transform = 'translateY(0)';
+        }, 700);
+
+        fab.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') fab.click();
+        });
+      })();
 
     </script>
   </body>
