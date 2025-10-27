@@ -1052,132 +1052,52 @@
 
           <form
             id="contactForm"
-            action="https://api.web3forms.com/submit"
+            action="https://script.google.com/macros/s/AKfycbxtTvQ5mxOZYD113E1KjOPSlb5djscCECM3biEcPMRGXKjKyiqjHeWz5q3AvkAV25ZS/exec"
             method="POST"
             novalidate
           >
-            <input
-              type="hidden"
-              name="access_key"
-              value="e663df5e-a898-414f-a0d3-361c9868e403"
-            />
-            <input
-              type="hidden"
-              name="from_name"
-              value="WEB KSD - CONTACT FORM"
-            />
-            <input
-              type="hidden"
-              name="subject"
-              value="New Contact Message — PT KSD"
-            />
-            <input
-              type="checkbox"
-              name="botcheck"
-              tabindex="-1"
-              autocomplete="off"
-              style="display: none"
-            />
-            <input type="hidden" name="replyto" value="email" />
-            <input
-              type="hidden"
-              name="headers:X-Company"
-              value="PT Kusuma Sarana Dedikasi"
-            />
+            <!-- token harus sama dengan SECRET_TOKEN di Apps Script -->
+            <input type="hidden" name="_token" value="PWoB97ntLB9pJFhht6s3" />
+
+            <!-- Optional metadata -->
+            <input type="hidden" name="from_name" value="WEB KSD - CONTACT FORM" />
+            <input type="hidden" name="headers:X-Company" value="PT Kusuma Sarana Dedikasi" />
             <input type="hidden" name="to" value="customercare.ksd@gmail.com" />
+
+            <!-- Honeypot -->
+            <input type="text" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
 
             <div class="grid">
               <div class="control">
                 <label for="name">Full name</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Example: John Doe"
-                  required
-                  aria-required="true"
-                />
+                <input id="name" name="name" type="text" placeholder="Example: John Doe" required aria-required="true" />
               </div>
 
               <div class="control">
                 <label for="email">Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  required
-                  aria-required="true"
-                />
+                <input id="email" name="email" type="email" placeholder="you@example.com" required aria-required="true" />
               </div>
 
               <div class="control grid-full">
                 <label for="subject">Subject</label>
-                <input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  placeholder="Inquiry about product / service"
-                  required
-                />
+                <input id="subject" name="subject" type="text" placeholder="Inquiry about product / service" required />
               </div>
 
               <div class="control grid-full">
                 <label for="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="6"
-                  placeholder="Tell us briefly what you need..."
-                  required
-                ></textarea>
-                <div class="hint">
-                  Tips: Mention product names, quantities, specs, and delivery
-                  location if available.
-                </div>
+                <textarea id="message" name="message" rows="6" placeholder="Tell us briefly what you need..." required></textarea>
+                <div class="hint">Tips: Mention product names, quantities, specs, and delivery location if available.</div>
               </div>
             </div>
 
-            <div
-              style="
-                display: flex;
-                gap: 12px;
-                align-items: center;
-                margin-top: 8px;
-              "
-            >
+            <div style="display:flex;gap:12px;align-items:center;margin-top:8px;">
               <button class="btn" id="sendBtn" type="submit" aria-live="polite">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M22 2L11 13"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M22 2L15 22L11 13L2 9L22 2Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <span id="btnLabel">Send Message</span>
               </button>
-
-              <div class="hint">
-                Or email:
-                <a href="mailto:customercare.ksd@gmail.com" class="muted"
-                  >customercare.ksd@gmail.com</a
-                >
-              </div>
             </div>
           </form>
         </aside>
@@ -1671,13 +1591,15 @@
         btnLabel.textContent = "Sending...";
 
         try {
+          const GAS_URL = "https://script.google.com/macros/s/AKfycbxtTvQ5mxOZYD113E1KjOPSlb5djscCECM3biEcPMRGXKjKyiqjHeWz5q3AvkAV25ZS/exec";
           const formData = new FormData(form);
-          const res = await fetch("https://api.web3forms.com/submit", {
+          formData.set("_token", "PWoB97ntLB9pJFhht6s3");
+          const res = await fetch(GAS_URL, {
             method: "POST",
             body: formData,
+            // jangan set Content-Type — FormData akan set boundary otomatis
           });
           const data = await res.json();
-
           if (
             res.ok &&
             (data?.success || data?.message === "Submission successful")
