@@ -158,6 +158,8 @@
         --ease: cubic-bezier(0.2, 0.9, 0.3, 1);
         --t: 180ms var(--ease);
         --shadow: 0 10px 34px rgba(0, 0, 0, 0.55);
+        --hero-w: 360px;
+        --hero-gap: 28px;
       }
 
       * {
@@ -219,7 +221,7 @@
                     NAVBAR
         ====================================== */
       nav.navbar {
-        --nav-h: 64px;
+        --nav-h: 60px;
         position: sticky;
         top: 0;
         z-index: 60;
@@ -418,20 +420,51 @@
                     PAGE HERO
         ====================================== */
       .page-hero {
-        background: linear-gradient(
-            180deg,
-            rgba(15, 15, 15, 0.86),
-            rgba(15, 15, 15, 0.6)
-          ),
-          url("../assets/hero/industrial-dark-texture.webp") center/cover
-            no-repeat;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        color: #eee;
-      }
-      .page-hero .container {
-        padding-top: 28px;
-        padding-bottom: 18px;
-      }
+        position: fixed;
+        left: 0;
+        top: 84px;
+        bottom: 0;
+        width: var(--hero-w);
+        padding: 22px 20px;
+        background: linear-gradient(180deg, rgba(15,15,15,0.86), rgba(15,15,15,0.6)), url("../assets/hero/industrial-dark-texture.webp") center/cover no-repeat;
+        border-right: 1px solid rgba(255,255,255,0.04);
+        z-index: 50;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        }
+        .page-hero .container { padding-top: 12px; padding-bottom: 18px; }
+        .page-hero .container > .controls {
+          margin-top: 18px;
+          padding-top: 14px;
+          border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        #content {
+          margin-left: calc(var(--hero-w) + var(--hero-gap));
+        }
+        @media (max-width: 880px) {
+          :root {
+          --hero-w: 100%;
+          }
+          .page-hero {
+          position: static;
+          width: auto;
+          top: auto;
+          bottom: auto;
+          left: auto;
+          right: auto;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          padding: 18px 28px;
+          overflow: visible;
+          }
+          .page-hero .container {
+          padding-top: 28px;
+          padding-bottom: 18px;
+          }
+          #content {
+          margin-left: 0;
+          }
+        }
       .breadcrumbs {
         font-size: 12px;
         color: var(--muted);
@@ -447,81 +480,115 @@
       }
       .hero-head {
         display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 16px;
+        align-items: flex-start;
+        gap: 18px;
       }
-      .hero-title {
-        font-size: clamp(22px, 3.2vw, 32px);
-        font-weight: 700;
+        .hero-title {
+        font-size: clamp(20px, 2.6vw, 28px);
+        font-weight: 800;
         letter-spacing: 0.4px;
+        margin: 0 0 6px;
       }
-      .hero-sub {
+        .hero-sub {
         color: var(--muted);
-        font-size: 14px;
-        margin-top: 6px;
-        max-width: 72ch;
-        line-height: 1.6;
+        font-size: 13px;
+        margin: 0;
+        line-height: 1.55;
+        max-width: 44ch;
       }
 
       /* =====================================
                     CONTROLS
         ====================================== */
       .controls {
-        display: grid;
+        display: flex;
         gap: 12px;
-        margin-top: 18px;
-        grid-template-columns: 1fr auto;
-        align-items: center;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        row-gap: 10px;
       }
-      @media (max-width: 760px) {
+      @media (max-width: 880px) {
         .controls {
-          grid-template-columns: 1fr;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 12px;
+        }
+        .searchbar { flex: none; width: 100%; max-height: 8vh; }
+        .chips-scroll { max-width: 100%; overflow: visible; }
+        .chips { justify-content: flex-start; }
+        .chip {
+          max-width: calc(50% - 8px);
+          font-size: 13px;
         }
       }
-      .searchbar {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: var(--glass);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 10px;
-        padding: 10px 12px;
+      @media (min-width: 1100px) {
+        .chip { max-width: 260px; }
       }
-      .searchbar input {
+      .searchbar {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.04);
+          border-radius: 10px;
+          padding: 8px 10px;
+          min-width: 160px;
+          flex: 1 1 220px;
+        }
+        .searchbar input {
         flex: 1;
         background: transparent;
         border: 0;
-        outline: 0;
+        outline: none;
         color: var(--text);
         font-size: 14px;
+      }
+      .searchbar:focus-within {
+        box-shadow: 0 6px 18px rgba(0,0,0,0.55), 0 0 0 3px rgba(255,138,0,0.06);
+        border-color: rgba(255,138,0,0.18);
+      }
+      .chips-scroll {
+        display: block;
+        max-width: 100%;
+        overflow: visible;
       }
       .chips {
         display: flex;
         gap: 8px;
+        align-items: center;
+        padding: 6px 0;
         flex-wrap: wrap;
-        justify-content: flex-end;
+        white-space: normal;
       }
+      .chips::-webkit-scrollbar { height: 8px; }
+      .chips::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 999px; }
       .chip {
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.02);
-        color: var(--muted);
-        font-size: 12px;
-        letter-spacing: 0.4px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         padding: 8px 12px;
         border-radius: 999px;
+        background: rgba(255,255,255,0.02);
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.6px;
+        border: 1px solid rgba(255,255,255,0.04);
         cursor: pointer;
-        user-select: none;
-        transition: transform var(--t), background var(--t), color var(--t);
-        text-transform: uppercase;
+        transition: transform 160ms var(--ease), background 160ms var(--ease), color 160ms var(--ease);
+        white-space: normal;
+        word-break: break-word;
+        max-width: 220px;
+        flex: 0 0 auto;
       }
-      .chip:hover {
-        transform: translateY(-1px);
+      .chip:hover, .chip:focus {
+        transform: translateY(-2px);
         color: var(--text);
       }
+      .chip:focus { outline: none; box-shadow: 0 0 0 4px rgba(255,138,0,0.06); }
       .chip.active {
         background: linear-gradient(90deg, var(--accent), var(--accent-2));
-        color: #111;
+        color: #0b0b0b;
         border-color: transparent;
       }
 
@@ -1081,12 +1148,17 @@
     <!-- =========================
         HERO
     ========================== -->
-    <header class="page-hero">
+    <aside
+      class="page-hero"
+      aria-label="Panel filter dan pencarian produk"
+      role="complementary"
+    >
       <div class="container">
         <nav class="breadcrumbs" aria-label="Breadcrumbs">
           <a href="../">Home</a> <span>›</span> <strong>Products</strong>
         </nav>
-        <div class="hero-head">
+
+        <div class="hero-head" style="gap:12px;">
           <div>
             <h1 class="hero-title">Products</h1>
             <p class="hero-sub">
@@ -1096,62 +1168,75 @@
           </div>
         </div>
 
-        <!-- Controls -->
-        <div class="controls" role="region" aria-label="Products controls">
-          <div class="searchbar" role="search">
-            🔎
+        <div
+          class="controls"
+          role="region"
+          aria-label="Kontrol produk: pencarian dan filter kategori"
+        >
+          <form id="searchForm" class="searchbar" role="search" onsubmit="return false;">
+            <label for="prodSearch" class="sr-only">Cari produk</label>
+            <span aria-hidden="true">🔎</span>
             <input
               id="prodSearch"
+              name="q"
               type="search"
-              placeholder="Search products… (e.g., gloves, drill, cable ties)"
+              placeholder="Search products… (mis. gloves, drill, cable ties)"
               aria-label="Search products"
               autocomplete="off"
             />
-          </div>
-          <div class="chips mono" aria-label="Filter categories" role="tablist">
+          </form>
+
+          <div
+            class="chips mono"
+            role="tablist"
+            aria-label="Filter categories"
+            tabindex="0"
+          >
             <button
               class="chip active"
               data-filter="all"
               role="tab"
               aria-selected="true"
+              data-index="0"
             >
               All
             </button>
-            <button class="chip" data-filter="consumables" role="tab">
+            <button class="chip" data-filter="consumables" role="tab" data-index="1">
               Consumables
             </button>
-            <button class="chip" data-filter="industrial-products" role="tab">
+            <button class="chip" data-filter="industrial-products" role="tab" data-index="2">
               Industrial
             </button>
-            <button class="chip" data-filter="safety-equipment" role="tab">
+            <button class="chip" data-filter="safety-equipment" role="tab" data-index="3">
               Safety
             </button>
-            <button class="chip" data-filter="technical-tools" role="tab">
+            <button class="chip" data-filter="technical-tools" role="tab" data-index="4">
               Technical Tools
             </button>
-            <button class="chip" data-filter="building-materials" role="tab">
+            <button class="chip" data-filter="building-materials" role="tab" data-index="5">
               Building
             </button>
-            <button class="chip" data-filter="electronics" role="tab">
+            <button class="chip" data-filter="electronics" role="tab" data-index="6">
               Electronics
             </button>
-            <button class="chip" data-filter="it-communications" role="tab">
-              IT & Comms
+            <button class="chip" data-filter="it-communications" role="tab" data-index="7">
+              IT &amp; Comms
             </button>
-            <button class="chip" data-filter="office-stationery" role="tab">
+            <button class="chip" data-filter="office-stationery" role="tab" data-index="8">
               ATK
             </button>
             <button
               class="chip"
               data-filter="stainless-steel-fabrication"
               role="tab"
+              data-index="9"
             >
               Stainless
             </button>
           </div>
         </div>
       </div>
-    </header>
+    </aside>
 
     <!-- =========================
         SECTIONS
