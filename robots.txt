@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Allow essential crawling
+Allow: /assets/
+Allow: /products/
+
+# Disallow internal or unused system paths (opsional)
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /internal/
+
+# Sitemap location
+Sitemap: https://kusumasaranadedikasi.com/sitemap.xml
