@@ -3,16 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta 
-      name="description" 
+    <meta
+      name="description"
       content="Hubungi PT Kusuma Sarana Dedikasi (KSD) untuk kebutuhan pengadaan industri, konstruksi, dan corporate. Kirim RFQ, konsultasi procurement, atau permintaan penawaran. Layanan area Bekasi/Jakarta dan seluruh Indonesia."
     />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Contact KSD – Send RFQ & Procurement Inquiry" />
+    <meta
+      property="og:title"
+      content="Contact KSD – Send RFQ & Procurement Inquiry"
+    />
 
-    <meta 
-      property="og:description" 
+    <meta
+      property="og:description"
       content="Hubungi PT Kusuma Sarana Dedikasi (KSD) untuk RFQ, permintaan penawaran, dan konsultasi procurement. Melayani kebutuhan industrial, construction, dan corporate."
     />
 
@@ -26,7 +29,10 @@
     />
     <meta property="og:site_name" content="PT Kusuma Sarana Dedikasi (KSD)" />
 
-    <title>Contact | PT Kusuma Sarana Dedikasi (KSD) – Industrial & General Supplier RFQ</title>
+    <title>
+      Contact | PT Kusuma Sarana Dedikasi (KSD) – Industrial & General Supplier
+      RFQ
+    </title>
 
     <link rel="canonical" href="https://kusumasaranadedikasi.com/contact/" />
     <!-- Favicon -->
@@ -1023,14 +1029,18 @@
       <div class="container">
         <h1 class="title">Contact Us</h1>
         <p class="lead">
-          For procurement inquiries, RFQ submissions, quotation requests, or technical discussions about our industrial, construction, or corporate supply solutions, please contact us via the form below or email.
-          <span class="muted">Our team typically responds within 1–2 business days.</span>
+          For procurement inquiries, RFQ submissions, quotation requests, or
+          technical discussions about our industrial, construction, or corporate
+          supply solutions, please contact us via the form below or email.
+          <span class="muted"
+            >Our team typically responds within 1–2 business days.</span
+          >
         </p>
       </div>
     </header>
 
     <!-- ===================================
-        CONTACT (DIRAPIHKAN)
+        CONTACT 
     ==================================== -->
     <main class="container" id="contact" aria-labelledby="contact-heading">
       <section class="contact-wrap" aria-describedby="contact-desc">
@@ -1046,35 +1056,21 @@
 
           <form
             id="contactForm"
-            action="https://script.google.com/macros/s/AKfycbxtTvQ5mxOZYD113E1KjOPSlb5djscCECM3biEcPMRGXKjKyiqjHeWz5q3AvkAV25ZS/exec"
+            action="https://api.web3forms.com/submit"
             method="POST"
-            novalidate
           >
-            <!-- token harus sama dengan SECRET_TOKEN di Apps Script -->
-            <input type="hidden" name="_token" value="PWoB97ntLB9pJFhht6s3" />
-
-            <!-- Optional metadata -->
+            <input
+              type="hidden"
+              name="access_key"
+              value="fca8a310-0ef3-4c41-bcb5-110062a421d2"
+            />
+            <input type="hidden" name="subject" id="finalSubject" />
             <input
               type="hidden"
               name="from_name"
-              value="WEB KSD - CONTACT FORM"
+              value="KSD Website Contact Form"
             />
-            <input
-              type="hidden"
-              name="headers:X-Company"
-              value="PT Kusuma Sarana Dedikasi"
-            />
-            <input type="hidden" name="to" value="customercare.ksd@gmail.com" />
-
-            <!-- Honeypot -->
-            <input
-              type="text"
-              name="botcheck"
-              tabindex="-1"
-              autocomplete="off"
-              style="display: none"
-            />
-
+            <input type="text" name="botcheck" style="display: none" />
             <div class="grid">
               <div class="control">
                 <label for="name">Full name</label>
@@ -1084,10 +1080,8 @@
                   type="text"
                   placeholder="Example: John Doe"
                   required
-                  aria-required="true"
                 />
               </div>
-
               <div class="control">
                 <label for="email">Email</label>
                 <input
@@ -1096,71 +1090,73 @@
                   type="email"
                   placeholder="you@example.com"
                   required
-                  aria-required="true"
                 />
               </div>
-
               <div class="control grid-full">
-                <label for="subject">Subject</label>
+                <label>Inquiry Purpose</label>
+                <div
+                  style="
+                    display: flex;
+                    gap: 16px;
+                    flex-wrap: wrap;
+                    margin-top: 8px;
+                  "
+                >
+                  <label style="display: flex; align-items: center; gap: 6px">
+                    <input type="radio" name="category" value="Request for Quotation (RFQ)" required />
+                    Request for Quotation (RFQ)
+                  </label>
+
+                  <label style="display: flex; align-items: center; gap: 6px">
+                    <input type="radio" name="category" value="Product Availability Check" />
+                    Product Availability Check
+                  </label>
+
+                  <label style="display: flex; align-items: center; gap: 6px">
+                    <input type="radio" name="category" value="Technical Support" />
+                    Technical Support
+                  </label>
+
+                  <label style="display: flex; align-items: center; gap: 6px">
+                    <input type="radio" name="category" value="Procurement Discussion" />
+                    Procurement Discussion
+                  </label>
+
+                  <label style="display: flex; align-items: center; gap: 6px">
+                    <input type="radio" name="category" value="General Inquiry" />
+                    General Inquiry
+                  </label>
+                </div>
+              </div>
+              <div class="control grid-full">
+                <label for="user_subject">Subject</label>
                 <input
-                  id="subject"
-                  name="subject"
+                  id="user_subject"
+                  name="user_subject"
                   type="text"
-                  placeholder="Inquiry about product / service"
+                  placeholder="e.g. Safety Shoes Procurement"
                   required
                 />
               </div>
-
               <div class="control grid-full">
                 <label for="message">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   rows="6"
-                  placeholder="Tell us briefly what you need..."
+                  placeholder="Tell us what you need..."
                   required
                 ></textarea>
-                <div class="hint">
-                  Tips: Mention product names, quantities, specs, and delivery
-                  location if available.
-                </div>
               </div>
             </div>
-
-            <div
-              style="
-                display: flex;
-                gap: 12px;
-                align-items: center;
-                margin-top: 8px;
-              "
+            <button
+              class="btn"
+              id="sendBtn"
+              type="submit"
+              style="margin-top: 3vh"
             >
-              <button class="btn" id="sendBtn" type="submit" aria-live="polite">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M22 2L11 13"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M22 2L15 22L11 13L2 9L22 2Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <span id="btnLabel">Send Message</span>
-              </button>
-            </div>
+              <span id="btnLabel">Send Message</span>
+            </button>
           </form>
         </aside>
 
@@ -1642,55 +1638,52 @@
         if (t.checkValidity()) clearInvalid(t);
       });
 
-      form.addEventListener("submit", handleSubmit);
-
-      async function handleSubmit(e) {
+      form.addEventListener("submit", async function (e) {
         e.preventDefault();
-        // manual checks for better UX hints
-        const required = ["name", "email", "subject", "message"].map((id) =>
-          form.querySelector("#" + id)
-        );
-        let ok = true;
-        required.forEach((el) => {
-          if (!el.value.trim() || !el.checkValidity()) {
-            markInvalid(el, "Required");
-            ok = false;
-          }
-        });
-        if (!ok) return;
 
         sendBtn.disabled = true;
         btnLabel.textContent = "Sending...";
 
+        // Ambil input user
+        const category = form.querySelector(
+          "input[name='category']:checked"
+        )?.value;
+        const userSubject = document
+          .getElementById("user_subject")
+          .value.trim();
+
+        // Format subject final
+        const subjectFinal = `[${category}] ${userSubject}`;
+
+        // Set ke hidden input 'subject'
+        document.getElementById("finalSubject").value = subjectFinal;
+
+        // Build formdata
+        const formData = new FormData(form);
+
         try {
-          const GAS_URL =
-            "https://script.google.com/macros/s/AKfycbxtTvQ5mxOZYD113E1KjOPSlb5djscCECM3biEcPMRGXKjKyiqjHeWz5q3AvkAV25ZS/exec";
-          const formData = new FormData(form);
-          formData.set("_token", "PWoB97ntLB9pJFhht6s3");
-          const res = await fetch(GAS_URL, {
+          const res = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
             body: formData,
-            // jangan set Content-Type — FormData akan set boundary otomatis
           });
+
           const data = await res.json();
-          if (
-            res.ok &&
-            (data?.success || data?.message === "Submission successful")
-          ) {
+
+          if (data.success) {
             btnLabel.textContent = "Sent";
             showToast();
             form.reset();
           } else {
+            alert(data.message || "Failed to send message.");
             btnLabel.textContent = "Send Message";
-            alert(data?.message || "Failed to send. Please try again.");
           }
-        } catch (err) {
-          btnLabel.textContent = "Send Message";
+        } catch (error) {
           alert("Network error. Please try again.");
-        } finally {
-          sendBtn.disabled = false;
+          btnLabel.textContent = "Send Message";
         }
-      }
+
+        sendBtn.disabled = false;
+      });
 
       /* =====================================
         KEYBOARD HANDLING (TIDAK DIUBAH)
